@@ -39,6 +39,14 @@ public sealed class Engine(string stateFile)
     static RegistryKey Root(string hive) =>
         RegistryKey.OpenBaseKey(hive == "HKLM" ? RegistryHive.LocalMachine : RegistryHive.CurrentUser, RegistryView.Registry64);
 
+    /// <summary>Etat observable d'un Op (comparaison avant/après). null si non sondable (CmdOp).</summary>
+    public static string? Probe(Op op) => op switch
+    {
+        RegOp r => Capture(r) is { Exists: true } c ? $"{c.Kind}:{c.Value}" : "absent",
+        TaskOp t => TaskState(t.Path) ?? "absent",
+        _ => null,
+    };
+
     static Snap Capture(Op op)
     {
         switch (op)
