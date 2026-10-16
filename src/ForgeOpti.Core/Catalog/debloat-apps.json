@@ -1,0 +1,530 @@
+[
+  {
+    "id": "app.clipchamp",
+    "category": "Debloat apps",
+    "name": "Supprimer Clipchamp",
+    "description": "Retire l'éditeur vidéo Clipchamp.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Clipchamp.Clipchamp' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Clipchamp.Clipchamp' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Clipchamp.Clipchamp' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9P1J8S7CCWWT --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.solitaire",
+    "category": "Debloat apps",
+    "name": "Supprimer Microsoft Solitaire Collection",
+    "description": "Retire les jeux de cartes préinstallés.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.MicrosoftSolitaireCollection' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.MicrosoftSolitaireCollection' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.MicrosoftSolitaireCollection' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRFHWD2 --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.xbox-app",
+    "category": "Debloat apps",
+    "name": "Supprimer l'application Xbox",
+    "description": "Retire l'application Xbox. Les services de jeu ne sont pas touchés.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.GamingApp' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.GamingApp' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.GamingApp' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9MV0B5HZVK9Z --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.xbox-gamebar",
+    "category": "Debloat apps",
+    "name": "Supprimer Xbox Game Bar",
+    "description": "Retire la surcouche Game Bar (Win+G). Les services de jeu ne sont pas touchés.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.XboxGamingOverlay' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.XboxGamingOverlay' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.XboxGamingOverlay' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NZKPSTSNW4P --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.cortana",
+    "category": "Debloat apps",
+    "name": "Supprimer Cortana",
+    "description": "Retire l'application Cortana.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.549981C3F5F10' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.549981C3F5F10' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.549981C3F5F10' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NFFX4SZZ23L --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.bing-actualites",
+    "category": "Debloat apps",
+    "name": "Supprimer Microsoft Actualités",
+    "description": "Retire l'application Actualités (Bing News).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.BingNews' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.BingNews' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.BingNews' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRFHVFW --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.bing-meteo",
+    "category": "Debloat apps",
+    "name": "Supprimer Météo",
+    "description": "Retire l'application Météo (Bing Weather).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.BingWeather' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.BingWeather' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.BingWeather' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRFJ3Q2 --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.teams-pro",
+    "category": "Debloat apps",
+    "name": "Supprimer Microsoft Teams (préinstallé)",
+    "description": "Retire Teams préinstallé sur Windows 11.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'MSTeams' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'MSTeams' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'MSTeams' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id XP8BT8DW290MPQ --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.mail-calendrier",
+    "category": "Debloat apps",
+    "name": "Supprimer Courrier et Calendrier",
+    "description": "Retire les anciennes applis Courrier et Calendrier.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'microsoft.windowscommunicationsapps' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'microsoft.windowscommunicationsapps' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'microsoft.windowscommunicationsapps' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRFHVQM --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.outlook-nouveau",
+    "category": "Debloat apps",
+    "name": "Supprimer le nouvel Outlook",
+    "description": "Retire le nouvel Outlook préinstallé.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.OutlookForWindows' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.OutlookForWindows' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.OutlookForWindows' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NRX63209R7B --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.skype",
+    "category": "Debloat apps",
+    "name": "Supprimer Skype",
+    "description": "Retire l'application Skype.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.SkypeApp' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.SkypeApp' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.SkypeApp' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRFJ364 --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.films-tv",
+    "category": "Debloat apps",
+    "name": "Supprimer Films et TV",
+    "description": "Retire Films et TV.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.ZuneVideo' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.ZuneVideo' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.ZuneVideo' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRFJ3P2 --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.groove",
+    "category": "Debloat apps",
+    "name": "Supprimer Groove Musique",
+    "description": "Retire Groove Musique / Lecteur multimédia hérité.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.ZuneMusic' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.ZuneMusic' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.ZuneMusic' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRFJ3PT --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.realite-mixte",
+    "category": "Debloat apps",
+    "name": "Supprimer Portail de réalité mixte",
+    "description": "Retire le Portail de réalité mixte.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.MixedReality.Portal' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.MixedReality.Portal' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.MixedReality.Portal' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NG1H8B3ZC7M --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.visionneuse-3d",
+    "category": "Debloat apps",
+    "name": "Supprimer Visionneuse 3D",
+    "description": "Retire la Visionneuse 3D.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.Microsoft3DViewer' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.Microsoft3DViewer' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.Microsoft3DViewer' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NBLGGH42THS --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.paint-3d",
+    "category": "Debloat apps",
+    "name": "Supprimer Paint 3D",
+    "description": "Retire Paint 3D (Paint classique conservé).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.MSPaint' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.MSPaint' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.MSPaint' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NBLGGH5FV99 --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.people",
+    "category": "Debloat apps",
+    "name": "Supprimer Contacts (People)",
+    "description": "Retire l'application Contacts.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.People' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.People' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.People' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NBLGGH10PG8 --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.feedback-hub",
+    "category": "Debloat apps",
+    "name": "Supprimer Hub de commentaires",
+    "description": "Retire le Hub de commentaires.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.WindowsFeedbackHub' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.WindowsFeedbackHub' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.WindowsFeedbackHub' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NBLGGH4R32N --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.obtenir-aide",
+    "category": "Debloat apps",
+    "name": "Supprimer Obtenir de l'aide",
+    "description": "Retire l'application Obtenir de l'aide.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.GetHelp' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.GetHelp' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.GetHelp' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9PKDZBMV1H3T --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.astuces",
+    "category": "Debloat apps",
+    "name": "Supprimer Astuces",
+    "description": "Retire l'application Astuces.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.Getstarted' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.Getstarted' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.Getstarted' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRDTBJJ --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.power-automate",
+    "category": "Debloat apps",
+    "name": "Supprimer Power Automate",
+    "description": "Retire Power Automate Desktop.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.PowerAutomateDesktop' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.PowerAutomateDesktop' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.PowerAutomateDesktop' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NFTCH6J7FHV --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.copilot",
+    "category": "Debloat apps",
+    "name": "Supprimer Copilot",
+    "description": "Retire l'application Copilot.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.Copilot' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.Copilot' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.Copilot' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NHT9RB2F4HD --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.microsoft-365",
+    "category": "Debloat apps",
+    "name": "Supprimer Microsoft 365 (Office hub)",
+    "description": "Retire l'application Microsoft 365 / Office.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.MicrosoftOfficeHub' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.MicrosoftOfficeHub' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.MicrosoftOfficeHub' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRD29V9 --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.todo",
+    "category": "Debloat apps",
+    "name": "Supprimer Microsoft To Do",
+    "description": "Retire Microsoft To Do.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.Todos' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.Todos' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.Todos' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NBLGGH5R558 --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.cartes",
+    "category": "Debloat apps",
+    "name": "Supprimer Cartes",
+    "description": "Retire l'application Cartes.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.WindowsMaps' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.WindowsMaps' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.WindowsMaps' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRDTBVB --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.whiteboard",
+    "category": "Debloat apps",
+    "name": "Supprimer Whiteboard",
+    "description": "Retire Microsoft Whiteboard.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.Whiteboard' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.Whiteboard' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.Whiteboard' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9MSPC6MP8FM4 --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.onenote",
+    "category": "Debloat apps",
+    "name": "Supprimer OneNote (Store)",
+    "description": "Retire OneNote pour Windows 10.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.Office.OneNote' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.Office.OneNote' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.Office.OneNote' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRFHVJL --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.lien-telephone",
+    "category": "Debloat apps",
+    "name": "Supprimer Lien avec le téléphone",
+    "description": "Retire Phone Link (Votre téléphone).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.YourPhone' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.YourPhone' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.YourPhone' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9NMPJ99VJBWV --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.alarmes",
+    "category": "Debloat apps",
+    "name": "Supprimer Horloge et Alarmes",
+    "description": "Retire Horloge et Alarmes.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.WindowsAlarms' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.WindowsAlarms' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.WindowsAlarms' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRFJ3PR --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.dictaphone",
+    "category": "Debloat apps",
+    "name": "Supprimer Enregistreur vocal",
+    "description": "Retire l'Enregistreur vocal.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'Microsoft.WindowsSoundRecorder' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.WindowsSoundRecorder' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'Microsoft.WindowsSoundRecorder' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9WZDNCRFHWKN --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ]
+  },
+  {
+    "id": "app.widgets-pack",
+    "category": "Debloat apps",
+    "name": "Supprimer le pack Windows Web Experience (Widgets)",
+    "description": "Retire le composant qui fait fonctionner les Widgets (composant système).",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'MicrosoftWindows.Client.WebExperience' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'MicrosoftWindows.Client.WebExperience' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'MicrosoftWindows.Client.WebExperience' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9MSSGKG348SP --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
+    ],
+    "minBuild": 22000
+  }
+]

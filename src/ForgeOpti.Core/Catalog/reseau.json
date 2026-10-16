@@ -1,0 +1,159 @@
+[
+ {
+  "id": "net.nagle",
+  "category": "Réseau",
+  "name": "Désactiver l'algorithme de Nagle (par interface)",
+  "description": "TcpAckFrequency=1 et TCPNoDelay=1 sur chaque interface réseau : latence réduite en ligne.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces' | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name TcpAckFrequency -Value 1 -Type DWord; Set-ItemProperty -Path $_.PSPath -Name TCPNoDelay -Value 1 -Type DWord }",
+    "revert": "Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces' | ForEach-Object { Remove-ItemProperty -Path $_.PSPath -Name TcpAckFrequency,TCPNoDelay -ErrorAction SilentlyContinue }"
+   }
+  ]
+ },
+ {
+  "id": "net.limitation-reseau",
+  "category": "Réseau",
+  "name": "Supprimer la limitation réseau multimédia",
+  "description": "NetworkThrottlingIndex désactivé : plus de bridage des paquets pendant la lecture multimédia.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+    "name": "NetworkThrottlingIndex",
+    "kind": "DWord",
+    "value": 4294967295
+   }
+  ]
+ },
+ {
+  "id": "net.optimisation-livraison",
+  "category": "Réseau",
+  "name": "Désactiver le partage de mises à jour (pair à pair)",
+  "description": "N'envoie plus de mises à jour à d'autres PC depuis votre connexion.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+    "name": "DODownloadMode",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "net.llmnr",
+  "category": "Réseau",
+  "name": "Désactiver LLMNR",
+  "description": "Coupe la résolution de noms multidiffusion, vecteur d'usurpation sur réseau local.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows NT\\DNSClient",
+    "name": "EnableMulticast",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "net.bande-passante-reservee",
+  "category": "Réseau",
+  "name": "Libérer la bande passante réservée QoS",
+  "description": "NonBestEffortLimit = 0 : plus de réservation pour les applications QoS.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Psched",
+    "name": "NonBestEffortLimit",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "net.ipv4-prioritaire",
+  "category": "Réseau",
+  "name": "Préférer IPv4 à IPv6",
+  "description": "Évite les lenteurs de connexion sur les réseaux où IPv6 est mal géré. IPv6 reste actif.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+    "name": "DisabledComponents",
+    "kind": "DWord",
+    "value": 32
+   }
+  ]
+ },
+ {
+  "id": "net.ndu",
+  "category": "Réseau",
+  "name": "Désactiver le moniteur d'utilisation réseau (Ndu)",
+  "description": "Corrige les fuites mémoire connues du pilote Ndu.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\Ndu",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "net.assistance-distance",
+  "category": "Réseau",
+  "name": "Désactiver l'assistance à distance",
+  "description": "Refuse les invitations d'assistance à distance entrantes.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Remote Assistance",
+    "name": "fAllowToGetHelp",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ }
+]

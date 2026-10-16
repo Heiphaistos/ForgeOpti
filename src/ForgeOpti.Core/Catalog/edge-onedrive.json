@@ -1,0 +1,460 @@
+[
+  {
+    "id": "edge.premier-lancement",
+    "category": "Edge et OneDrive",
+    "name": "Edge : ignorer l'assistant de premier lancement",
+    "description": "Masque l'écran de bienvenue au premier démarrage.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "HideFirstRunExperience",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "edge.demarrage-rapide",
+    "category": "Edge et OneDrive",
+    "name": "Edge : désactiver le démarrage anticipé",
+    "description": "Edge ne se précharge plus au démarrage de Windows.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "StartupBoostEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.arriere-plan",
+    "category": "Edge et OneDrive",
+    "name": "Edge : ne pas rester en arrière-plan",
+    "description": "Ferme les processus Edge à la fermeture du navigateur.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "BackgroundModeEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.achats",
+    "category": "Edge et OneDrive",
+    "name": "Edge : désactiver l'assistant d'achat",
+    "description": "Retire les comparateurs de prix et coupons.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "EdgeShoppingAssistantEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.barre-laterale",
+    "category": "Edge et OneDrive",
+    "name": "Edge : désactiver la barre latérale",
+    "description": "Retire la barre latérale et Copilot du navigateur.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "HubsSidebarEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.rewards",
+    "category": "Edge et OneDrive",
+    "name": "Edge : masquer Microsoft Rewards",
+    "description": "Retire les offres Rewards.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "ShowMicrosoftRewards",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.recommandations",
+    "category": "Edge et OneDrive",
+    "name": "Edge : masquer les recommandations",
+    "description": "Retire les suggestions de contenu.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "ShowRecommendationsEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.spotlight",
+    "category": "Edge et OneDrive",
+    "name": "Edge : désactiver les expériences Spotlight",
+    "description": "Retire les promotions de la page d'accueil.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "SpotlightExperiencesAndRecommendationsEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.promos",
+    "category": "Edge et OneDrive",
+    "name": "Edge : bloquer les onglets promotionnels",
+    "description": "Plus de pages de promotion à l'ouverture.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "PromotionalTabsEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.navigateur-defaut",
+    "category": "Edge et OneDrive",
+    "name": "Edge : ne plus réclamer d'être le navigateur par défaut",
+    "description": "Supprime l'invite de navigateur par défaut.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "DefaultBrowserSettingEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.telemetrie",
+    "category": "Edge et OneDrive",
+    "name": "Edge : réduire la télémétrie",
+    "description": "Coupe les statistiques d'usage envoyées à Microsoft.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "MetricsReportingEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.retours",
+    "category": "Edge et OneDrive",
+    "name": "Edge : désactiver les retours utilisateur",
+    "description": "Retire le bouton de commentaires.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "UserFeedbackAllowed",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.dnt",
+    "category": "Edge et OneDrive",
+    "name": "Edge : activer Do Not Track",
+    "description": "Envoie l'en-tête Do Not Track.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "ConfigureDoNotTrack",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "edge.insider-promo",
+    "category": "Edge et OneDrive",
+    "name": "Edge : masquer la promotion Insider",
+    "description": "Retire les invites des versions préliminaires.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "MicrosoftEdgeInsiderPromotionEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.connexion",
+    "category": "Edge et OneDrive",
+    "name": "Edge : désactiver la connexion au navigateur",
+    "description": "Empêche la connexion avec un compte Microsoft dans Edge.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "BrowserSignin",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.synchro",
+    "category": "Edge et OneDrive",
+    "name": "Edge : désactiver la synchronisation",
+    "description": "Coupe la synchronisation des données du navigateur.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "SyncDisabled",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "edge.raccourci-bureau",
+    "category": "Edge et OneDrive",
+    "name": "Edge : ne pas créer de raccourci bureau",
+    "description": "Empêche le raccourci après chaque mise à jour.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\EdgeUpdate",
+        "name": "CreateDesktopShortcut{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "edge.maj-off",
+    "category": "Edge et OneDrive",
+    "name": "Edge : désactiver mises à jour et services de mise à jour",
+    "description": "Coupe les mises à jour d'Edge : les correctifs de sécurité du navigateur ne seront plus appliqués. WebView2 est conservé.",
+    "risk": "Avance",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\EdgeUpdate",
+        "name": "Update{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\edgeupdate",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\edgeupdatem",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "edge.desinstaller",
+    "category": "Edge et OneDrive",
+    "name": "Désinstaller Microsoft Edge",
+    "description": "Retire Edge via son programme d'installation. WebView2 n'est pas touché. Réinstallation par winget (Microsoft.Edge).",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\EdgeUpdateDev",
+        "name": "AllowUninstall",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "cmd",
+        "apply": "$s=Get-ChildItem \"${env:ProgramFiles(x86)}\\Microsoft\\Edge\\Application\\*\\Installer\\setup.exe\" -ErrorAction SilentlyContinue | Sort-Object FullName -Descending | Select-Object -First 1; if ($s) { Start-Process $s.FullName -ArgumentList '--uninstall --system-level --verbose-logging --force-uninstall' -Wait }",
+        "revert": "winget install --id Microsoft.Edge --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' }"
+      }
+    ]
+  },
+  {
+    "id": "od.politique",
+    "category": "Edge et OneDrive",
+    "name": "OneDrive : désactiver la synchronisation par stratégie",
+    "description": "Empêche OneDrive de synchroniser des fichiers.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive",
+        "name": "DisableFileSyncNGSC",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "od.trafic-prelogin",
+    "category": "Edge et OneDrive",
+    "name": "OneDrive : pas de trafic réseau avant connexion",
+    "description": "Évite les connexions OneDrive avant ouverture de session.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\OneDrive",
+        "name": "PreventNetworkTrafficPreUserSignIn",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "od.desinstaller",
+    "category": "Edge et OneDrive",
+    "name": "Désinstaller OneDrive",
+    "description": "Ferme OneDrive et le désinstalle (les fichiers locaux sont conservés). Réinstallation par winget (Microsoft.OneDrive).",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "Stop-Process -Name OneDrive -Force -ErrorAction SilentlyContinue; $p=\"$env:SystemRoot\\SysWOW64\\OneDriveSetup.exe\"; if (-not (Test-Path $p)) { $p=\"$env:SystemRoot\\System32\\OneDriveSetup.exe\" }; if (Test-Path $p) { Start-Process $p -ArgumentList '/uninstall' -Wait }",
+        "revert": "winget install --id Microsoft.OneDrive --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' }"
+      }
+    ]
+  }
+]

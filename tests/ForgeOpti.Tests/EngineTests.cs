@@ -36,4 +36,19 @@ public class EngineTests
 
     [Fact]
     public void Catalogue_se_charge_sans_doublon() => Assert.NotEmpty(Catalog.LoadAll());
+
+    [Fact]
+    public void Catalogue_est_coherent()
+    {
+        foreach (var t in Catalog.LoadAll())
+        {
+            Assert.NotEmpty(t.Ops);
+            if (t.Risk == Risk.Avance) Assert.False(t.OneClick, t.Id);
+            foreach (var o in t.Ops)
+            {
+                if (o is CmdOp c) Assert.False(string.IsNullOrWhiteSpace(c.Revert), t.Id);
+                if (o is RegOp r) { Assert.Contains(r.Hive, new[] { "HKLM", "HKCU" }); Assert.Contains(r.Kind, new[] { "DWord", "QWord", "String", "ExpandString" }); }
+            }
+        }
+    }
 }

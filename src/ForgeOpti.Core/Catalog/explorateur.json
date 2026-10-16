@@ -1,0 +1,534 @@
+[
+  {
+    "id": "exp.extensions",
+    "category": "Explorateur",
+    "name": "Afficher les extensions de fichiers",
+    "description": "Montre .exe, .txt, etc. (protège contre les faux fichiers).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "HideFileExt",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "exp.fichiers-caches",
+    "category": "Explorateur",
+    "name": "Afficher les fichiers et dossiers cachés",
+    "description": "Rend visibles les éléments masqués.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "Hidden",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "exp.fichiers-systeme",
+    "category": "Explorateur",
+    "name": "Afficher les fichiers protégés du système",
+    "description": "Montre aussi les fichiers système masqués.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "ShowSuperHidden",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "exp.ouvrir-ce-pc",
+    "category": "Explorateur",
+    "name": "Ouvrir l'Explorateur sur 'Ce PC'",
+    "description": "Remplace Accueil/Accès rapide par Ce PC.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "LaunchTo",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "exp.acces-rapide-frequents",
+    "category": "Explorateur",
+    "name": "Accès rapide : masquer les dossiers fréquents",
+    "description": "Ne liste plus les dossiers fréquemment ouverts.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        "name": "ShowFrequent",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "exp.acces-rapide-recents",
+    "category": "Explorateur",
+    "name": "Accès rapide : masquer les fichiers récents",
+    "description": "Ne liste plus les fichiers récemment ouverts.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        "name": "ShowRecent",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "exp.accueil-cloud",
+    "category": "Explorateur",
+    "name": "Accueil : masquer les fichiers cloud",
+    "description": "Retire les fichiers OneDrive de l'Accès rapide.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        "name": "ShowCloudFilesInQuickAccess",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "minBuild": 22621
+  },
+  {
+    "id": "exp.volet-accueil",
+    "category": "Explorateur",
+    "name": "Volet de navigation : masquer Accueil",
+    "description": "Retire l'entrée Accueil du volet gauche.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Classes\\CLSID\\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}",
+        "name": "System.IsPinnedToNameSpaceTree",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "minBuild": 22000
+  },
+  {
+    "id": "exp.volet-galerie",
+    "category": "Explorateur",
+    "name": "Volet de navigation : masquer Galerie",
+    "description": "Retire l'entrée Galerie du volet gauche.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Classes\\CLSID\\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}",
+        "name": "System.IsPinnedToNameSpaceTree",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "minBuild": 22621
+  },
+  {
+    "id": "exp.volet-onedrive",
+    "category": "Explorateur",
+    "name": "Volet de navigation : masquer OneDrive",
+    "description": "Retire l'entrée OneDrive du volet gauche.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}",
+        "name": "System.IsPinnedToNameSpaceTree",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "exp.dossier-3d",
+    "category": "Explorateur",
+    "name": "Retirer le dossier Objets 3D de Ce PC",
+    "description": "Masque Objets 3D (Windows 10).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FolderDescriptions\\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\\PropertyBag",
+        "name": "ThisPCPolicy",
+        "kind": "String",
+        "value": "Hide"
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FolderDescriptions\\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\\PropertyBag",
+        "name": "ThisPCPolicy",
+        "kind": "String",
+        "value": "Hide"
+      }
+    ]
+  },
+  {
+    "id": "exp.notifs-sync",
+    "category": "Explorateur",
+    "name": "Désactiver les pubs des fournisseurs de synchro",
+    "description": "Supprime les bannières OneDrive/Office dans l'Explorateur.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "ShowSyncProviderNotifications",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "exp.mode-compact",
+    "category": "Explorateur",
+    "name": "Vue compacte de l'Explorateur",
+    "description": "Réduit l'espacement des éléments.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "UseCompactMode",
+        "kind": "DWord",
+        "value": 1
+      }
+    ],
+    "minBuild": 22000
+  },
+  {
+    "id": "exp.chemin-complet",
+    "category": "Explorateur",
+    "name": "Afficher le chemin complet dans la barre de titre",
+    "description": "Utile pour savoir où l'on se trouve.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState",
+        "name": "FullPath",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "exp.processus-separe",
+    "category": "Explorateur",
+    "name": "Ouvrir chaque fenêtre dans un processus séparé",
+    "description": "Un plantage n'emporte plus tout l'Explorateur.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "SeparateProcess",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "exp.miniatures-off",
+    "category": "Explorateur",
+    "name": "Désactiver les miniatures (icônes seules)",
+    "description": "Accélère les gros dossiers.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "IconsOnly",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "exp.cases-a-cocher",
+    "category": "Explorateur",
+    "name": "Cases à cocher de sélection",
+    "description": "Ajoute des cases à cocher sur les éléments.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "AutoCheckSelect",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "exp.volet-tous-dossiers",
+    "category": "Explorateur",
+    "name": "Volet : afficher tous les dossiers",
+    "description": "Montre le Panneau de configuration, la Corbeille et plus.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "NavPaneShowAllFolders",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "exp.volet-dossier-courant",
+    "category": "Explorateur",
+    "name": "Volet : développer vers le dossier courant",
+    "description": "Suit automatiquement le dossier ouvert.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "NavPaneExpandToCurrentFolder",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "exp.barre-etat",
+    "category": "Explorateur",
+    "name": "Afficher la barre d'état",
+    "description": "Affiche le nombre d'éléments et la sélection.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "ShowStatusBar",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "exp.lecteurs-vides",
+    "category": "Explorateur",
+    "name": "Afficher les lecteurs vides",
+    "description": "Montre les lecteurs sans média (lecteur de cartes).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "HideDrivesWithNoMedia",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "exp.conflits-fusion",
+    "category": "Explorateur",
+    "name": "Afficher les conflits de fusion de dossiers",
+    "description": "Avertit lors de la fusion de dossiers.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "HideMergeConflicts",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "exp.suffixe-raccourci",
+    "category": "Explorateur",
+    "name": "Raccourcis sans le suffixe '- Raccourci'",
+    "description": "Les nouveaux raccourcis ne portent plus ce suffixe.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\NamingTemplates",
+        "name": "ShortcutNameTemplate",
+        "kind": "String",
+        "value": "%s.lnk"
+      }
+    ]
+  },
+  {
+    "id": "exp.menu-partager",
+    "category": "Explorateur",
+    "name": "Menu contextuel : retirer 'Partager'",
+    "description": "Masque l'entrée Partager.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+        "name": "{e2bf9676-5f8f-435c-97eb-11607a5bedf7}",
+        "kind": "String",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "exp.menu-donner-acces",
+    "category": "Explorateur",
+    "name": "Menu contextuel : retirer 'Donner l'accès à'",
+    "description": "Masque l'entrée de partage réseau.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+        "name": "{f81e9010-6ea4-11ce-a7ff-00aa003ca9f6}",
+        "kind": "String",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "exp.menu-bibliotheque",
+    "category": "Explorateur",
+    "name": "Menu contextuel : retirer 'Inclure dans la bibliothèque'",
+    "description": "Masque l'entrée bibliothèque.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+        "name": "{3dad6c5d-2167-4cae-9914-f99e41c12cfa}",
+        "kind": "String",
+        "value": ""
+      }
+    ]
+  }
+]

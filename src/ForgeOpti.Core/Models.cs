@@ -21,4 +21,4 @@ public sealed record CmdOp(string Apply, string Revert) : Op;
 
 public sealed record Tweak(
     string Id, string Category, string Name, string Description,
-    Risk Risk, bool Reboot, bool Gaming, bool OneClick, List<Op> Ops);
+    Risk Risk, bool Reboot, bool Gaming, bool OneClick, List<Op> Ops, int MinBuild = 0);

@@ -1,0 +1,437 @@
+[
+ {
+  "id": "gaming.gamemode",
+  "category": "Gaming",
+  "name": "Activer le mode Jeu",
+  "description": "Priorise les ressources pour le jeu au premier plan et limite les tâches de fond.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\GameBar",
+    "name": "AutoGameModeEnabled",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\GameBar",
+    "name": "AllowAutoGameMode",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "gaming.hags",
+  "category": "Gaming",
+  "name": "Activer la planification GPU accélérée (HAGS)",
+  "description": "Le GPU gère sa propre mémoire vidéo : latence réduite sur les cartes récentes. Nécessite un pilote compatible.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+    "name": "HwSchMode",
+    "kind": "DWord",
+    "value": 2
+   }
+  ]
+ },
+ {
+  "id": "gaming.gamebar",
+  "category": "Gaming",
+  "name": "Désactiver la Xbox Game Bar",
+  "description": "Supprime la barre de jeu, son panneau de démarrage et le raccourci Win+G.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\GameBar",
+    "name": "ShowStartupPanel",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\GameBar",
+    "name": "UseNexusForGameBarEnabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "gaming.capture-fond",
+  "category": "Gaming",
+  "name": "Désactiver la capture en arrière-plan",
+  "description": "Arrête l'enregistrement continu des derniers instants de jeu (Game DVR).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR",
+    "name": "AppCaptureEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR",
+    "name": "HistoricalCaptureEnabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "gaming.fso",
+  "category": "Gaming",
+  "name": "Désactiver les optimisations plein écran",
+  "description": "Utilise le vrai plein écran exclusif plutôt que la fenêtre optimisée de Windows.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "System\\GameConfigStore",
+    "name": "GameDVR_FSEBehaviorMode",
+    "kind": "DWord",
+    "value": 2
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "System\\GameConfigStore",
+    "name": "GameDVR_HonorUserFSEBehaviorMode",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "System\\GameConfigStore",
+    "name": "GameDVR_FSEBehavior",
+    "kind": "DWord",
+    "value": 2
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "System\\GameConfigStore",
+    "name": "GameDVR_DXGIHonorFSEWindowsCompatible",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "gaming.fenetre-jeux",
+  "category": "Gaming",
+  "name": "Optimiser les jeux en fenêtré",
+  "description": "Active la mise à niveau du mode d'affichage (flip model) pour les jeux DirectX 10/11 en fenêtré ou sans bordure.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\DirectX\\UserGpuPreferences",
+    "name": "DirectXUserGlobalSettings",
+    "kind": "String",
+    "value": "SwapEffectUpgradeEnable=1;"
+   }
+  ],
+  "minBuild": 22000
+ },
+ {
+  "id": "gaming.mmcss-reactivite",
+  "category": "Gaming",
+  "name": "Réactivité système maximale (MMCSS)",
+  "description": "Réserve 0 % du CPU aux tâches de fond multimédia au lieu de 20 % par défaut.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+    "name": "SystemResponsiveness",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "gaming.mmcss-jeux",
+  "category": "Gaming",
+  "name": "Priorité GPU/CPU élevée pour les jeux",
+  "description": "Règle la tâche MMCSS « Games » : priorité GPU 8, priorité CPU 6, catégorie de planification haute.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+    "name": "GPU Priority",
+    "kind": "DWord",
+    "value": 8
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+    "name": "Priority",
+    "kind": "DWord",
+    "value": 6
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+    "name": "Scheduling Category",
+    "kind": "String",
+    "value": "High"
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+    "name": "SFIO Priority",
+    "kind": "String",
+    "value": "High"
+   }
+  ]
+ },
+ {
+  "id": "gaming.priorite-premier-plan",
+  "category": "Gaming",
+  "name": "Priorité CPU au programme au premier plan",
+  "description": "Quantum court à durée variable favorisant l'application active (Win32PrioritySeparation = 38).",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+    "name": "Win32PrioritySeparation",
+    "kind": "DWord",
+    "value": 38
+   }
+  ]
+ },
+ {
+  "id": "gaming.accel-souris",
+  "category": "Gaming",
+  "name": "Désactiver l'accélération de la souris",
+  "description": "Désactive « Améliorer la précision du pointeur » pour une visée constante.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Mouse",
+    "name": "MouseSpeed",
+    "kind": "String",
+    "value": "0"
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Mouse",
+    "name": "MouseThreshold1",
+    "kind": "String",
+    "value": "0"
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Mouse",
+    "name": "MouseThreshold2",
+    "kind": "String",
+    "value": "0"
+   }
+  ]
+ },
+ {
+  "id": "gaming.touches-remanentes",
+  "category": "Gaming",
+  "name": "Désactiver les touches rémanentes et filtres",
+  "description": "Évite les fenêtres parasites (Maj x5, touches bascule) en plein jeu.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Accessibility\\StickyKeys",
+    "name": "Flags",
+    "kind": "String",
+    "value": "506"
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Accessibility\\Keyboard Response",
+    "name": "Flags",
+    "kind": "String",
+    "value": "122"
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Accessibility\\ToggleKeys",
+    "name": "Flags",
+    "kind": "String",
+    "value": "58"
+   }
+  ]
+ },
+ {
+  "id": "gaming.services-xbox",
+  "category": "Gaming",
+  "name": "Désactiver les services Xbox",
+  "description": "Arrête XblAuthManager, XblGameSave et XboxNetApiSvc. Casse les jeux du Microsoft Store et la connexion Xbox.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\XblAuthManager",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\XblGameSave",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\XboxNetApiSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "gaming.mpo",
+  "category": "Gaming",
+  "name": "Désactiver les superpositions multi-plans (MPO)",
+  "description": "Corrige scintillements et écrans noirs sur certaines cartes graphiques.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\Dwm",
+    "name": "OverlayTestMode",
+    "kind": "DWord",
+    "value": 5
+   }
+  ]
+ },
+ {
+  "id": "gaming.notifications",
+  "category": "Gaming",
+  "name": "Couper les notifications toast",
+  "description": "Supprime les bulles de notification qui interrompent le jeu.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+    "name": "ToastEnabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "gaming.tick-dynamique",
+  "category": "Gaming",
+  "name": "Désactiver le tick dynamique (timer)",
+  "description": "Maintient une horloge système régulière : latence d'entrée plus stable, consommation légèrement accrue. Modifie bcdedit.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "bcdedit /set disabledynamictick yes",
+    "revert": "bcdedit /deletevalue disabledynamictick"
+   }
+  ]
+ },
+ {
+  "id": "gaming.horloge-plateforme",
+  "category": "Gaming",
+  "name": "Retirer le forçage de l'horloge HPET",
+  "description": "Ne force plus l'horloge plateforme (useplatformclock) au profit du TSC. Modifie bcdedit.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "bcdedit /set useplatformclock no",
+    "revert": "bcdedit /deletevalue useplatformclock"
+   }
+  ]
+ }
+]

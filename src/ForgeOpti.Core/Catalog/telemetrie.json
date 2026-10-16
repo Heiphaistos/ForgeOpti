@@ -1,0 +1,1014 @@
+[
+ {
+  "id": "tele.niveau-diagnostic",
+  "category": "Télémétrie",
+  "name": "Limiter la collecte de diagnostic au minimum",
+  "description": "Politique de collecte au niveau minimal, sans téléchargement de configuration OneSettings ni notifications de retour.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+    "name": "AllowTelemetry",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+    "name": "MaxTelemetryAllowed",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+    "name": "LimitDiagnosticLogCollection",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+    "name": "DisableOneSettingsDownloads",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+    "name": "DoNotShowFeedbackNotifications",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "tele.service-diagtrack",
+  "category": "Télémétrie",
+  "name": "Désactiver le service d'expériences utilisateur connectées (DiagTrack)",
+  "description": "Arrête le service qui envoie les données de diagnostic à Microsoft.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\DiagTrack",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "tele.service-dmwappush",
+  "category": "Télémétrie",
+  "name": "Désactiver le service de routage push WAP (dmwappushservice)",
+  "description": "Service de transport de messages de télémétrie, inutile sur un poste personnel.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\dmwappushservice",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "tele.taches-ceip",
+  "category": "Télémétrie",
+  "name": "Désactiver les tâches du programme d'amélioration de l'expérience",
+  "description": "Coupe les tâches planifiées CEIP (Consolidator, UsbCeip, KernelCeipTask).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\KernelCeipTask"
+   }
+  ]
+ },
+ {
+  "id": "tele.taches-compat",
+  "category": "Télémétrie",
+  "name": "Désactiver les tâches de compatibilité applicative",
+  "description": "Désactive ProgramDataUpdater, StartupAppTask, PcaPatchDbTask et MareBackup (collecte d'inventaire).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Application Experience\\ProgramDataUpdater"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Application Experience\\StartupAppTask"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Application Experience\\PcaPatchDbTask"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Application Experience\\MareBackup"
+   }
+  ]
+ },
+ {
+  "id": "tele.taches-retours",
+  "category": "Télémétrie",
+  "name": "Désactiver les tâches de retour d'expérience (Feedback)",
+  "description": "Désactive les tâches DmClient liées aux demandes de commentaires.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClient"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClientOnScenarioDownload"
+   }
+  ]
+ },
+ {
+  "id": "tele.taches-diagnostic-disque",
+  "category": "Télémétrie",
+  "name": "Désactiver la collecte de données de diagnostic disque",
+  "description": "Désactive la tâche qui envoie des données de diagnostic du disque.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\DiskDiagnostic\\Microsoft-Windows-DiskDiagnosticDataCollector"
+   }
+  ]
+ },
+ {
+  "id": "tele.taches-autochk",
+  "category": "Télémétrie",
+  "name": "Désactiver la tâche Autochk Proxy",
+  "description": "Collecte des informations de vérification de disque pour le SQM.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Autochk\\Proxy"
+   }
+  ]
+ },
+ {
+  "id": "tele.ceip-sqm",
+  "category": "Télémétrie",
+  "name": "Désactiver le programme d'amélioration (CEIP/SQM)",
+  "description": "Politique CEIPEnable à 0 pour Windows.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\SQMClient\\Windows",
+    "name": "CEIPEnable",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.retours-windows",
+  "category": "Télémétrie",
+  "name": "Ne plus demander de retours à Windows",
+  "description": "Supprime les invites de commentaires (fréquence zéro).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Siuf\\Rules",
+    "name": "NumberOfSIUFInPeriod",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Siuf\\Rules",
+    "name": "PeriodInNanoSeconds",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.historique-activites",
+  "category": "Télémétrie",
+  "name": "Désactiver l'historique d'activités",
+  "description": "Aucune collecte ni envoi de l'historique d'activités (chronologie).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "name": "EnableActivityFeed",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "name": "PublishUserActivities",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "name": "UploadUserActivities",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.id-publicitaire",
+  "category": "Télémétrie",
+  "name": "Désactiver l'identifiant publicitaire (politique)",
+  "description": "Interdit aux applications d'utiliser l'identifiant publicitaire.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\AdvertisingInfo",
+    "name": "DisabledByGroupPolicy",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "tele.experiences-personnalisees",
+  "category": "Télémétrie",
+  "name": "Désactiver les expériences personnalisées basées sur le diagnostic",
+  "description": "Empêche Microsoft d'utiliser vos données de diagnostic pour des suggestions.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Privacy",
+    "name": "TailoredExperiencesWithDiagnosticDataEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+    "name": "DisableTailoredExperiencesWithDiagnosticData",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "tele.suggestions-demarrer",
+  "category": "Télémétrie",
+  "name": "Supprimer les suggestions dans le menu Démarrer",
+  "description": "Plus d'applications suggérées ni de recommandations sponsorisées.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SubscribedContent-338388Enabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SystemPaneSuggestionsEnabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.suggestions-parametres",
+  "category": "Télémétrie",
+  "name": "Supprimer les suggestions dans Paramètres et notifications",
+  "description": "Désactive les contenus suggérés dans l'application Paramètres.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SubscribedContent-338393Enabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SubscribedContent-353694Enabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SubscribedContent-353696Enabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SubscribedContent-310093Enabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.conseils-astuces",
+  "category": "Télémétrie",
+  "name": "Désactiver les conseils et astuces Windows",
+  "description": "Plus de notifications « Obtenez des conseils » ni d'écran de bienvenue.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SubscribedContent-338389Enabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SoftLandingEnabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.installation-auto-applis",
+  "category": "Télémétrie",
+  "name": "Bloquer l'installation silencieuse d'applications sponsorisées",
+  "description": "Empêche le retour des applications préinstallées (Candy Crush, etc.).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SilentInstalledAppsEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "PreInstalledAppsEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "OemPreInstalledAppsEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "ContentDeliveryAllowed",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "PreInstalledAppsEverEnabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.fonctions-consommateur",
+  "category": "Télémétrie",
+  "name": "Désactiver les expériences grand public Microsoft",
+  "description": "Politique DisableWindowsConsumerFeatures : plus de contenus sponsorisés.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+    "name": "DisableWindowsConsumerFeatures",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+    "name": "DisableThirdPartySuggestions",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "tele.spotlight",
+  "category": "Télémétrie",
+  "name": "Désactiver Windows Spotlight",
+  "description": "Retire le fond d'écran et les astuces Spotlight de l'écran de verrouillage.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+    "name": "DisableWindowsSpotlightFeatures",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "RotatingLockScreenEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "RotatingLockScreenOverlayEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SubscribedContent-338387Enabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.pubs-explorateur",
+  "category": "Télémétrie",
+  "name": "Supprimer les notifications de fournisseurs de synchronisation",
+  "description": "Plus de publicités OneDrive/Office dans l'Explorateur.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "name": "ShowSyncProviderNotifications",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.recherche-web-demarrer",
+  "category": "Télémétrie",
+  "name": "Désactiver la recherche web Bing dans le menu Démarrer",
+  "description": "Les recherches restent locales, sans suggestions web.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+    "name": "DisableSearchBoxSuggestions",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+    "name": "BingSearchEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+    "name": "DisableWebSearch",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+    "name": "ConnectedSearchUseWeb",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.localisation",
+  "category": "Télémétrie",
+  "name": "Désactiver la localisation (politique)",
+  "description": "Coupe les services de localisation et refuse l'accès par défaut. Les cartes et la météo locale ne se géolocalisent plus.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+    "name": "DisableLocation",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
+    "name": "Value",
+    "kind": "String",
+    "value": "Deny"
+   }
+  ]
+ },
+ {
+  "id": "tele.rapport-erreurs-wer",
+  "category": "Télémétrie",
+  "name": "Désactiver le rapport d'erreurs Windows (WER)",
+  "description": "N'envoie plus de rapports de plantage à Microsoft.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\Windows Error Reporting",
+    "name": "Disabled",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting",
+    "name": "Disabled",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Windows Error Reporting\\QueueReporting"
+   }
+  ]
+ },
+ {
+  "id": "tele.inventaire-applicatif",
+  "category": "Télémétrie",
+  "name": "Désactiver l'inventaire applicatif et l'assistant de compatibilité",
+  "description": "Politiques AppCompat : inventaire, enregistreur d'étapes et assistant de compatibilité des programmes.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat",
+    "name": "DisableInventory",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat",
+    "name": "AITEnable",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat",
+    "name": "DisableUAR",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat",
+    "name": "DisablePCA",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "tele.langues-suivi",
+  "category": "Télémétrie",
+  "name": "Ne pas partager la liste de langues avec les sites",
+  "description": "Désactive l'accès des sites web à la liste de langues.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\International\\User Profile",
+    "name": "HttpAcceptLanguageOptOut",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "tele.personnalisation-saisie",
+  "category": "Télémétrie",
+  "name": "Désactiver la collecte de saisie et d'encre",
+  "description": "Plus de personnalisation de la frappe et de l'écriture manuscrite par collecte.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\InputPersonalization",
+    "name": "RestrictImplicitInkCollection",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\InputPersonalization",
+    "name": "RestrictImplicitTextCollection",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\InputPersonalization\\TrainedDataStore",
+    "name": "HarvestContacts",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Personalization\\Settings",
+    "name": "AcceptedPrivacyPolicy",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Input\\TIPC",
+    "name": "Enabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.reconnaissance-vocale-en-ligne",
+  "category": "Télémétrie",
+  "name": "Désactiver la reconnaissance vocale en ligne",
+  "description": "Refuse la charte de reconnaissance vocale cloud.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Speech_OneCore\\Settings\\OnlineSpeechPrivacy",
+    "name": "HasAccepted",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.historique-presse-papiers",
+  "category": "Télémétrie",
+  "name": "Désactiver l'historique et la synchro du presse-papiers",
+  "description": "Désactive Win+V et le presse-papiers entre appareils.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "name": "AllowClipboardHistory",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "name": "AllowCrossDeviceClipboard",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.synchronisation-parametres",
+  "category": "Télémétrie",
+  "name": "Désactiver la synchronisation des paramètres",
+  "description": "Plus de synchro des thèmes, mots de passe et préférences via le compte Microsoft.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+    "name": "DisableSettingSync",
+    "kind": "DWord",
+    "value": 2
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+    "name": "DisableSettingSyncUserOverride",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "tele.experiences-partagees",
+  "category": "Télémétrie",
+  "name": "Désactiver les expériences partagées",
+  "description": "Coupe le partage entre appareils (CDP, Partage à proximité).",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CDP",
+    "name": "CdpSessionUserAuthzPolicy",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CDP",
+    "name": "NearShareChannelUserAuthzPolicy",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CDP",
+    "name": "RomeSdkChannelUserAuthzPolicy",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.edge-telemetrie",
+  "category": "Télémétrie",
+  "name": "Réduire la télémétrie de Microsoft Edge",
+  "description": "Désactive les mesures d'utilisation, l'envoi des sites visités et la personnalisation par rapport de données.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "name": "MetricsReportingEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "name": "SendSiteInfoToImproveServices",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "name": "PersonalizationReportingEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "name": "UserFeedbackAllowed",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.office-telemetrie",
+  "category": "Télémétrie",
+  "name": "Réduire la télémétrie d'Office",
+  "description": "Désactive la journalisation et le téléversement OSM et le programme qualité.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Office\\16.0\\osm",
+    "name": "Enablelogging",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Office\\16.0\\osm",
+    "name": "EnableUpload",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Office\\16.0\\Common",
+    "name": "QMEnable",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "tele.outils-dev-telemetrie",
+  "category": "Télémétrie",
+  "name": "Désactiver la télémétrie des outils développeur",
+  "description": "Variables système POWERSHELL_TELEMETRY_OPTOUT et DOTNET_CLI_TELEMETRY_OPTOUT (effet après reconnexion).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment",
+    "name": "POWERSHELL_TELEMETRY_OPTOUT",
+    "kind": "String",
+    "value": "1"
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment",
+    "name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+    "kind": "String",
+    "value": "1"
+   }
+  ]
+ }
+]

@@ -1,0 +1,438 @@
+[
+ {
+  "id": "secu.smb1-off",
+  "category": "Sécurité",
+  "name": "Désactiver SMB 1.0 côté serveur",
+  "description": "Protocole obsolète et vulnérable. Peut gêner d'anciens NAS ou imprimantes.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+    "name": "SMB1",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "secu.autorun-off",
+  "category": "Sécurité",
+  "name": "Désactiver l'exécution automatique de tous les lecteurs",
+  "description": "Bloque l'AutoRun des clés USB et disques.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+    "name": "NoDriveTypeAutoRun",
+    "kind": "DWord",
+    "value": 255
+   }
+  ]
+ },
+ {
+  "id": "secu.autoplay-off",
+  "category": "Sécurité",
+  "name": "Désactiver la lecture automatique",
+  "description": "Plus de fenêtre automatique à l'insertion d'un support.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers",
+    "name": "DisableAutoplay",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "secu.afficher-extensions",
+  "category": "Sécurité",
+  "name": "Afficher les extensions de fichiers",
+  "description": "Aide à repérer les faux documents (facture.pdf.exe).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "name": "HideFileExt",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "secu.llmnr-off",
+  "category": "Sécurité",
+  "name": "Désactiver LLMNR",
+  "description": "Réduit les attaques d'usurpation de noms sur le réseau local.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows NT\\DNSClient",
+    "name": "EnableMulticast",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "secu.assistance-distance-off",
+  "category": "Sécurité",
+  "name": "Désactiver l'assistance à distance",
+  "description": "Interdit les invitations d'assistance à distance.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Remote Assistance",
+    "name": "fAllowToGetHelp",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "secu.bureau-distance-off",
+  "category": "Sécurité",
+  "name": "Désactiver le Bureau à distance",
+  "description": "Refuse les connexions RDP entrantes.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Terminal Server",
+    "name": "fDenyTSConnections",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "secu.registre-distance-off",
+  "category": "Sécurité",
+  "name": "Désactiver le service Registre à distance",
+  "description": "Empêche la modification du registre depuis le réseau.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\RemoteRegistry",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "secu.wdigest-off",
+  "category": "Sécurité",
+  "name": "Interdire les mots de passe en clair WDigest",
+  "description": "Évite le stockage des identifiants en clair en mémoire.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest",
+    "name": "UseLogonCredential",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "secu.ntlm-v2",
+  "category": "Sécurité",
+  "name": "Exiger NTLMv2 uniquement",
+  "description": "Refuse LM et NTLMv1. Peut gêner d'anciens appareils réseau.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Lsa",
+    "name": "LmCompatibilityLevel",
+    "kind": "DWord",
+    "value": 5
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Lsa",
+    "name": "NoLMHash",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "secu.protection-lsa",
+  "category": "Sécurité",
+  "name": "Activer la protection LSA (RunAsPPL)",
+  "description": "Protège le processus des identifiants. Peut gêner certains pilotes ou outils anciens.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Lsa",
+    "name": "RunAsPPL",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "secu.macros-internet-off",
+  "category": "Sécurité",
+  "name": "Bloquer les macros Office venant d'Internet",
+  "description": "Word, Excel et PowerPoint refusent les macros des fichiers téléchargés.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Office\\16.0\\word\\security",
+    "name": "blockcontentexecutionfrominternet",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Office\\16.0\\excel\\security",
+    "name": "blockcontentexecutionfrominternet",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Office\\16.0\\powerpoint\\security",
+    "name": "blockcontentexecutionfrominternet",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "secu.defender-pua",
+  "category": "Sécurité",
+  "name": "Activer la protection contre les applications potentiellement indésirables",
+  "description": "Defender bloque les logiciels publicitaires et PUA.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+    "name": "PUAProtection",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "secu.defender-cpu-analyse",
+  "category": "Sécurité",
+  "name": "Limiter l'usage CPU des analyses Defender à 20 %",
+  "description": "Défaut : 50 %. Les analyses durent plus longtemps mais gênent moins.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Scan",
+    "name": "AvgCPULoadFactor",
+    "kind": "DWord",
+    "value": 20
+   }
+  ]
+ },
+ {
+  "id": "secu.defender-pas-echantillons",
+  "category": "Sécurité",
+  "name": "Ne pas envoyer d'échantillons à Microsoft (Defender)",
+  "description": "Refuse l'envoi automatique de fichiers et le rapport cloud MAPS. Protection cloud réduite.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+    "name": "SubmitSamplesConsent",
+    "kind": "DWord",
+    "value": 2
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+    "name": "SpynetReporting",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "secu.defender-notifications-off",
+  "category": "Sécurité",
+  "name": "Masquer les notifications de Defender",
+  "description": "Aucune notification du Centre de sécurité. Vous ne verrez plus les alertes.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications",
+    "name": "DisableNotifications",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "secu.defender-analyse-planifiee-off",
+  "category": "Sécurité",
+  "name": "Désactiver la tâche d'analyse planifiée de Defender",
+  "description": "Plus d'analyse hebdomadaire automatique. La protection en temps réel reste active.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Scheduled Scan"
+   }
+  ]
+ },
+ {
+  "id": "secu.smartscreen-systeme-off",
+  "category": "Sécurité",
+  "name": "Désactiver SmartScreen pour les fichiers et applications (Explorateur)",
+  "description": "Plus de vérification de réputation des téléchargements. Réduit la protection.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+    "name": "SmartScreenEnabled",
+    "kind": "String",
+    "value": "Off"
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "name": "EnableSmartScreen",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "secu.smartscreen-edge-off",
+  "category": "Sécurité",
+  "name": "Désactiver SmartScreen dans Edge",
+  "description": "Plus de filtre d'hameçonnage ni de téléchargements d'Edge.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "name": "SmartScreenEnabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "secu.smartscreen-store-off",
+  "category": "Sécurité",
+  "name": "Désactiver SmartScreen pour le contenu web des applications",
+  "description": "Retire le filtre sur les URL ouvertes par les applications du Store.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\AppHost",
+    "name": "EnableWebContentEvaluation",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ }
+]

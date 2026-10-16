@@ -1,0 +1,307 @@
+[
+ {
+  "id": "maj.differer-fonctionnalites",
+  "category": "Mises à jour",
+  "name": "Différer les mises à jour de fonctionnalités de 365 jours",
+  "description": "Les correctifs de sécurité continuent d'arriver normalement.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "name": "DeferFeatureUpdates",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "name": "DeferFeatureUpdatesPeriodinDays",
+    "kind": "DWord",
+    "value": 365
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "name": "BranchReadinessLevel",
+    "kind": "DWord",
+    "value": 16
+   }
+  ]
+ },
+ {
+  "id": "maj.differer-qualite-7j",
+  "category": "Mises à jour",
+  "name": "Différer les correctifs qualité de 7 jours",
+  "description": "Laisse une semaine aux autres pour détecter un correctif défectueux. Retarde aussi les correctifs de sécurité.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "name": "DeferQualityUpdates",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "name": "DeferQualityUpdatesPeriodinDays",
+    "kind": "DWord",
+    "value": 7
+   }
+  ]
+ },
+ {
+  "id": "maj.pas-redemarrage-auto",
+  "category": "Mises à jour",
+  "name": "Pas de redémarrage automatique avec session ouverte",
+  "description": "Windows n'impose plus de redémarrage pendant que vous travaillez.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+    "name": "NoAutoRebootWithLoggedOnUsers",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "maj.pas-pilotes-wu",
+  "category": "Mises à jour",
+  "name": "Ne pas installer de pilotes via Windows Update",
+  "description": "Évite les pilotes génériques qui écrasent ceux du constructeur.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "name": "ExcludeWUDriversInQualityUpdate",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DriverSearching",
+    "name": "SearchOrderConfig",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "maj.livraison-p2p-off",
+  "category": "Mises à jour",
+  "name": "Désactiver le partage P2P de l'optimisation de livraison",
+  "description": "Téléchargements depuis Microsoft uniquement, sans envoi vers d'autres PC.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+    "name": "DODownloadMode",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "maj.notifier-avant-telechargement",
+  "category": "Mises à jour",
+  "name": "Demander avant de télécharger les mises à jour",
+  "description": "Les mises à jour restent actives mais vous choisissez le moment. Penser à les installer régulièrement.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+    "name": "NoAutoUpdate",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+    "name": "AUOptions",
+    "kind": "DWord",
+    "value": 2
+   }
+  ]
+ },
+ {
+  "id": "maj.pas-reveil-ordinateur",
+  "category": "Mises à jour",
+  "name": "Ne pas réveiller le PC pour installer les mises à jour",
+  "description": "Désactive la gestion d'alimentation de Windows Update.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+    "name": "AUPowerManagement",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Wake To Work"
+   }
+  ]
+ },
+ {
+  "id": "maj.heures-actives",
+  "category": "Mises à jour",
+  "name": "Définir les heures d'activité de 7 h à 23 h",
+  "description": "Aucun redémarrage planifié dans cette plage.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings",
+    "name": "ActiveHoursStart",
+    "kind": "DWord",
+    "value": 7
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings",
+    "name": "ActiveHoursEnd",
+    "kind": "DWord",
+    "value": 23
+   }
+  ]
+ },
+ {
+  "id": "maj.store-pas-maj-auto",
+  "category": "Mises à jour",
+  "name": "Désactiver la mise à jour automatique des applications du Store",
+  "description": "Les applications du Microsoft Store se mettent à jour à la demande.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\WindowsStore",
+    "name": "AutoDownload",
+    "kind": "DWord",
+    "value": 2
+   }
+  ]
+ },
+ {
+  "id": "maj.insider-off",
+  "category": "Mises à jour",
+  "name": "Désactiver les builds Insider et l'expérimentation",
+  "description": "Aucune version préliminaire ni test de fonctionnalités.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds",
+    "name": "AllowBuildPreview",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds",
+    "name": "EnableConfigFlighting",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds",
+    "name": "EnableExperimentation",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "maj.msrt-exclu",
+  "category": "Mises à jour",
+  "name": "Exclure l'outil de suppression de logiciels malveillants de Windows Update",
+  "description": "Retire l'outil MRT mensuel. Defender reste actif.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\MRT",
+    "name": "DontOfferThroughWUAU",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "maj.stockage-reserve-off",
+  "category": "Mises à jour",
+  "name": "Désactiver le stockage réservé de Windows",
+  "description": "Libère quelques Go utilisés pour les mises à jour. Une mise à jour peut échouer si le disque est plein.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "Set-WindowsReservedStorageState -State Disabled",
+    "revert": "Set-WindowsReservedStorageState -State Enabled"
+   }
+  ]
+ }
+]

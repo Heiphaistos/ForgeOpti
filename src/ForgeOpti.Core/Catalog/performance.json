@@ -1,0 +1,681 @@
+[
+ {
+  "id": "perf.sysmain",
+  "category": "Performance",
+  "name": "Désactiver SysMain (Superfetch)",
+  "description": "Arrête le préchargement en mémoire. Utile sur SSD, à éviter sur disque dur.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\SysMain",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "perf.prefetch",
+  "category": "Performance",
+  "name": "Désactiver Prefetch/Superfetch (registre)",
+  "description": "Coupe le préchargement des applications et du démarrage. Conseillé uniquement sur SSD.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters",
+    "name": "EnablePrefetcher",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters",
+    "name": "EnableSuperfetch",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "perf.wsearch",
+  "category": "Performance",
+  "name": "Désactiver Windows Search (indexation)",
+  "description": "Arrête l'indexeur : moins d'activité disque, mais recherches de fichiers plus lentes.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\WSearch",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "perf.diagtrack",
+  "category": "Performance",
+  "name": "Désactiver le service de télémétrie (DiagTrack)",
+  "description": "Arrête l'Expérience des utilisateurs connectés et télémétrie.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\DiagTrack",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "perf.wer",
+  "category": "Performance",
+  "name": "Désactiver le rapport d'erreurs Windows",
+  "description": "Arrête le service WerSvc et l'envoi de rapports de plantage.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\WerSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "perf.services-inutiles",
+  "category": "Performance",
+  "name": "Désactiver des services rarement utiles",
+  "description": "Cartes téléchargées (MapsBroker), mode démo (RetailDemo) et géolocalisation (lfsvc).",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\MapsBroker",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\RetailDemo",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\lfsvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "perf.taches-inutiles",
+  "category": "Performance",
+  "name": "Désactiver des tâches planifiées de collecte",
+  "description": "Programme d'amélioration de l'expérience, mise à jour des cartes et mise à jour des données de programmes.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\KernelCeipTask"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Application Experience\\ProgramDataUpdater"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Maps\\MapsUpdateTask"
+   }
+  ]
+ },
+ {
+  "id": "perf.menu-delai",
+  "category": "Performance",
+  "name": "Menus instantanés",
+  "description": "Supprime le délai d'affichage des menus (MenuShowDelay = 0).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Desktop",
+    "name": "MenuShowDelay",
+    "kind": "String",
+    "value": "0"
+   }
+  ]
+ },
+ {
+  "id": "perf.fermeture-services",
+  "category": "Performance",
+  "name": "Arrêt rapide des services",
+  "description": "Réduit à 2 s le délai d'attente avant de forcer l'arrêt d'un service à l'extinction.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control",
+    "name": "WaitToKillServiceTimeout",
+    "kind": "String",
+    "value": "2000"
+   }
+  ]
+ },
+ {
+  "id": "perf.fermeture-apps",
+  "category": "Performance",
+  "name": "Fermeture rapide des applications",
+  "description": "Délais de 2 s et fermeture automatique des programmes bloqués. Peut faire perdre un travail non enregistré.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Desktop",
+    "name": "WaitToKillAppTimeout",
+    "kind": "String",
+    "value": "2000"
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Desktop",
+    "name": "HungAppTimeout",
+    "kind": "String",
+    "value": "2000"
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Desktop",
+    "name": "AutoEndTasks",
+    "kind": "String",
+    "value": "1"
+   }
+  ]
+ },
+ {
+  "id": "perf.delai-demarrage",
+  "category": "Performance",
+  "name": "Supprimer le délai de démarrage des applications",
+  "description": "Lance les programmes de démarrage sans temporisation.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+    "name": "StartupDelayInMSec",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "perf.animations",
+  "category": "Performance",
+  "name": "Désactiver les animations de fenêtres",
+  "description": "Supprime animations de réduction, de barre des tâches, aperçu Peek et ombres de sélection.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Desktop\\WindowMetrics",
+    "name": "MinAnimate",
+    "kind": "String",
+    "value": "0"
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "name": "TaskbarAnimations",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "name": "ListviewAlphaSelect",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "name": "ListviewShadow",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\DWM",
+    "name": "EnableAeroPeek",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "perf.transparence",
+  "category": "Performance",
+  "name": "Désactiver la transparence",
+  "description": "Supprime les effets de transparence et de flou (acrylique).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+    "name": "EnableTransparency",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "perf.miniatures",
+  "category": "Performance",
+  "name": "Afficher des icônes au lieu des miniatures",
+  "description": "L'Explorateur ne génère plus d'aperçus d'images : dossiers plus rapides.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "name": "IconsOnly",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "perf.apps-fond",
+  "category": "Performance",
+  "name": "Bloquer les applications en arrière-plan",
+  "description": "Empêche les applications du Store de tourner en tâche de fond.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications",
+    "name": "GlobalUserDisabled",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\AppPrivacy",
+    "name": "LetAppsRunInBackground",
+    "kind": "DWord",
+    "value": 2
+   }
+  ]
+ },
+ {
+  "id": "perf.suggestions",
+  "category": "Performance",
+  "name": "Désactiver suggestions et installations automatiques",
+  "description": "Plus de suggestions dans le menu Démarrer ni d'applications installées automatiquement.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SystemPaneSuggestionsEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SilentInstalledAppsEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SubscribedContent-338388Enabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SubscribedContent-338389Enabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "perf.fonctions-grand-public",
+  "category": "Performance",
+  "name": "Désactiver les fonctionnalités grand public",
+  "description": "Bloque les applications et contenus promotionnels poussés par Microsoft.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+    "name": "DisableWindowsConsumerFeatures",
+    "kind": "DWord",
+    "value": 1
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+    "name": "DisableSoftLanding",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "perf.recherche-web",
+  "category": "Performance",
+  "name": "Retirer la recherche web de la barre de recherche",
+  "description": "La recherche locale n'envoie plus de requêtes à Bing.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+    "name": "DisableSearchBoxSuggestions",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "perf.edge-fond",
+  "category": "Performance",
+  "name": "Désactiver le préchargement de Microsoft Edge",
+  "description": "Coupe le démarrage anticipé et l'exécution en arrière-plan d'Edge.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "name": "StartupBoostEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "name": "BackgroundModeEnabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "perf.pagination-noyau",
+  "category": "Performance",
+  "name": "Garder le noyau en mémoire vive",
+  "description": "Interdit la pagination du noyau (DisablePagingExecutive). Conseillé à partir de 16 Go de RAM.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+    "name": "DisablePagingExecutive",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "perf.ntfs-dernier-acces",
+  "category": "Performance",
+  "name": "Désactiver la mise à jour du dernier accès NTFS",
+  "description": "Évite une écriture disque à chaque lecture de fichier.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+    "name": "NtfsDisableLastAccessUpdate",
+    "kind": "DWord",
+    "value": 2147483649
+   }
+  ]
+ },
+ {
+  "id": "perf.ntfs-8dot3",
+  "category": "Performance",
+  "name": "Désactiver les noms de fichiers courts 8.3",
+  "description": "Plus de création de noms DOS. Peut gêner de très vieux logiciels.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+    "name": "NtfsDisable8dot3NameCreation",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "perf.compression-memoire",
+  "category": "Performance",
+  "name": "Désactiver la compression de mémoire",
+  "description": "Libère un peu de CPU, au prix d'un usage mémoire accru. Utile avec beaucoup de RAM.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "Disable-MMAgent -MemoryCompression",
+    "revert": "Enable-MMAgent -MemoryCompression"
+   }
+  ]
+ },
+ {
+  "id": "perf.defender-cpu",
+  "category": "Performance",
+  "name": "Limiter la charge CPU des analyses Defender",
+  "description": "Ramène la charge moyenne des analyses à 20 % (50 % par défaut).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "Set-MpPreference -ScanAvgCPULoadFactor 20",
+    "revert": "Set-MpPreference -ScanAvgCPULoadFactor 50"
+   }
+  ]
+ },
+ {
+  "id": "perf.stockage-reserve",
+  "category": "Performance",
+  "name": "Désactiver le stockage réservé",
+  "description": "Libère environ 7 Go réservés aux mises à jour Windows.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "DISM /Online /Set-ReservedStorageState /State:Disabled",
+    "revert": "DISM /Online /Set-ReservedStorageState /State:Enabled"
+   }
+  ]
+ },
+ {
+  "id": "perf.mitigations-cpu",
+  "category": "Performance",
+  "name": "Désactiver les mitigations Spectre/Meltdown",
+  "description": "Gain de performance sur certains CPU, mais expose la machine à des attaques par canal auxiliaire. À éviter hors poste isolé.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+    "name": "FeatureSettingsOverride",
+    "kind": "DWord",
+    "value": 3
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+    "name": "FeatureSettingsOverrideMask",
+    "kind": "DWord",
+    "value": 3
+   }
+  ]
+ },
+ {
+  "id": "perf.vbs-hvci",
+  "category": "Performance",
+  "name": "Désactiver la sécurité basée sur la virtualisation (VBS/HVCI)",
+  "description": "Retire l'isolation de la mémoire du noyau : gain en jeu, protection réduite contre les malwares noyau.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\DeviceGuard",
+    "name": "EnableVirtualizationBasedSecurity",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity",
+    "name": "Enabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ }
+]
