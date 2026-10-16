@@ -7,7 +7,7 @@ permissions:
 jobs:
   build:
     runs-on: windows-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
@@ -21,10 +21,17 @@ jobs:
           $v = '${{ github.ref_name }}'.TrimStart('v')
           dotnet publish src/ForgeOpti.App -c Release -r win-x64 -p:Version=$v -o out
           Compress-Archive -Path out/* -DestinationPath ForgeOpti-win-x64.zip
-          $h = (Get-FileHash ForgeOpti-win-x64.zip -Algorithm SHA256).Hash.ToLower()
-          "$h  ForgeOpti-win-x64.zip" | Out-File -Encoding ascii ForgeOpti-win-x64.zip.sha256
+      - name: Installeur et portable (.exe)
+        shell: pwsh
+        run: |
+          $v = '${{ github.ref_name }}'.TrimStart('v')
+          choco install innosetup --no-progress -y
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          foreach ($m in 'setup','portable') { & $iscc /Q "/DAppVersion=$v" "/DSourceDir=$PWD\out" "/DMode=$m" installer\ForgeOpti.iss }
+          Copy-Item ForgeOpti-win-x64.zip dist/
+          Get-ChildItem dist | ForEach-Object { "$((Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower())  $($_.Name)" | Out-File -Encoding ascii "$($_.FullName).sha256" }
       - name: Release
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create '${{ github.ref_name }}' ForgeOpti-win-x64.zip ForgeOpti-win-x64.zip.sha256 --title '${{ github.ref_name }}' --generate-notes
+        run: gh release create '${{ github.ref_name }}' (Get-ChildItem dist).FullName --title '${{ github.ref_name }}' --generate-notes

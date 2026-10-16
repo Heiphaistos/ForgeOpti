@@ -1,181 +1,181 @@
 [
- {
-  "id": "pwr.plan-ultime",
-  "category": "Alimentation",
-  "name": "Plan d'alimentation Performances ultimes",
-  "description": "Crée et active le plan Performances ultimes ; le plan précédent est mémorisé et restauré à l'annulation.",
-  "risk": "Modere",
-  "reboot": false,
-  "gaming": true,
-  "oneClick": false,
-  "ops": [
-   {
-    "type": "cmd",
-    "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $c=[regex]::Match((powercfg /getactivescheme),'[0-9a-fA-F-]{36}').Value; Set-Content \"$d\\plan-precedent-ultime.txt\" $c; $g=[regex]::Match((powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61),'[0-9a-fA-F-]{36}').Value; Set-Content \"$d\\plan-ultime.txt\" $g; powercfg /setactive $g",
-    "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; powercfg /setactive (Get-Content \"$d\\plan-precedent-ultime.txt\").Trim(); powercfg /delete (Get-Content \"$d\\plan-ultime.txt\").Trim()"
-   }
-  ]
- },
- {
-  "id": "pwr.plan-hautes-perf",
-  "category": "Alimentation",
-  "name": "Plan d'alimentation Hautes performances",
-  "description": "Active le plan Hautes performances ; le plan précédent est restauré à l'annulation. Indisponible sur certains portables.",
-  "risk": "Modere",
-  "reboot": false,
-  "gaming": true,
-  "oneClick": false,
-  "ops": [
-   {
-    "type": "cmd",
-    "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $c=[regex]::Match((powercfg /getactivescheme),'[0-9a-fA-F-]{36}').Value; Set-Content \"$d\\plan-precedent-hp.txt\" $c; powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c",
-    "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; powercfg /setactive (Get-Content \"$d\\plan-precedent-hp.txt\").Trim()"
-   }
-  ]
- },
- {
-  "id": "pwr.usb-suspension",
-  "category": "Alimentation",
-  "name": "Désactiver la suspension sélective USB",
-  "description": "Empêche Windows de couper l'alimentation des ports USB (secteur uniquement).",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": true,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "cmd",
-    "apply": "powercfg /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0; powercfg /setactive SCHEME_CURRENT",
-    "revert": "powercfg /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 1; powercfg /setactive SCHEME_CURRENT"
-   }
-  ]
- },
- {
-  "id": "pwr.core-parking",
-  "category": "Alimentation",
-  "name": "Désactiver le parking des cœurs CPU",
-  "description": "Garde tous les cœurs actifs (secteur) ; la valeur d'origine est mémorisée puis restaurée.",
-  "risk": "Modere",
-  "reboot": false,
-  "gaming": true,
-  "oneClick": false,
-  "ops": [
-   {
-    "type": "cmd",
-    "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $o=powercfg /qh SCHEME_CURRENT SUB_PROCESSOR CPMINCORES; $m=[regex]::Matches($o,'0x[0-9a-fA-F]{8}'); [Convert]::ToInt32($m[$m.Count-2].Value,16)|Set-Content \"$d\\cpmincores.txt\"; powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100; powercfg /setactive SCHEME_CURRENT",
-    "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; $v=[int](Get-Content \"$d\\cpmincores.txt\"); powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES $v; powercfg /setactive SCHEME_CURRENT"
-   }
-  ]
- },
- {
-  "id": "pwr.cpu-minimum",
-  "category": "Alimentation",
-  "name": "CPU à 100 % minimum (secteur)",
-  "description": "Empêche la baisse de fréquence au repos ; la valeur d'origine est mémorisée puis restaurée. Chauffe et consommation accrues.",
-  "risk": "Avance",
-  "reboot": false,
-  "gaming": true,
-  "oneClick": false,
-  "ops": [
-   {
-    "type": "cmd",
-    "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $o=powercfg /qh SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN; $m=[regex]::Matches($o,'0x[0-9a-fA-F]{8}'); [Convert]::ToInt32($m[$m.Count-2].Value,16)|Set-Content \"$d\\procthrottlemin.txt\"; powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 100; powercfg /setactive SCHEME_CURRENT",
-    "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; $v=[int](Get-Content \"$d\\procthrottlemin.txt\"); powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN $v; powercfg /setactive SCHEME_CURRENT"
-   }
-  ]
- },
- {
-  "id": "pwr.hibernation",
-  "category": "Alimentation",
-  "name": "Désactiver l'hibernation",
-  "description": "Supprime hiberfil.sys (libère plusieurs Go) et coupe aussi le démarrage rapide.",
-  "risk": "Modere",
-  "reboot": true,
-  "gaming": false,
-  "oneClick": false,
-  "ops": [
-   {
-    "type": "cmd",
-    "apply": "powercfg /h off",
-    "revert": "powercfg /h on"
-   }
-  ]
- },
- {
-  "id": "pwr.hibernation-reduite",
-  "category": "Alimentation",
-  "name": "Réduire la taille du fichier d'hibernation",
-  "description": "Fichier hiberfil.sys réduit, démarrage rapide conservé, hibernation complète indisponible.",
-  "risk": "Modere",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": false,
-  "ops": [
-   {
-    "type": "cmd",
-    "apply": "powercfg /h /type reduced",
-    "revert": "powercfg /h /type full"
-   }
-  ]
- },
- {
-  "id": "pwr.demarrage-rapide",
-  "category": "Alimentation",
-  "name": "Désactiver le démarrage rapide",
-  "description": "Garantit un vrai arrêt à chaque extinction (corrige pilotes et mises à jour incomplètes).",
-  "risk": "Sur",
-  "reboot": true,
-  "gaming": false,
-  "oneClick": false,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
-    "name": "HiberbootEnabled",
-    "kind": "DWord",
-    "value": 0
-   }
-  ]
- },
- {
-  "id": "pwr.limitation-puissance",
-  "category": "Alimentation",
-  "name": "Désactiver la limitation de puissance des processus",
-  "description": "Empêche Windows de brider les applications en arrière-plan pour économiser l'énergie.",
-  "risk": "Modere",
-  "reboot": true,
-  "gaming": true,
-  "oneClick": false,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
-    "name": "PowerThrottlingOff",
-    "kind": "DWord",
-    "value": 1
-   }
-  ]
- },
- {
-  "id": "pwr.son-demarrage",
-  "category": "Alimentation",
-  "name": "Désactiver le son de démarrage",
-  "description": "Supprime la mélodie de Windows au démarrage.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\BootAnimation",
-    "name": "DisableStartupSound",
-    "kind": "DWord",
-    "value": 1
-   }
-  ]
- }
+  {
+    "id": "pwr.plan-ultime",
+    "category": "Alimentation",
+    "name": "Plan d'alimentation Performances ultimes",
+    "description": "Crée et active le plan Performances ultimes ; le plan précédent est mémorisé et restauré à l'annulation.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": true,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $c=[regex]::Match((powercfg /getactivescheme),'[0-9a-fA-F-]{36}').Value; $u=(Get-Content \"$d\\plan-ultime.txt\" -EA 0); if ($c -ne '8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c' -and $c -ne $u) { Set-Content \"$d\\plan-origine.txt\" $c }; $g=[regex]::Match((powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61),'[0-9a-fA-F-]{36}').Value; Set-Content \"$d\\plan-ultime.txt\" $g; powercfg /setactive $g",
+        "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; $g=(Get-Content \"$d\\plan-origine.txt\" -EA 0); if ($g) { $g=$g.Trim() }; if (-not $g -or -not ((powercfg /list) -match $g)) { $g='381b4222-f694-41f0-9685-ff5bb260df2e' }; powercfg /setactive $g; $x=(Get-Content \"$d\\plan-ultime.txt\" -EA 0); if ($x) { powercfg /delete $x.Trim() }"
+      }
+    ]
+  },
+  {
+    "id": "pwr.plan-hautes-perf",
+    "category": "Alimentation",
+    "name": "Plan d'alimentation Hautes performances",
+    "description": "Active le plan Hautes performances ; le plan précédent est restauré à l'annulation. Indisponible sur certains portables.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": true,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $c=[regex]::Match((powercfg /getactivescheme),'[0-9a-fA-F-]{36}').Value; $u=(Get-Content \"$d\\plan-ultime.txt\" -EA 0); if ($c -ne '8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c' -and $c -ne $u) { Set-Content \"$d\\plan-origine.txt\" $c }; powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c",
+        "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; $g=(Get-Content \"$d\\plan-origine.txt\" -EA 0); if ($g) { $g=$g.Trim() }; if (-not $g -or -not ((powercfg /list) -match $g)) { $g='381b4222-f694-41f0-9685-ff5bb260df2e' }; powercfg /setactive $g"
+      }
+    ]
+  },
+  {
+    "id": "pwr.usb-suspension",
+    "category": "Alimentation",
+    "name": "Désactiver la suspension sélective USB",
+    "description": "Empêche Windows de couper l'alimentation des ports USB (secteur uniquement).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": true,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "powercfg /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0; powercfg /setactive SCHEME_CURRENT",
+        "revert": "powercfg /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 1; powercfg /setactive SCHEME_CURRENT"
+      }
+    ]
+  },
+  {
+    "id": "pwr.core-parking",
+    "category": "Alimentation",
+    "name": "Désactiver le parking des cœurs CPU",
+    "description": "Garde tous les cœurs actifs (secteur) ; la valeur d'origine est mémorisée puis restaurée.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": true,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $o=powercfg /qh SCHEME_CURRENT SUB_PROCESSOR CPMINCORES; $m=[regex]::Matches($o,'0x[0-9a-fA-F]{8}'); [Convert]::ToInt32($m[$m.Count-2].Value,16)|Set-Content \"$d\\cpmincores.txt\"; powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100; powercfg /setactive SCHEME_CURRENT",
+        "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; $v=[int](Get-Content \"$d\\cpmincores.txt\"); powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES $v; powercfg /setactive SCHEME_CURRENT"
+      }
+    ]
+  },
+  {
+    "id": "pwr.cpu-minimum",
+    "category": "Alimentation",
+    "name": "CPU à 100 % minimum (secteur)",
+    "description": "Empêche la baisse de fréquence au repos ; la valeur d'origine est mémorisée puis restaurée. Chauffe et consommation accrues.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": true,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $o=powercfg /qh SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN; $m=[regex]::Matches($o,'0x[0-9a-fA-F]{8}'); [Convert]::ToInt32($m[$m.Count-2].Value,16)|Set-Content \"$d\\procthrottlemin.txt\"; powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 100; powercfg /setactive SCHEME_CURRENT",
+        "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; $v=[int](Get-Content \"$d\\procthrottlemin.txt\"); powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN $v; powercfg /setactive SCHEME_CURRENT"
+      }
+    ]
+  },
+  {
+    "id": "pwr.hibernation",
+    "category": "Alimentation",
+    "name": "Désactiver l'hibernation",
+    "description": "Supprime hiberfil.sys (libère plusieurs Go) et coupe aussi le démarrage rapide.",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "powercfg /h off",
+        "revert": "powercfg /h on"
+      }
+    ]
+  },
+  {
+    "id": "pwr.hibernation-reduite",
+    "category": "Alimentation",
+    "name": "Réduire la taille du fichier d'hibernation",
+    "description": "Fichier hiberfil.sys réduit, démarrage rapide conservé, hibernation complète indisponible.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "powercfg /h /type reduced",
+        "revert": "powercfg /h /type full"
+      }
+    ]
+  },
+  {
+    "id": "pwr.demarrage-rapide",
+    "category": "Alimentation",
+    "name": "Désactiver le démarrage rapide",
+    "description": "Garantit un vrai arrêt à chaque extinction (corrige pilotes et mises à jour incomplètes).",
+    "risk": "Sur",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+        "name": "HiberbootEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "pwr.limitation-puissance",
+    "category": "Alimentation",
+    "name": "Désactiver la limitation de puissance des processus",
+    "description": "Empêche Windows de brider les applications en arrière-plan pour économiser l'énergie.",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": true,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+        "name": "PowerThrottlingOff",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "pwr.son-demarrage",
+    "category": "Alimentation",
+    "name": "Désactiver le son de démarrage",
+    "description": "Supprime la mélodie de Windows au démarrage.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\BootAnimation",
+        "name": "DisableStartupSound",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  }
 ]

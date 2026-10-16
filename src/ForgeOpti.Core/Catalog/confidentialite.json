@@ -40,7 +40,7 @@
       {
         "type": "cmd",
         "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'MicrosoftWindows.Client.WebExperience' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'MicrosoftWindows.Client.WebExperience' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
-        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'MicrosoftWindows.Client.WebExperience' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9MSSGKG348SP --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'MicrosoftWindows.Client.WebExperience' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9MSSGKG348SP --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) { throw 'winget a echoue' } }"
       }
     ]
   },
