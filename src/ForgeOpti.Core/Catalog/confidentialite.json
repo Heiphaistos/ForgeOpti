@@ -1,35 +1,91 @@
 [
   {
-    "id": "priv.telemetrie", "category": "Confidentialité", "name": "Réduire la télémétrie Windows",
+    "id": "priv.telemetrie",
+    "category": "Confidentialité",
+    "name": "Réduire la télémétrie Windows",
     "description": "Niveau de diagnostic minimal et désactivation du suivi publicitaire.",
-    "risk": "Sur", "reboot": false, "gaming": false, "oneClick": true,
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
     "ops": [
-      { "type": "reg", "hive": "HKLM", "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "name": "AllowTelemetry", "kind": "DWord", "value": 0 },
-      { "type": "reg", "hive": "HKCU", "key": "Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo", "name": "Enabled", "kind": "DWord", "value": 0 }
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "AllowTelemetry",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      }
     ]
   },
   {
-    "id": "ui.widgets", "category": "Interface", "name": "Supprimer les Widgets (météo, actualités)",
-    "description": "Retire le bouton Widgets de la barre des tâches et désactive le service.",
-    "risk": "Sur", "reboot": false, "gaming": false, "oneClick": true,
+    "id": "ui.widgets",
+    "category": "Interface",
+    "name": "Supprimer les Widgets (météo, actualités)",
+    "description": "Retire le composant Windows Web Experience qui fait fonctionner les Widgets (météo, actualités). Réinstallable.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
     "ops": [
-      { "type": "reg", "hive": "HKCU", "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "TaskbarDa", "kind": "DWord", "value": 0 },
-      { "type": "reg", "hive": "HKLM", "key": "SOFTWARE\\Policies\\Microsoft\\Dsh", "name": "AllowNewsAndInterests", "kind": "DWord", "value": 0 }
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; Get-AppxPackage -AllUsers -Name 'MicrosoftWindows.Client.WebExperience' | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'MicrosoftWindows.Client.WebExperience' } | Remove-AppxProvisionedPackage -Online | Out-Null; exit 0",
+        "revert": "$ok=$false; Get-AppxPackage -AllUsers -Name 'MicrosoftWindows.Client.WebExperience' | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } }; if (-not $ok) { winget install --id 9MSSGKG348SP --source msstore --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0) { throw 'winget a echoue' } }"
+      }
     ]
   },
   {
-    "id": "gaming.gamedvr", "category": "Gaming", "name": "Désactiver Game DVR / capture en arrière-plan",
+    "id": "gaming.gamedvr",
+    "category": "Gaming",
+    "name": "Désactiver Game DVR / capture en arrière-plan",
     "description": "Évite la capture permanente qui coûte des images par seconde.",
-    "risk": "Sur", "reboot": false, "gaming": true, "oneClick": true,
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": true,
+    "oneClick": true,
     "ops": [
-      { "type": "reg", "hive": "HKCU", "key": "System\\GameConfigStore", "name": "GameDVR_Enabled", "kind": "DWord", "value": 0 },
-      { "type": "reg", "hive": "HKLM", "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR", "name": "AllowGameDVR", "kind": "DWord", "value": 0 }
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "System\\GameConfigStore",
+        "name": "GameDVR_Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+        "name": "AllowGameDVR",
+        "kind": "DWord",
+        "value": 0
+      }
     ]
   },
   {
-    "id": "gaming.tache-compat", "category": "Gaming", "name": "Désactiver la tâche de télémétrie de compatibilité",
+    "id": "gaming.tache-compat",
+    "category": "Gaming",
+    "name": "Désactiver la tâche de télémétrie de compatibilité",
     "description": "Stoppe Microsoft Compatibility Appraiser (pics CPU/disque).",
-    "risk": "Sur", "reboot": false, "gaming": true, "oneClick": true,
-    "ops": [ { "type": "task", "path": "\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser" } ]
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": true,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "task",
+        "path": "\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser"
+      }
+    ]
   }
 ]

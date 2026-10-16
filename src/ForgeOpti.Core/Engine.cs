@@ -114,10 +114,19 @@ public sealed class Engine(string stateFile)
         return o.Length == 0 ? null : o;
     }
 
+    const string Pre = """
+        $ProgressPreference='SilentlyContinue'
+        if (-not (Get-Command winget -EA 0)) {
+          $w = Get-ChildItem "$env:ProgramFiles\WindowsApps\Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe\winget.exe" -EA 0 | Sort-Object FullName -Descending | Select-Object -First 1
+          if ($w) { Set-Alias winget $w.FullName -Scope Global }
+        }
+
+        """;
+
     public static string Ps(string script)
     {
         var psi = new ProcessStartInfo("powershell.exe",
-            $"-NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand {Convert.ToBase64String(Encoding.Unicode.GetBytes(script))}")
+            $"-NoProfile -NonInteractive -ExecutionPolicy Bypass -OutputFormat Text -EncodedCommand {Convert.ToBase64String(Encoding.Unicode.GetBytes(Pre + script))}")
         { RedirectStandardOutput = true, RedirectStandardError = true, CreateNoWindow = true };
         using var p = Process.Start(psi)!;
         var err = p.StandardError.ReadToEndAsync();

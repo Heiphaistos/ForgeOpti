@@ -25,7 +25,7 @@ public static class SelfTest
         try { RestorePoint.Create("ForgeOpti selftest"); Add(new("restore-point", "OK", "")); }
         catch (Exception e) { Add(new("restore-point", "FAIL", e.Message)); }
 
-        foreach (var t in tweaks.Where(t => t.MinBuild <= build))
+        foreach (var t in tweaks.Where(t => t.MinBuild <= build && (t.MaxBuild == 0 || build <= t.MaxBuild)))
         {
             var before = t.Ops.Select(Engine.Probe).ToList();
             try

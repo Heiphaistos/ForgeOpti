@@ -1,379 +1,351 @@
 [
- {
-  "id": "ia.copilot-politique",
-  "category": "IA et Copilot",
-  "name": "Désactiver Windows Copilot (politique)",
-  "description": "Active la stratégie TurnOffWindowsCopilot pour la machine et l'utilisateur.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot",
-    "name": "TurnOffWindowsCopilot",
-    "kind": "DWord",
-    "value": 1
-   },
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Policies\\Microsoft\\Windows\\WindowsCopilot",
-    "name": "TurnOffWindowsCopilot",
-    "kind": "DWord",
-    "value": 1
-   }
-  ],
-  "minBuild": 22621
- },
- {
-  "id": "ia.copilot-bouton",
-  "category": "IA et Copilot",
-  "name": "Masquer le bouton Copilot de la barre des tâches",
-  "description": "Retire l'icône Copilot.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
-    "name": "ShowCopilotButton",
-    "kind": "DWord",
-    "value": 0
-   }
-  ],
-  "minBuild": 22621
- },
- {
-  "id": "ia.recall-analyse",
-  "category": "IA et Copilot",
-  "name": "Désactiver Recall et l'analyse des données par l'IA",
-  "description": "Empêche l'enregistrement d'instantanés d'écran et l'analyse IA locale.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
-    "name": "DisableAIDataAnalysis",
-    "kind": "DWord",
-    "value": 1
-   },
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Policies\\Microsoft\\Windows\\WindowsAI",
-    "name": "DisableAIDataAnalysis",
-    "kind": "DWord",
-    "value": 1
-   },
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
-    "name": "AllowRecallEnablement",
-    "kind": "DWord",
-    "value": 0
-   }
-  ],
-  "minBuild": 26100
- },
- {
-  "id": "ia.click-to-do",
-  "category": "IA et Copilot",
-  "name": "Désactiver Click to Do",
-  "description": "Désactive les actions IA contextuelles sur le contenu de l'écran.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
-    "name": "DisableClickToDo",
-    "kind": "DWord",
-    "value": 1
-   },
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Policies\\Microsoft\\Windows\\WindowsAI",
-    "name": "DisableClickToDo",
-    "kind": "DWord",
-    "value": 1
-   }
-  ],
-  "minBuild": 26100
- },
- {
-  "id": "ia.cortana",
-  "category": "IA et Copilot",
-  "name": "Désactiver Cortana",
-  "description": "Politique AllowCortana à 0.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
-    "name": "AllowCortana",
-    "kind": "DWord",
-    "value": 0
-   }
-  ]
- },
- {
-  "id": "ia.cortana-consentement",
-  "category": "IA et Copilot",
-  "name": "Retirer le consentement Cortana et recherche cloud",
-  "description": "Cortana et recherche cloud (compte Microsoft et compte professionnel) désactivés.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
-    "name": "CortanaConsent",
-    "kind": "DWord",
-    "value": 0
-   },
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings",
-    "name": "IsMSACloudSearchEnabled",
-    "kind": "DWord",
-    "value": 0
-   },
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings",
-    "name": "IsAADCloudSearchEnabled",
-    "kind": "DWord",
-    "value": 0
-   }
-  ]
- },
- {
-  "id": "ia.recherche-bing",
-  "category": "IA et Copilot",
-  "name": "Supprimer Bing de la recherche Windows",
-  "description": "Désactive la recherche web Bing dans la recherche de la barre des tâches.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
-    "name": "BingSearchEnabled",
-    "kind": "DWord",
-    "value": 0
-   },
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
-    "name": "DisableWebSearch",
-    "kind": "DWord",
-    "value": 1
-   }
-  ]
- },
- {
-  "id": "ia.suggestions-web-explorateur",
-  "category": "IA et Copilot",
-  "name": "Désactiver les suggestions web de la recherche (machine)",
-  "description": "Version stratégie machine de DisableSearchBoxSuggestions.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
-    "name": "DisableSearchBoxSuggestions",
-    "kind": "DWord",
-    "value": 1
-   }
-  ]
- },
- {
-  "id": "ia.recherche-points-forts",
-  "category": "IA et Copilot",
-  "name": "Désactiver les points forts de la recherche",
-  "description": "Retire le logo et les contenus du jour dans la zone de recherche.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings",
-    "name": "IsDynamicSearchBoxEnabled",
-    "kind": "DWord",
-    "value": 0
-   }
-  ]
- },
- {
-  "id": "ia.actualites-interets",
-  "category": "IA et Copilot",
-  "name": "Désactiver Actualités et centres d'intérêt (Windows 10)",
-  "description": "Désactive le flux d'actualités de la barre des tâches.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds",
-    "name": "EnableFeeds",
-    "kind": "DWord",
-    "value": 0
-   },
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Feeds",
-    "name": "ShellFeedsTaskbarViewMode",
-    "kind": "DWord",
-    "value": 2
-   }
-  ]
- },
- {
-  "id": "ia.widgets-win11",
-  "category": "IA et Copilot",
-  "name": "Désactiver le tableau de widgets (Windows 11)",
-  "description": "Retire le bouton Widgets et son flux piloté par l'IA.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
-    "name": "TaskbarDa",
-    "kind": "DWord",
-    "value": 0
-   }
-  ],
-  "minBuild": 22000
- },
- {
-  "id": "ia.suggestions-saisie",
-  "category": "IA et Copilot",
-  "name": "Désactiver les suggestions de texte intelligentes",
-  "description": "Désactive les informations contextuelles de saisie.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Input\\Settings",
-    "name": "InsightsEnabled",
-    "kind": "DWord",
-    "value": 0
-   }
-  ]
- },
- {
-  "id": "ia.edge-barre-laterale",
-  "category": "IA et Copilot",
-  "name": "Désactiver la barre latérale d'Edge (Copilot)",
-  "description": "Retire le volet Copilot et les Hubs d'Edge.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
-    "name": "HubsSidebarEnabled",
-    "kind": "DWord",
-    "value": 0
-   }
-  ]
- },
- {
-  "id": "ia.edge-shopping",
-  "category": "IA et Copilot",
-  "name": "Désactiver l'assistant d'achat d'Edge",
-  "description": "Plus de coupons ni comparateurs de prix.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
-    "name": "EdgeShoppingAssistantEnabled",
-    "kind": "DWord",
-    "value": 0
-   }
-  ]
- },
- {
-  "id": "ia.edge-recommandations",
-  "category": "IA et Copilot",
-  "name": "Désactiver les recommandations et Rewards d'Edge",
-  "description": "Retire les suggestions de la page d'accueil et Microsoft Rewards.",
-  "risk": "Sur",
-  "reboot": false,
-  "gaming": false,
-  "oneClick": true,
-  "ops": [
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
-    "name": "ShowRecommendationsEnabled",
-    "kind": "DWord",
-    "value": 0
-   },
-   {
-    "type": "reg",
-    "hive": "HKLM",
-    "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
-    "name": "ShowMicrosoftRewards",
-    "kind": "DWord",
-    "value": 0
-   }
-  ]
- }
+  {
+    "id": "ia.copilot-politique",
+    "category": "IA et Copilot",
+    "name": "Désactiver Windows Copilot (politique)",
+    "description": "Active la stratégie TurnOffWindowsCopilot pour la machine et l'utilisateur.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+        "name": "TurnOffWindowsCopilot",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+        "name": "TurnOffWindowsCopilot",
+        "kind": "DWord",
+        "value": 1
+      }
+    ],
+    "minBuild": 22621
+  },
+  {
+    "id": "ia.copilot-bouton",
+    "category": "IA et Copilot",
+    "name": "Masquer le bouton Copilot de la barre des tâches",
+    "description": "Retire l'icône Copilot.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "ShowCopilotButton",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "minBuild": 22621
+  },
+  {
+    "id": "ia.recall-analyse",
+    "category": "IA et Copilot",
+    "name": "Désactiver Recall et l'analyse des données par l'IA",
+    "description": "Empêche l'enregistrement d'instantanés d'écran et l'analyse IA locale.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "name": "DisableAIDataAnalysis",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "name": "DisableAIDataAnalysis",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "name": "AllowRecallEnablement",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "minBuild": 26100
+  },
+  {
+    "id": "ia.click-to-do",
+    "category": "IA et Copilot",
+    "name": "Désactiver Click to Do",
+    "description": "Désactive les actions IA contextuelles sur le contenu de l'écran.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "name": "DisableClickToDo",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "name": "DisableClickToDo",
+        "kind": "DWord",
+        "value": 1
+      }
+    ],
+    "minBuild": 26100
+  },
+  {
+    "id": "ia.cortana",
+    "category": "IA et Copilot",
+    "name": "Désactiver Cortana",
+    "description": "Politique AllowCortana à 0.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "name": "AllowCortana",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ia.cortana-consentement",
+    "category": "IA et Copilot",
+    "name": "Retirer le consentement Cortana et recherche cloud",
+    "description": "Cortana et recherche cloud (compte Microsoft et compte professionnel) désactivés.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+        "name": "CortanaConsent",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings",
+        "name": "IsMSACloudSearchEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings",
+        "name": "IsAADCloudSearchEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ia.recherche-bing",
+    "category": "IA et Copilot",
+    "name": "Supprimer Bing de la recherche Windows",
+    "description": "Désactive la recherche web Bing dans la recherche de la barre des tâches.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+        "name": "BingSearchEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "name": "DisableWebSearch",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ia.suggestions-web-explorateur",
+    "category": "IA et Copilot",
+    "name": "Désactiver les suggestions web de la recherche (machine)",
+    "description": "Version stratégie machine de DisableSearchBoxSuggestions.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "DisableSearchBoxSuggestions",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ia.recherche-points-forts",
+    "category": "IA et Copilot",
+    "name": "Désactiver les points forts de la recherche",
+    "description": "Retire le logo et les contenus du jour dans la zone de recherche.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings",
+        "name": "IsDynamicSearchBoxEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ia.actualites-interets",
+    "category": "IA et Copilot",
+    "name": "Désactiver Actualités et centres d'intérêt (Windows 10)",
+    "description": "Désactive le flux d'actualités de la barre des tâches.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds",
+        "name": "EnableFeeds",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "maxBuild": 21999
+  },
+  {
+    "id": "ia.suggestions-saisie",
+    "category": "IA et Copilot",
+    "name": "Désactiver les suggestions de texte intelligentes",
+    "description": "Désactive les informations contextuelles de saisie.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Input\\Settings",
+        "name": "InsightsEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ia.edge-barre-laterale",
+    "category": "IA et Copilot",
+    "name": "Désactiver la barre latérale d'Edge (Copilot)",
+    "description": "Retire le volet Copilot et les Hubs d'Edge.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "HubsSidebarEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ia.edge-shopping",
+    "category": "IA et Copilot",
+    "name": "Désactiver l'assistant d'achat d'Edge",
+    "description": "Plus de coupons ni comparateurs de prix.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "EdgeShoppingAssistantEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ia.edge-recommandations",
+    "category": "IA et Copilot",
+    "name": "Désactiver les recommandations et Rewards d'Edge",
+    "description": "Retire les suggestions de la page d'accueil et Microsoft Rewards.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "ShowRecommendationsEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "ShowMicrosoftRewards",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  }
 ]

@@ -221,26 +221,6 @@
     ]
   },
   {
-    "id": "ui.meteo-w10",
-    "category": "Interface",
-    "name": "Désactiver Actualités et centres d'intérêt (Windows 10)",
-    "description": "Retire la météo et les actualités de la barre des tâches Windows 10.",
-    "risk": "Sur",
-    "reboot": false,
-    "gaming": false,
-    "oneClick": true,
-    "ops": [
-      {
-        "type": "reg",
-        "hive": "HKCU",
-        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Feeds",
-        "name": "ShellFeedsTaskbarViewMode",
-        "kind": "DWord",
-        "value": 2
-      }
-    ]
-  },
-  {
     "id": "ui.cortana-bouton",
     "category": "Interface",
     "name": "Masquer le bouton Cortana",

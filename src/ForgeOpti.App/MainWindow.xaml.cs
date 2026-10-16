@@ -9,7 +9,7 @@ public sealed partial class MainWindow : Window
     const string Gaming = "★ Mode gaming";
     static readonly int Build = Environment.OSVersion.Version.Build;
     readonly Engine _engine = new(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "ForgeOpti", "state.json"));
-    readonly List<Tweak> _all = Catalog.LoadAll().Where(t => t.MinBuild <= Build).ToList();
+    readonly List<Tweak> _all = Catalog.LoadAll().Where(t => t.MinBuild <= Build && (t.MaxBuild == 0 || Build <= t.MaxBuild)).ToList();
     bool _restoreDone, _busy, _refreshing;
 
     public MainWindow()
@@ -18,6 +18,25 @@ public sealed partial class MainWindow : Window
         Title = "ForgeOpti";
         foreach (var c in new[] { Gaming }.Concat(_all.Select(t => t.Category).Distinct().Order())) Cats.Items.Add(c);
         Cats.SelectedIndex = 0;
+        ChkAuto.IsChecked = Updater.Enabled;
+        if (Updater.Enabled) _ = CheckUpdate(false);
+    }
+
+    void Auto_Click(object s, RoutedEventArgs e) => Updater.Enabled = ChkAuto.IsChecked == true;
+    async void Update_Click(object s, RoutedEventArgs e) => await CheckUpdate(true);
+
+    async Task CheckUpdate(bool manual)
+    {
+        try
+        {
+            Status.Text = "Recherche de mise à jour…";
+            var u = await Updater.CheckAsync();
+            if (u is null) { Status.Text = manual ? "ForgeOpti est à jour." : "Prêt."; return; }
+            var d = new ContentDialog { XamlRoot = Root.XamlRoot, Title = $"Mise à jour {u.Version} disponible", Content = "Télécharger, vérifier (SHA-256) et installer maintenant ? L'application redémarrera.", PrimaryButtonText = "Installer", CloseButtonText = "Plus tard" };
+            if (await d.ShowAsync() == ContentDialogResult.Primary) { Status.Text = "Téléchargement…"; await Updater.InstallAsync(u); }
+            else Status.Text = "Prêt.";
+        }
+        catch (Exception ex) { Status.Text = manual ? "Mise à jour impossible : " + ex.Message : "Prêt."; }
     }
 
     void Cats_SelectionChanged(object s, SelectionChangedEventArgs e) => Show();
