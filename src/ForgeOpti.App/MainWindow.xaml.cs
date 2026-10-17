@@ -7,6 +7,7 @@ namespace ForgeOpti.App;
 public sealed partial class MainWindow : Window
 {
     const string Gaming = "★ Mode gaming";
+    const string CleanCat = "🧹 Nettoyage";
     static readonly int Build = Environment.OSVersion.Version.Build;
     readonly Engine _engine = new(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "ForgeOpti", "state.json"));
     readonly List<Tweak> _all = Catalog.LoadAll().Where(t => t.MinBuild <= Build && (t.MaxBuild == 0 || Build <= t.MaxBuild)).ToList();
@@ -16,7 +17,8 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
         Title = "ForgeOpti";
-        foreach (var c in new[] { Gaming }.Concat(_all.Select(t => t.Category).Distinct().Order())) Cats.Items.Add(c);
+        try { AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "forgeopti.ico")); } catch { /* icône facultative */ }
+        foreach (var c in new[] { Gaming, CleanCat }.Concat(_all.Select(t => t.Category).Distinct().Order())) Cats.Items.Add(c);
         Cats.SelectedIndex = 0;
         ChkAuto.IsChecked = Updater.Enabled;
         if (Updater.Enabled) _ = CheckUpdate(false);
@@ -44,6 +46,7 @@ public sealed partial class MainWindow : Window
     void Show()
     {
         var cat = (string?)Cats.SelectedItem; if (cat is null) return;
+        if (cat == CleanCat) { ShowCleaner(); return; }
         _refreshing = true; List.Children.Clear();
         foreach (var t in _all.Where(t => cat == Gaming ? t.Gaming : t.Category == cat))
         {
@@ -59,6 +62,38 @@ public sealed partial class MainWindow : Window
         }
         _refreshing = false;
     }
+
+    void ShowCleaner()
+    {
+        List.Children.Clear();
+        List.Children.Add(new TextBlock { Text = "Libère de l'espace disque. Les éléments supprimés sont des caches et fichiers temporaires que Windows recrée : ce nettoyage n'est pas annulable.", Opacity = 0.7, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(12, 0, 12, 8) });
+        var boxes = new List<(CheckBox Box, CleanItem Item, TextBlock Size)>();
+        foreach (var it in Cleaner.Items)
+        {
+            var size = new TextBlock { Text = "…", Opacity = 0.65, VerticalAlignment = VerticalAlignment.Center };
+            var cb = new CheckBox { Content = $"{it.Name}  —  {it.Description}", IsChecked = true };
+            var g = new Grid { Padding = new Thickness(12, 4, 12, 4) };
+            g.ColumnDefinitions.Add(new ColumnDefinition()); g.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            g.Children.Add(cb); Grid.SetColumn(size, 1); g.Children.Add(size);
+            List.Children.Add(g); boxes.Add((cb, it, size));
+            _ = Task.Run(() => Cleaner.Measure(it)).ContinueWith(t => DispatcherQueue.TryEnqueue(() => size.Text = it.Special is not null && it.Dirs().All(d => false) ? "" : Human(t.Result)));
+        }
+        var go = new Button { Content = "🧹 Nettoyer la sélection", Style = (Style)Application.Current.Resources["AccentButtonStyle"], Margin = new Thickness(12, 12, 12, 0) };
+        go.Click += async (_, _) => await Run(async () =>
+        {
+            long freed = 0;
+            foreach (var (box, item, size) in boxes.Where(b => b.Box.IsChecked == true))
+            {
+                Status.Text = $"Nettoyage : {item.Name}…";
+                freed += await Task.Run(() => Cleaner.Clean(item));
+                size.Text = Human(await Task.Run(() => Cleaner.Measure(item)));
+            }
+            Status.Text = $"Nettoyage terminé : {Human(freed)} libérés.";
+        }, () => { });
+        List.Children.Add(go);
+    }
+
+    static string Human(long b) => b >= 1L << 30 ? $"{b / (double)(1L << 30):0.0} Go" : b >= 1L << 20 ? $"{b / (double)(1L << 20):0} Mo" : b > 0 ? $"{b / 1024} Ko" : "0";
 
     async void Toggled(object s, RoutedEventArgs e)
     {

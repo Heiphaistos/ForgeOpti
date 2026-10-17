@@ -1,0 +1,352 @@
+[
+ {
+  "id": "w10.widget-actualites-barre",
+  "category": "Windows 10",
+  "name": "Barre des tâches : masquer le widget Actualités et météo",
+  "description": "Masque le widget Actualités et centres d'intérêt (météo) de la barre des tâches de Windows 10, pour l'utilisateur courant.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Feeds",
+    "name": "ShellFeedsTaskbarViewMode",
+    "kind": "DWord",
+    "value": 2
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.ink-espace",
+  "category": "Windows 10",
+  "name": "Désactiver Windows Ink Workspace",
+  "description": "Désactive l'espace de travail Windows Ink et ses suggestions d'applications (stratégie).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\WindowsInkWorkspace",
+    "name": "AllowWindowsInkWorkspace",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\WindowsInkWorkspace",
+    "name": "AllowSuggestedAppsInWindowsInkWorkspace",
+    "kind": "DWord",
+    "value": 0
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.ink-bouton",
+  "category": "Windows 10",
+  "name": "Barre des tâches : masquer le bouton Windows Ink Workspace",
+  "description": "Retire l'icône de stylet de la zone de notification.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\PenWorkspace",
+    "name": "PenWorkspaceButtonDesiredVisibility",
+    "kind": "DWord",
+    "value": 0
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.tuiles-dynamiques",
+  "category": "Windows 10",
+  "name": "Désactiver les tuiles dynamiques",
+  "description": "Empêche les tuiles du menu Démarrer d'afficher des notifications et contenus en direct.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+    "name": "NoTileApplicationNotification",
+    "kind": "DWord",
+    "value": 1
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.cortana-ecran-verrouillage",
+  "category": "Windows 10",
+  "name": "Cortana : interdire l'accès depuis l'écran de verrouillage",
+  "description": "Cortana ne répond plus quand l'appareil est verrouillé.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+    "name": "AllowCortanaAboveLock",
+    "kind": "DWord",
+    "value": 0
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.recherche-localisation",
+  "category": "Windows 10",
+  "name": "Recherche : ne pas utiliser la localisation ni le web sur connexion limitée",
+  "description": "Empêche la recherche Windows d'exploiter votre position et le web, y compris sur réseau limité.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+    "name": "AllowSearchToUseLocation",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+    "name": "ConnectedSearchUseWebOverMeteredConnections",
+    "kind": "DWord",
+    "value": 0
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.recherche-cloud",
+  "category": "Windows 10",
+  "name": "Recherche : désactiver la recherche cloud",
+  "description": "Limite la recherche Windows aux éléments locaux (pas de comptes Microsoft ni professionnels).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+    "name": "AllowCloudSearch",
+    "kind": "DWord",
+    "value": 0
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.recherche-historique",
+  "category": "Windows 10",
+  "name": "Recherche : désactiver l'historique des recherches de l'appareil",
+  "description": "Arrête l'enregistrement des termes recherchés sur cet appareil.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings",
+    "name": "IsDeviceSearchHistoryEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+    "name": "DeviceHistoryEnabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.timeline-suggestions",
+  "category": "Windows 10",
+  "name": "Chronologie : supprimer les suggestions",
+  "description": "Masque les suggestions occasionnelles dans la Chronologie (Affichage des tâches).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+    "name": "SubscribedContent-353698Enabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.verrouillage-camera",
+  "category": "Windows 10",
+  "name": "Écran de verrouillage : désactiver l'appareil photo",
+  "description": "Empêche l'ouverture de l'appareil photo depuis l'écran de verrouillage.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization",
+    "name": "NoLockScreenCamera",
+    "kind": "DWord",
+    "value": 1
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.verrouillage-notifications",
+  "category": "Windows 10",
+  "name": "Écran de verrouillage : masquer les notifications d'applications",
+  "description": "Aucune notification d'application n'est affichée sur l'écran de verrouillage.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "name": "DisableLockScreenAppNotifications",
+    "kind": "DWord",
+    "value": 1
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.experiences-partagees",
+  "category": "Windows 10",
+  "name": "Désactiver les expériences partagées (CDP)",
+  "description": "Coupe la plateforme d'appareils connectés : continuer sur un autre PC, partage de proximité entre appareils.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "name": "EnableCdp",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CDP",
+    "name": "CdpSessionUserAuthzPolicy",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CDP",
+    "name": "NearShareChannelUserAuthzPolicy",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CDP",
+    "name": "RomeSdkChannelUserAuthzPolicy",
+    "kind": "DWord",
+    "value": 0
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.cortana-activation-vocale",
+  "category": "Windows 10",
+  "name": "Désactiver l'activation vocale (« Hey Cortana »)",
+  "description": "Arrête l'écoute permanente du mot d'activation, y compris sur l'écran de verrouillage.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Speech_OneCore\\Settings\\VoiceActivation\\UserPreferenceForAllApps",
+    "name": "AgentActivationEnabled",
+    "kind": "DWord",
+    "value": 0
+   },
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Speech_OneCore\\Settings\\VoiceActivation\\UserPreferenceForAllApps",
+    "name": "AgentActivationOnLockScreenEnabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ],
+  "maxBuild": 21999
+ },
+ {
+  "id": "w10.cartes-maj-auto",
+  "category": "Windows 10",
+  "name": "Cartes : désactiver les mises à jour automatiques",
+  "description": "Empêche le téléchargement automatique des cartes hors connexion.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\Maps",
+    "name": "AutoUpdateEnabled",
+    "kind": "DWord",
+    "value": 0
+   }
+  ],
+  "maxBuild": 21999
+ }
+]

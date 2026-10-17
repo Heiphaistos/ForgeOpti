@@ -1,0 +1,190 @@
+[
+ {
+  "id": "ctx.envoyer-vers",
+  "category": "Menu contextuel",
+  "name": "Menu contextuel : retirer « Envoyer vers »",
+  "description": "Masque le sous-menu « Envoyer vers » du clic droit sur les fichiers et dossiers.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "name": "{7BA4C740-9E81-11CF-99D3-00AA004AE837}",
+    "kind": "String",
+    "value": ""
+   }
+  ]
+ },
+ {
+  "id": "ctx.versions-precedentes",
+  "category": "Menu contextuel",
+  "name": "Menu contextuel : retirer « Restaurer les versions précédentes »",
+  "description": "Masque l'entrée d'historique des versions du clic droit.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "name": "{596AB062-B4D2-4215-9F74-E9109B0A8153}",
+    "kind": "String",
+    "value": ""
+   }
+  ]
+ },
+ {
+  "id": "ctx.epingler-demarrer",
+  "category": "Menu contextuel",
+  "name": "Menu contextuel : retirer « Épingler à l'écran de démarrage »",
+  "description": "Masque les entrées d'épinglage au menu Démarrer.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "name": "{470C0EBD-5D73-4d58-9CED-E91E22E23282}",
+    "kind": "String",
+    "value": ""
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "name": "{a2a9545d-a0c2-42b4-9708-a0b2badd77c8}",
+    "kind": "String",
+    "value": ""
+   }
+  ]
+ },
+ {
+  "id": "ctx.epingler-barre",
+  "category": "Menu contextuel",
+  "name": "Menu contextuel : retirer « Épingler à la barre des tâches »",
+  "description": "Masque l'entrée d'épinglage à la barre des tâches.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "name": "{90AA3A4E-1CBA-4233-B8BB-535773D48449}",
+    "kind": "String",
+    "value": ""
+   }
+  ]
+ },
+ {
+  "id": "ctx.modifier-photos",
+  "category": "Menu contextuel",
+  "name": "Menu contextuel : retirer « Modifier avec Photos »",
+  "description": "Masque l'entrée d'édition avec l'application Photos sur les images.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "name": "{BFE0E2A4-C70C-4AD7-AC3D-10D1ECEBB5B4}",
+    "kind": "String",
+    "value": ""
+   }
+  ]
+ },
+ {
+  "id": "ctx.diffuser-appareil",
+  "category": "Menu contextuel",
+  "name": "Menu contextuel : retirer « Diffuser sur l'appareil »",
+  "description": "Masque l'entrée Cast to Device (diffusion vers TV ou boîtier).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "name": "{7AD84985-87B4-4a16-BE58-8B72A5B390F7}",
+    "kind": "String",
+    "value": ""
+   }
+  ]
+ },
+ {
+  "id": "ctx.analyse-defender",
+  "category": "Menu contextuel",
+  "name": "Menu contextuel : retirer « Analyser avec Microsoft Defender »",
+  "description": "Masque l'entrée d'analyse rapide de Defender ; l'analyse reste possible depuis Sécurité Windows.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "name": "{09A47860-11B0-4DA5-AFA5-26D86198A780}",
+    "kind": "String",
+    "value": ""
+   }
+  ]
+ },
+ {
+  "id": "ctx.compatibilite",
+  "category": "Menu contextuel",
+  "name": "Menu contextuel : retirer « Résoudre les problèmes de compatibilité »",
+  "description": "Masque l'assistant de compatibilité sur les programmes.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "name": "{1d27f844-3a1f-4410-85ac-14651078412d}",
+    "kind": "String",
+    "value": ""
+   }
+  ]
+ },
+ {
+  "id": "ctx.terminal-windows",
+  "category": "Menu contextuel",
+  "name": "Menu contextuel : retirer « Ouvrir dans le Terminal Windows »",
+  "description": "Masque l'entrée du Terminal Windows dans le clic droit des dossiers.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "name": "{9F156763-7844-4DC4-B2B1-901F640F5155}",
+    "kind": "String",
+    "value": ""
+   }
+  ]
+ }
+]

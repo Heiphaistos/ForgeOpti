@@ -82,4 +82,19 @@ public class EngineTests
         Assert.Throws<InvalidOperationException>(() => e.Revert(t));
         Assert.True(e.IsApplied("t.cmd"));
     }
+
+    [Fact]
+    public void Cleaner_supprime_les_fichiers_et_rapporte_la_taille()
+    {
+        var d = Path.Combine(Path.GetTempPath(), $"fo-clean-{Guid.NewGuid()}");
+        Directory.CreateDirectory(Path.Combine(d, "sub"));
+        File.WriteAllBytes(Path.Combine(d, "a.tmp"), new byte[1000]);
+        File.WriteAllBytes(Path.Combine(d, "sub", "b.tmp"), new byte[500]);
+        var it = new CleanItem("t", "t", "t", () => [d]);
+        Assert.Equal(1500, Cleaner.Measure(it));
+        Assert.Equal(1500, Cleaner.Clean(it));
+        Assert.Equal(0, Cleaner.Measure(it));
+        Assert.False(Directory.Exists(Path.Combine(d, "sub")));
+        Directory.Delete(d, true);
+    }
 }

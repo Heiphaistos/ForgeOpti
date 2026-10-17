@@ -1,0 +1,190 @@
+[
+ {
+  "id": "boot.menu-delai",
+  "category": "Démarrage",
+  "name": "Menu de démarrage : délai de 3 secondes",
+  "description": "Réduit le délai d'affichage du gestionnaire de démarrage à 3 secondes ; la valeur d'origine est lue puis restaurée à l'annulation.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $m=[regex]::Match((bcdedit /enum '{bootmgr}'|Out-String),'(?im)^timeout\\s+(\\d+)'); if(-not $m.Success){ throw 'timeout introuvable' }; $m.Groups[1].Value|Set-Content \"$d\\boot-timeout.txt\"; bcdedit /set '{bootmgr}' timeout 3; if($LASTEXITCODE -ne 0){ throw 'bcdedit a échoué' }",
+    "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; $v=(Get-Content \"$d\\boot-timeout.txt\"|Select-Object -First 1).Trim(); bcdedit /set '{bootmgr}' timeout $v; if($LASTEXITCODE -ne 0){ throw 'bcdedit a échoué' }"
+   }
+  ]
+ },
+ {
+  "id": "boot.menu-classique",
+  "category": "Démarrage",
+  "name": "Menu de démarrage avancé en mode classique (F8)",
+  "description": "Active la politique de menu « legacy » : la touche F8 donne accès au mode sans échec au démarrage. Valeur d'origine restaurée à l'annulation.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $m=[regex]::Match((bcdedit /enum '{current}'|Out-String),'(?im)^bootmenupolicy\\s+(\\S+)'); if($m.Success){ $m.Groups[1].Value|Set-Content \"$d\\boot-menupolicy.txt\" } else { 'absent'|Set-Content \"$d\\boot-menupolicy.txt\" }; bcdedit /set '{current}' bootmenupolicy legacy; if($LASTEXITCODE -ne 0){ throw 'bcdedit a échoué' }",
+    "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; $v=(Get-Content \"$d\\boot-menupolicy.txt\"|Select-Object -First 1).Trim(); if($v -eq 'absent'){ bcdedit /deletevalue '{current}' bootmenupolicy } else { bcdedit /set '{current}' bootmenupolicy $v }; if($LASTEXITCODE -ne 0){ throw 'bcdedit a échoué' }"
+   }
+  ]
+ },
+ {
+  "id": "boot.ignorer-echecs-demarrage",
+  "category": "Démarrage",
+  "name": "Ne pas lancer la réparation automatique après un échec",
+  "description": "Ignore les échecs de démarrage (bootstatuspolicy) au lieu de relancer la réparation automatique ; peut masquer un vrai problème disque. Valeur d'origine restaurée.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $m=[regex]::Match((bcdedit /enum '{current}'|Out-String),'(?im)^bootstatuspolicy\\s+(\\S+)'); if($m.Success){ $m.Groups[1].Value|Set-Content \"$d\\boot-statuspolicy.txt\" } else { 'absent'|Set-Content \"$d\\boot-statuspolicy.txt\" }; bcdedit /set '{current}' bootstatuspolicy ignoreallfailures; if($LASTEXITCODE -ne 0){ throw 'bcdedit a échoué' }",
+    "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; $v=(Get-Content \"$d\\boot-statuspolicy.txt\"|Select-Object -First 1).Trim(); if($v -eq 'absent'){ bcdedit /deletevalue '{current}' bootstatuspolicy } else { bcdedit /set '{current}' bootstatuspolicy $v }; if($LASTEXITCODE -ne 0){ throw 'bcdedit a échoué' }"
+   }
+  ]
+ },
+ {
+  "id": "boot.recovery-desactivee",
+  "category": "Démarrage",
+  "name": "Désactiver l'environnement de récupération au démarrage",
+  "description": "Empêche Windows de basculer dans l'environnement de récupération après des échecs de démarrage (recoveryenabled). Valeur d'origine restaurée.",
+  "risk": "Avance",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\"; New-Item $d -ItemType Directory -Force|Out-Null; $m=[regex]::Match((bcdedit /enum '{current}'|Out-String),'(?im)^recoveryenabled\\s+(\\S+)'); if($m.Success){ $m.Groups[1].Value|Set-Content \"$d\\boot-recovery.txt\" } else { 'absent'|Set-Content \"$d\\boot-recovery.txt\" }; bcdedit /set '{current}' recoveryenabled no; if($LASTEXITCODE -ne 0){ throw 'bcdedit a échoué' }",
+    "revert": "$d=\"$env:ProgramData\\ForgeOpti\"; $v=(Get-Content \"$d\\boot-recovery.txt\"|Select-Object -First 1).Trim(); if($v -eq 'absent'){ bcdedit /deletevalue '{current}' recoveryenabled } else { bcdedit /set '{current}' recoveryenabled $v }; if($LASTEXITCODE -ne 0){ throw 'bcdedit a échoué' }"
+   }
+  ]
+ },
+ {
+  "id": "boot.verbose",
+  "category": "Démarrage",
+  "name": "Afficher des messages détaillés au démarrage et à l'arrêt",
+  "description": "Remplace les écrans « Veuillez patienter » par l'état précis des opérations en cours : utile pour repérer ce qui ralentit le démarrage.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    "name": "VerboseStatus",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "boot.fond-connexion-net",
+  "category": "Démarrage",
+  "name": "Écran de connexion : fond net sans flou",
+  "description": "Supprime l'effet acrylique (flou) de l'arrière-plan de l'écran de connexion et affiche un fond uni : moins de dessin au démarrage.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "name": "DisableLogonBackgroundImage",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "boot.animation-premiere-connexion",
+  "category": "Démarrage",
+  "name": "Supprimer l'animation de première connexion",
+  "description": "Retire l'animation « Nous préparons les choses » affichée à l'ouverture d'une session, pour arriver plus vite au bureau.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    "name": "EnableFirstLogonAnimation",
+    "kind": "DWord",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "boot.pas-reouverture-session",
+  "category": "Démarrage",
+  "name": "Ne pas réouvrir les applications après un redémarrage",
+  "description": "Empêche Windows de finaliser la configuration avec les informations de connexion et de relancer les applications après un redémarrage de mise à jour.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    "name": "DisableAutomaticRestartSignOn",
+    "kind": "DWord",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "boot.delai-autochk",
+  "category": "Démarrage",
+  "name": "Réduire le délai d'annulation de la vérification disque au démarrage",
+  "description": "Ramène à 3 secondes le temps laissé pour interrompre autochk (vérification de disque) au démarrage, au lieu de 8 par défaut.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager",
+    "name": "AutoChkTimeOut",
+    "kind": "DWord",
+    "value": 3
+   }
+  ]
+ },
+ {
+  "id": "boot.verrouillage-pave-num",
+  "category": "Démarrage",
+  "name": "Activer le pavé numérique au démarrage",
+  "description": "Active Verr. Num à l'ouverture de session.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKCU",
+    "key": "Control Panel\\Keyboard",
+    "name": "InitialKeyboardIndicators",
+    "kind": "String",
+    "value": "2"
+   }
+  ]
+ }
+]

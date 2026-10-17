@@ -1,0 +1,1162 @@
+[
+ {
+  "id": "svc.telephonie",
+  "category": "Services",
+  "name": "Désactiver le service Téléphonie (TapiSrv)",
+  "description": "Arrête l'API de téléphonie (TAPI), inutile hors modems et accès distants anciens. Peut gêner certaines connexions VPN d'ancienne génération.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\TapiSrv",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.service-telephone",
+  "category": "Services",
+  "name": "Désactiver le service Téléphone (PhoneSvc)",
+  "description": "Arrête la gestion de l'état du téléphone (liaison Lien avec le téléphone / appels).",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\PhoneSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.bureau-distance",
+  "category": "Services",
+  "name": "Désactiver les Services Bureau à distance",
+  "description": "Arrête TermService, UmRdpService et SessionEnv : ce PC ne peut plus être pris en main via le Bureau à distance (RDP).",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\TermService",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\UmRdpService",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\SessionEnv",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.xbox-accessoires",
+  "category": "Services",
+  "name": "Désactiver le service accessoires Xbox (XboxGipSvc)",
+  "description": "Arrête la gestion des accessoires Xbox (manettes, casques Xbox). À éviter si vous jouez avec une manette Xbox sans fil dédiée.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\XboxGipSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.capteurs",
+  "category": "Services",
+  "name": "Désactiver les services de capteurs",
+  "description": "Arrête la surveillance et la gestion des capteurs (rotation automatique, luminosité adaptative). Sans effet sur un PC fixe.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\SensrSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\SensorService",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.carte-a-puce",
+  "category": "Services",
+  "name": "Désactiver les services de carte à puce",
+  "description": "Arrête SCardSvr, ScDeviceEnum et CertPropSvc. À éviter si vous utilisez une carte à puce ou une clé de sécurité pour vous connecter.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\SCardSvr",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\ScDeviceEnum",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\CertPropSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.alljoyn",
+  "category": "Services",
+  "name": "Désactiver le routeur AllJoyn",
+  "description": "Arrête le protocole de communication entre appareils connectés AllJoyn, très peu utilisé.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\AJRouter",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.portefeuille",
+  "category": "Services",
+  "name": "Désactiver le service Portefeuille",
+  "description": "Arrête l'infrastructure du portefeuille Windows (objets de portefeuille utilisés par certaines applis).",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\WalletService",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.paiements-nfc",
+  "category": "Services",
+  "name": "Désactiver le gestionnaire de paiements NFC",
+  "description": "Arrête le gestionnaire de paiements et d'éléments sécurisés NFC (SEMgrSvc), inutile sur un PC de bureau.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\SEMgrSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.controle-parental",
+  "category": "Services",
+  "name": "Désactiver le contrôle parental",
+  "description": "Arrête la surveillance Contrôle parental / Microsoft Family Safety (WpcMonSvc).",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\WpcMonSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.biometrie",
+  "category": "Services",
+  "name": "Désactiver la biométrie Windows",
+  "description": "Arrête le service de biométrie (Windows Hello empreinte/visage). À éviter si vous vous connectez par biométrie.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\WbioSrvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.spooler",
+  "category": "Services",
+  "name": "Désactiver le spouleur d'impression",
+  "description": "Arrête la file d'impression et les notifications d'imprimante : plus aucune impression possible (même vers PDF). À réserver aux PC sans imprimante.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\Spooler",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\PrintNotify",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.bluetooth",
+  "category": "Services",
+  "name": "Désactiver les services Bluetooth",
+  "description": "Arrête bthserv et BthAvctpSvc : plus de périphérique Bluetooth (casque, manette, souris) tant que non réactivés.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\bthserv",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\BthAvctpSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.hyperv-invite",
+  "category": "Services",
+  "name": "Désactiver les services d'intégration Hyper-V invité",
+  "description": "Arrête les services d'intégration invité (pulsation, arrêt, heure, échange de données, VSS, bureau distant Hyper-V). Utile seulement si Windows tourne comme machine virtuelle Hyper-V.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\vmicguestinterface",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\vmicheartbeat",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\vmickvpexchange",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\vmicrdv",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\vmicshutdown",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\vmictimesync",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\vmicvss",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.insider",
+  "category": "Services",
+  "name": "Désactiver le service Programme Windows Insider",
+  "description": "Arrête wisvc : plus d'inscription possible aux builds Insider.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\wisvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.assistant-compat",
+  "category": "Services",
+  "name": "Désactiver l'Assistant Compatibilité des programmes",
+  "description": "Arrête PcaSvc, qui détecte les problèmes de compatibilité des anciens logiciels et peut consommer du disque au lancement des programmes.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\PcaSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.suivi-liens",
+  "category": "Services",
+  "name": "Passer le suivi de liens client en Manuel",
+  "description": "TrkWks ne démarre plus avec Windows, seulement à la demande (maintien des raccourcis NTFS déplacés).",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\TrkWks",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 3
+   }
+  ]
+ },
+ {
+  "id": "svc.collecteur-evenements",
+  "category": "Services",
+  "name": "Désactiver le collecteur d'événements Windows",
+  "description": "Arrête Wecsvc (abonnements aux événements distants), inutile hors administration de parc.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\Wecsvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.point-acces-mobile",
+  "category": "Services",
+  "name": "Désactiver le Point d'accès mobile (partage de connexion)",
+  "description": "Arrête icssvc : le partage de connexion Internet Wi-Fi n'est plus disponible.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\icssvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.lltd",
+  "category": "Services",
+  "name": "Désactiver le mappeur de découverte de topologie (LLTD)",
+  "description": "Arrête lltdsvc, qui dessine la carte du réseau local ; sans effet sur l'usage courant.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\lltdsvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.ssdp-upnp",
+  "category": "Services",
+  "name": "Désactiver SSDP et l'hôte de périphérique UPnP",
+  "description": "Arrête la découverte automatique d'appareils UPnP (téléviseurs, box, imprimantes). Réduit aussi la surface d'attaque réseau.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\SSDPSRV",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\upnphost",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.dossiers-travail",
+  "category": "Services",
+  "name": "Désactiver Dossiers de travail",
+  "description": "Arrête le service Dossiers de travail (synchronisation d'entreprise).",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\workfolderssvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.appareils-connectes",
+  "category": "Services",
+  "name": "Désactiver la plateforme Appareils connectés (CDPSvc)",
+  "description": "Arrête la synchronisation avec appareils connectés et le partage de proximité. Peut gêner l'envoi vers un téléphone ou un autre PC.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\CDPSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.rapports-problemes",
+  "category": "Services",
+  "name": "Désactiver le support du Panneau Rapports de problèmes",
+  "description": "Arrête wercplsupport, inutile si les rapports d'erreurs sont désactivés.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\wercplsupport",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.client-web",
+  "category": "Services",
+  "name": "Désactiver le Client Web (WebDAV)",
+  "description": "Arrête WebClient : plus d'accès aux dossiers WebDAV. Réduit une surface d'attaque réseau connue.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\WebClient",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.acquisition-images",
+  "category": "Services",
+  "name": "Désactiver l'acquisition d'images Windows (WIA)",
+  "description": "Arrête stisvc : scanners et certains appareils photo ne sont plus détectés par WIA.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\stisvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.diagnostic-politique",
+  "category": "Services",
+  "name": "Désactiver les services de diagnostic et dépannage",
+  "description": "Arrête DPS, WdiServiceHost, WdiSystemHost et diagsvc : les utilitaires de résolution de problèmes Windows ne fonctionnent plus.",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": true,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\DPS",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\WdiServiceHost",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\WdiSystemHost",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   },
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\diagsvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.routeur-sms",
+  "category": "Services",
+  "name": "Désactiver le routeur SMS Microsoft",
+  "description": "Arrête SmsRouter, inutile sans modem cellulaire.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\SmsRouter",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.iscsi",
+  "category": "Services",
+  "name": "Désactiver l'initiateur iSCSI Microsoft",
+  "description": "Arrête MSiSCSI : plus de connexion à un stockage réseau iSCSI.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\MSiSCSI",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.camera-frames",
+  "category": "Services",
+  "name": "Désactiver le serveur de trames de la caméra",
+  "description": "Arrête FrameServer : les applications ne peuvent plus partager la webcam (visio, Windows Hello).",
+  "risk": "Avance",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\FrameServer",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.wifi-direct",
+  "category": "Services",
+  "name": "Désactiver Wi-Fi Direct",
+  "description": "Arrête le gestionnaire de connexion Wi-Fi Direct (WFDSConMgrSvc), utilisé pour la projection sans fil Miracast.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\WFDSConMgrSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.fichiers-hors-ligne",
+  "category": "Services",
+  "name": "Désactiver les fichiers hors connexion",
+  "description": "Arrête CscService : les dossiers réseau ne sont plus mis en cache hors ligne.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\CscService",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.donnees-spatiales",
+  "category": "Services",
+  "name": "Désactiver le service de données spatiales",
+  "description": "Arrête SharedRealitySvc, utilisé par la réalité mixte Windows.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\SharedRealitySvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.gestion-distance",
+  "category": "Services",
+  "name": "Désactiver Gestion à distance de Windows (WinRM)",
+  "description": "Arrête WinRM : plus de PowerShell distant ni d'administration à distance.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\WinRM",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.branchcache",
+  "category": "Services",
+  "name": "Désactiver BranchCache",
+  "description": "Arrête PeerDistSvc (cache de contenu entre postes d'agence), inutile à la maison.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\PeerDistSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.localisateur-rpc",
+  "category": "Services",
+  "name": "Désactiver le localisateur d'appels de procédure distants",
+  "description": "Arrête RpcLocator, ancien service rarement requis.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\RpcLocator",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "svc.depannage-recommande",
+  "category": "Services",
+  "name": "Désactiver le service de dépannage recommandé",
+  "description": "Arrête TroubleshootingSvc, qui applique automatiquement des correctifs suggérés par Microsoft.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "reg",
+    "hive": "HKLM",
+    "key": "SYSTEM\\CurrentControlSet\\Services\\TroubleshootingSvc",
+    "name": "Start",
+    "kind": "DWord",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "tache.cartes-notifs",
+  "category": "Tâches planifiées",
+  "name": "Désactiver la notification des cartes hors ligne",
+  "description": "Désactive la tâche de notification des cartes téléchargées (MapsToastTask).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Maps\\MapsToastTask"
+   }
+  ]
+ },
+ {
+  "id": "tache.xbox-sauvegarde",
+  "category": "Tâches planifiées",
+  "name": "Désactiver la tâche de sauvegarde Xbox",
+  "description": "Désactive la tâche de sauvegarde cloud des parties Xbox (XblGameSaveTask).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": true,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\XblGameSave\\XblGameSaveTask"
+   }
+  ]
+ },
+ {
+  "id": "tache.securite-famille",
+  "category": "Tâches planifiées",
+  "name": "Désactiver les tâches Sécurité des enfants",
+  "description": "Désactive la surveillance et l'actualisation Family Safety.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Shell\\FamilySafetyMonitor"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Shell\\FamilySafetyRefreshTask"
+   }
+  ]
+ },
+ {
+  "id": "tache.synchro-parametres",
+  "category": "Tâches planifiées",
+  "name": "Désactiver les tâches de synchronisation des paramètres",
+  "description": "Désactive l'envoi des paramètres vers le cloud (BackgroundUploadTask, NetworkStateChangeTask).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\SettingSync\\BackgroundUploadTask"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\SettingSync\\NetworkStateChangeTask"
+   }
+  ]
+ },
+ {
+  "id": "tache.localisation",
+  "category": "Tâches planifiées",
+  "name": "Désactiver les tâches de localisation",
+  "description": "Désactive les notifications et dialogues de la géolocalisation.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Location\\Notifications"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Location\\WindowsActionDialog"
+   }
+  ]
+ },
+ {
+  "id": "tache.diagnostic-systeme",
+  "category": "Tâches planifiées",
+  "name": "Désactiver la tâche de diagnostic planifié",
+  "description": "Désactive le diagnostic automatique Windows (Diagnosis\\Scheduled).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Diagnosis\\Scheduled"
+   }
+  ]
+ },
+ {
+  "id": "tache.diagnostic-memoire",
+  "category": "Tâches planifiées",
+  "name": "Désactiver les diagnostics mémoire automatiques",
+  "description": "Désactive la détection automatique d'erreurs mémoire (le test manuel reste possible).",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\MemoryDiagnostic\\ProcessMemoryDiagnosticEvents"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\MemoryDiagnostic\\RunFullMemoryDiagnostic"
+   }
+  ]
+ },
+ {
+  "id": "tache.sysmain-evaluations",
+  "category": "Tâches planifiées",
+  "name": "Désactiver les évaluations SysMain planifiées",
+  "description": "Désactive ResPriStaticDbSync et WsSwapAssessmentTask, tâches d'analyse de la mémoire.",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Sysmain\\ResPriStaticDbSync"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Sysmain\\WsSwapAssessmentTask"
+   }
+  ]
+ },
+ {
+  "id": "tache.information-appareil",
+  "category": "Tâches planifiées",
+  "name": "Désactiver les tâches d'informations sur l'appareil",
+  "description": "Désactive l'envoi des données d'appareil (Device Information\\Device et Device User).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Device Information\\Device"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Device Information\\Device User"
+   }
+  ]
+ },
+ {
+  "id": "tache.efficacite-energie",
+  "category": "Tâches planifiées",
+  "name": "Désactiver l'analyse d'efficacité énergétique",
+  "description": "Désactive la tâche AnalyzeSystem de diagnostic d'économie d'énergie.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Power Efficiency Diagnostics\\AnalyzeSystem"
+   }
+  ]
+ },
+ {
+  "id": "tache.partage-multimedia",
+  "category": "Tâches planifiées",
+  "name": "Désactiver la mise à jour du partage multimédia",
+  "description": "Désactive la tâche UpdateLibrary du partage Windows Media.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Windows Media Sharing\\UpdateLibrary"
+   }
+  ]
+ },
+ {
+  "id": "tache.reconnaissance-vocale",
+  "category": "Tâches planifiées",
+  "name": "Désactiver le téléchargement des modèles vocaux",
+  "description": "Désactive SpeechModelDownloadTask (modèles de reconnaissance vocale).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Speech\\SpeechModelDownloadTask"
+   }
+  ]
+ },
+ {
+  "id": "tache.dossiers-travail",
+  "category": "Tâches planifiées",
+  "name": "Désactiver les tâches Dossiers de travail",
+  "description": "Désactive la synchronisation à l'ouverture de session et la maintenance de Dossiers de travail.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Work Folders\\Work Folders Logon Synchronization"
+   },
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\Work Folders\\Work Folders Maintenance Work"
+   }
+  ]
+ },
+ {
+  "id": "tache.mode-demo",
+  "category": "Tâches planifiées",
+  "name": "Désactiver le nettoyage du mode démo",
+  "description": "Désactive CleanupOfflineContent du mode démonstration commerciale.",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\RetailDemo\\CleanupOfflineContent"
+   }
+  ]
+ },
+ {
+  "id": "tache.diagnostic-reseau",
+  "category": "Tâches planifiées",
+  "name": "Désactiver la collecte d'informations réseau",
+  "description": "Désactive GatherNetworkInfo (trace réseau pour le diagnostic).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\NetTrace\\GatherNetworkInfo"
+   }
+  ]
+ },
+ {
+  "id": "tache.diagnostic-disque",
+  "category": "Tâches planifiées",
+  "name": "Désactiver le résolveur de diagnostic disque",
+  "description": "Désactive Microsoft-Windows-DiskDiagnosticResolver (complète la collecte déjà gérée ailleurs).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "task",
+    "path": "\\Microsoft\\Windows\\DiskDiagnostic\\Microsoft-Windows-DiskDiagnosticResolver"
+   }
+  ]
+ }
+]

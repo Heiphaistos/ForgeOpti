@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security><requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+      <!-- Une seule demande d'élévation ici : l'appli lancée ensuite en hérite sans second prompt. -->
+      <requestedExecutionLevel level="requireAdministrator" uiAccess="false"/>
+    </requestedPrivileges></security>
+  </trustInfo>
+</assembly>

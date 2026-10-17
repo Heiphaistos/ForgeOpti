@@ -39,6 +39,7 @@ void Health(string tag)
     Log($"santé {tag} écrite");
 }
 
+if (Modes.Run(dir, args, engine, Safe)) return;
 Log($"démarrage, phase {phase}, {all.Count} tweaks, build {Environment.OSVersion.Version.Build}");
 switch (phase)
 {

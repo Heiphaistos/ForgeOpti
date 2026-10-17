@@ -1,0 +1,342 @@
+[
+ {
+  "id": "feat.internet-explorer-optional-amd64",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer Internet Explorer (fonctionnalité)",
+  "description": "Désactive Internet Explorer et son mode hérité sur Windows 10. Edge reste fonctionnel.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='Internet-Explorer-Optional-amd64';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='Internet-Explorer-Optional-amd64';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.windowsmediaplayer",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer Windows Media Player hérité",
+  "description": "Désactive l'ancien Lecteur Windows Media (fonctionnalité). Le nouveau lecteur Multimédia n'est pas touché.",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='WindowsMediaPlayer';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='WindowsMediaPlayer';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.workfolders-client",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer le client Dossiers de travail",
+  "description": "Désactive la fonctionnalité Dossiers de travail (synchronisation d'entreprise).",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='WorkFolders-Client';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='WorkFolders-Client';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.printing-xpsservices-features",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer les services d'impression XPS",
+  "description": "Désactive l'impression au format XPS (imprimante Microsoft XPS Document Writer).",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='Printing-XPSServices-Features';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='Printing-XPSServices-Features';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.telnetclient",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer le client Telnet",
+  "description": "Désactive telnet.exe, protocole non chiffré dépassé.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='TelnetClient';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='TelnetClient';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.tftp",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer le client TFTP",
+  "description": "Désactive tftp.exe, protocole de transfert non sécurisé.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='TFTP';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='TFTP';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.microsoftwindowspowershellv2root",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer PowerShell 2.0",
+  "description": "Désactive l'ancien moteur PowerShell 2.0, souvent utilisé pour contourner les protections modernes (réduit la surface d'attaque).",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='MicrosoftWindowsPowerShellV2Root';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='MicrosoftWindowsPowerShellV2Root';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.faxservicesclientpackage",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer Télécopie et numérisation Windows",
+  "description": "Désactive Télécopie et numérisation Windows (fonctionnalité).",
+  "risk": "Modere",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='FaxServicesClientPackage';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='FaxServicesClientPackage';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.msrdc-infrastructure",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer la compression différentielle à distance",
+  "description": "Désactive la Compression différentielle à distance (RDC), rarement utilisée.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='MSRDC-Infrastructure';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='MSRDC-Infrastructure';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.printing-foundation-internetprinting-client",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer le client d'impression Internet",
+  "description": "Désactive l'impression via protocole IPP/Internet du client d'impression Internet.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='Printing-Foundation-InternetPrinting-Client';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='Printing-Foundation-InternetPrinting-Client';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.printing-foundation-lprportmonitor",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer le moniteur de port LPR",
+  "description": "Désactive le moniteur de port LPR, ancien protocole d'impression.",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='Printing-Foundation-LPRPortMonitor';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='Printing-Foundation-LPRPortMonitor';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.tiffifilter",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer le filtre d'indexation TIFF",
+  "description": "Désactive le filtre IFilter TIFF de l'indexation (reconnaissance de texte dans les images TIFF).",
+  "risk": "Sur",
+  "reboot": true,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$n='TIFFIFilter';$d=\"$env:ProgramData\\ForgeOpti\\feat\";$f=$null;try{$f=Get-WindowsOptionalFeature -Online -FeatureName $n -ErrorAction Stop}catch{};if($f -and $f.State -eq 'Enabled'){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\$n.was\" -Value 1;Disable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null}",
+    "revert": "$n='TIFFIFilter';$m=\"$env:ProgramData\\ForgeOpti\\feat\\$n.was\";if(Test-Path $m){Enable-WindowsOptionalFeature -Online -FeatureName $n -NoRestart|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.cap-wordpad",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer WordPad",
+  "description": "Désinstalle WordPad (capacité Windows). Réinstallation via Windows Update (connexion Internet requise).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\\feat\";$c=$null;try{$c=Get-WindowsCapability -Online -ErrorAction Stop|Where-Object{$_.Name -like 'Microsoft.Windows.WordPad*' -and $_.State -eq 'Installed'}}catch{};foreach($x in $c){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\WordPad.was\" -Value $x.Name;Remove-WindowsCapability -Online -Name $x.Name|Out-Null}",
+    "revert": "$m=\"$env:ProgramData\\ForgeOpti\\feat\\WordPad.was\";if(Test-Path $m){$n=(Get-Content -Path $m|Select-Object -First 1);Add-WindowsCapability -Online -Name $n|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.cap-stepsrecorder",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer l'Enregistreur d'actions",
+  "description": "Désinstalle l'Enregistreur d'actions (psr.exe). Réinstallation via Windows Update (connexion Internet requise).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\\feat\";$c=$null;try{$c=Get-WindowsCapability -Online -ErrorAction Stop|Where-Object{$_.Name -like 'App.StepsRecorder*' -and $_.State -eq 'Installed'}}catch{};foreach($x in $c){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\StepsRecorder.was\" -Value $x.Name;Remove-WindowsCapability -Online -Name $x.Name|Out-Null}",
+    "revert": "$m=\"$env:ProgramData\\ForgeOpti\\feat\\StepsRecorder.was\";if(Test-Path $m){$n=(Get-Content -Path $m|Select-Object -First 1);Add-WindowsCapability -Online -Name $n|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.cap-internetexplorer",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer Internet Explorer (capacité)",
+  "description": "Désinstalle le mode Internet Explorer sur Windows 11. Réinstallation via Windows Update (connexion Internet requise).",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\\feat\";$c=$null;try{$c=Get-WindowsCapability -Online -ErrorAction Stop|Where-Object{$_.Name -like 'Browser.InternetExplorer*' -and $_.State -eq 'Installed'}}catch{};foreach($x in $c){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\InternetExplorer.was\" -Value $x.Name;Remove-WindowsCapability -Online -Name $x.Name|Out-Null}",
+    "revert": "$m=\"$env:ProgramData\\ForgeOpti\\feat\\InternetExplorer.was\";if(Test-Path $m){$n=(Get-Content -Path $m|Select-Object -First 1);Add-WindowsCapability -Online -Name $n|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.cap-powershellise",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer PowerShell ISE",
+  "description": "Désinstalle l'environnement ISE (PowerShell reste disponible). Réinstallation via Windows Update (connexion Internet requise).",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\\feat\";$c=$null;try{$c=Get-WindowsCapability -Online -ErrorAction Stop|Where-Object{$_.Name -like 'Microsoft.Windows.PowerShell.ISE*' -and $_.State -eq 'Installed'}}catch{};foreach($x in $c){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\PowerShellISE.was\" -Value $x.Name;Remove-WindowsCapability -Online -Name $x.Name|Out-Null}",
+    "revert": "$m=\"$env:ProgramData\\ForgeOpti\\feat\\PowerShellISE.was\";if(Test-Path $m){$n=(Get-Content -Path $m|Select-Object -First 1);Add-WindowsCapability -Online -Name $n|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.cap-mathrecognizer",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer le Panneau de reconnaissance mathématique",
+  "description": "Désinstalle le Panneau de saisie mathématique. Réinstallation via Windows Update (connexion Internet requise).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\\feat\";$c=$null;try{$c=Get-WindowsCapability -Online -ErrorAction Stop|Where-Object{$_.Name -like 'MathRecognizer*' -and $_.State -eq 'Installed'}}catch{};foreach($x in $c){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\MathRecognizer.was\" -Value $x.Name;Remove-WindowsCapability -Online -Name $x.Name|Out-Null}",
+    "revert": "$m=\"$env:ProgramData\\ForgeOpti\\feat\\MathRecognizer.was\";if(Test-Path $m){$n=(Get-Content -Path $m|Select-Object -First 1);Add-WindowsCapability -Online -Name $n|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.cap-windowsmediaplayercap",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer Windows Media Player (capacité)",
+  "description": "Désinstalle l'ancien Lecteur Windows Media sur Windows 11. Réinstallation via Windows Update (connexion Internet requise).",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\\feat\";$c=$null;try{$c=Get-WindowsCapability -Online -ErrorAction Stop|Where-Object{$_.Name -like 'Media.WindowsMediaPlayer*' -and $_.State -eq 'Installed'}}catch{};foreach($x in $c){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\WindowsMediaPlayerCap.was\" -Value $x.Name;Remove-WindowsCapability -Online -Name $x.Name|Out-Null}",
+    "revert": "$m=\"$env:ProgramData\\ForgeOpti\\feat\\WindowsMediaPlayerCap.was\";if(Test-Path $m){$n=(Get-Content -Path $m|Select-Object -First 1);Add-WindowsCapability -Online -Name $n|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.cap-faxscan",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer Télécopie et numérisation (capacité)",
+  "description": "Désinstalle Télécopie et numérisation Windows sur Windows 11. Réinstallation via Windows Update (connexion Internet requise).",
+  "risk": "Modere",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": false,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\\feat\";$c=$null;try{$c=Get-WindowsCapability -Online -ErrorAction Stop|Where-Object{$_.Name -like 'Print.Fax.Scan*' -and $_.State -eq 'Installed'}}catch{};foreach($x in $c){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\FaxScan.was\" -Value $x.Name;Remove-WindowsCapability -Online -Name $x.Name|Out-Null}",
+    "revert": "$m=\"$env:ProgramData\\ForgeOpti\\feat\\FaxScan.was\";if(Test-Path $m){$n=(Get-Content -Path $m|Select-Object -First 1);Add-WindowsCapability -Online -Name $n|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ },
+ {
+  "id": "feat.cap-xpsviewer",
+  "category": "Fonctionnalités Windows",
+  "name": "Retirer la visionneuse XPS",
+  "description": "Désinstalle la visionneuse de documents XPS. Réinstallation via Windows Update (connexion Internet requise).",
+  "risk": "Sur",
+  "reboot": false,
+  "gaming": false,
+  "oneClick": true,
+  "ops": [
+   {
+    "type": "cmd",
+    "apply": "$d=\"$env:ProgramData\\ForgeOpti\\feat\";$c=$null;try{$c=Get-WindowsCapability -Online -ErrorAction Stop|Where-Object{$_.Name -like 'XPS.Viewer*' -and $_.State -eq 'Installed'}}catch{};foreach($x in $c){New-Item -ItemType Directory -Force $d|Out-Null;Set-Content -Path \"$d\\XPSViewer.was\" -Value $x.Name;Remove-WindowsCapability -Online -Name $x.Name|Out-Null}",
+    "revert": "$m=\"$env:ProgramData\\ForgeOpti\\feat\\XPSViewer.was\";if(Test-Path $m){$n=(Get-Content -Path $m|Select-Object -First 1);Add-WindowsCapability -Online -Name $n|Out-Null;Remove-Item $m -Force}"
+   }
+  ]
+ }
+]

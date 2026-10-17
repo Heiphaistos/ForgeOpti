@@ -1,7 +1,8 @@
-bin/
-obj/
-.vs/
-.logs/
 *.user
+.logs/
+.vs/
+bin/
 dist/
+obj-payload/
+obj/
 out/

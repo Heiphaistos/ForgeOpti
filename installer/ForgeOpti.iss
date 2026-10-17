@@ -21,6 +21,7 @@ MinVersion=10.0.17763
 Compression=lzma2/max
 SolidCompression=yes
 WizardStyle=modern
+SetupIconFile=../assets/forgeopti.ico
 UninstallDisplayIcon={app}\ForgeOpti.exe
 #if Mode == "setup"
 OutputBaseFilename=ForgeOpti-Setup-{#AppVersion}

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Lanceur portable : un seul .exe, aucun assistant, aucune installation. Extrait l'appli (charge utile Brotli) puis la lance. -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>ForgeOpti-Portable</AssemblyName>
+    <Version>0.2.0</Version>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>full</TrimMode>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>../../assets/forgeopti.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Payload)' != ''">
+    <EmbeddedResource Include="$(Payload)" LogicalName="payload.br" />
+  </ItemGroup>
+</Project>

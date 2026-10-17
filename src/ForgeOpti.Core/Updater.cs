@@ -10,7 +10,7 @@ public sealed record UpdateInfo(Version Version, string ZipUrl, string Sha256);
 /// <summary>Mise à jour automatique : release GitHub -> téléchargement -> vérif SHA-256 -> remplacement après fermeture -> relance.</summary>
 public static class Updater
 {
-    const string Api = "https://api.github.com/repos/Heiphaistos/ForgeOpti/releases/latest";
+    static readonly string Api = Environment.GetEnvironmentVariable("FORGEOPTI_UPDATE_API") ?? "https://api.github.com/repos/Heiphaistos/ForgeOpti/releases/latest";
     const string AssetZip = "ForgeOpti-win-x64.zip";
     static readonly HttpClient Http = new() { DefaultRequestHeaders = { { "User-Agent", "ForgeOpti-Updater" } }, Timeout = TimeSpan.FromMinutes(5) };
 
