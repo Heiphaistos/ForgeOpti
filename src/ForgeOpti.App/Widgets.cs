@@ -29,6 +29,7 @@ static class Widgets
         if (glyph is not null) row.Children.Add(Glyph(glyph, 15, fg));
         row.Children.Add(new TextBlock { Text = label, Foreground = fg, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center });
         var b = new Button { Content = row, Background = fill, Foreground = fg, BorderBrush = t.BorderB, CornerRadius = new CornerRadius(8), Padding = new Thickness(14, 8, 14, 8) };
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(b, label); // lecteurs d'écran et tests UI Automation
         foreach (var (k, v) in new (string, Brush)[]
         {
             ("ButtonBackground", fill), ("ButtonBackgroundPointerOver", hover), ("ButtonBackgroundPressed", press), ("ButtonBackgroundDisabled", t.B(t.Border)),

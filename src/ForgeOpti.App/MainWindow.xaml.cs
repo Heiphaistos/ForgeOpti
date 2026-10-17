@@ -52,11 +52,23 @@ public sealed partial class MainWindow : Window
         catch (Exception ex) { Status.Text = manual ? "Mise à jour impossible : " + ex.Message : "Prêt."; }
     }
 
-    ContentDialog Dialog(string title, string body, string primary, string close) => new()
+    /// <summary>Boîte de dialogue aux couleurs du thème (le bouton principal suit l'accent choisi, pas celui de Windows).</summary>
+    ContentDialog Dialog(string title, string body, string primary, string close)
     {
-        XamlRoot = Root.XamlRoot, Title = title, Content = body, PrimaryButtonText = primary, CloseButtonText = close,
-        DefaultButton = ContentDialogButton.Primary, RequestedTheme = Root.RequestedTheme,
-    };
+        var t = _theme;
+        var d = new ContentDialog
+        {
+            XamlRoot = Root.XamlRoot, Title = title, Content = body, PrimaryButtonText = primary, CloseButtonText = close,
+            DefaultButton = ContentDialogButton.Primary, RequestedTheme = Root.RequestedTheme, Background = t.SurfaceB, Foreground = t.TextB,
+        };
+        foreach (var (k, v) in new (string, Microsoft.UI.Xaml.Media.Brush)[]
+        {
+            ("AccentButtonBackground", t.AccentB), ("AccentButtonBackgroundPointerOver", t.B(t.Accent, 0xDD)), ("AccentButtonBackgroundPressed", t.B(t.Accent, 0xB0)),
+            ("AccentButtonForeground", t.OnAccentB), ("AccentButtonForegroundPointerOver", t.OnAccentB), ("AccentButtonForegroundPressed", t.OnAccentB),
+            ("ContentDialogBackground", t.SurfaceB), ("ContentDialogForeground", t.TextB), ("ContentDialogBorderBrush", t.BorderB),
+        }) d.Resources[k] = v;
+        return d;
+    }
 
     // ---------- exécution ----------
     async Task Run(Func<Task> work, Action refresh)

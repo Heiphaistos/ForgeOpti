@@ -161,6 +161,7 @@ public sealed partial class MainWindow
             Background = sel ? t.AccentSoftB : t.B(t.Surface, 0), BorderBrush = sel ? t.B(t.Accent, 0x66) : t.B(t.Surface, 0), BorderThickness = new Thickness(1),
             CornerRadius = new CornerRadius(8), Padding = new Thickness(12, 8, 12, 8), Tag = e.Key,
         };
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(b, e.Label);
         foreach (var (k, v) in new (string, Brush)[]
         {
             ("ButtonBackground", sel ? t.AccentSoftB : t.B(t.Surface, 0)), ("ButtonBackgroundPointerOver", t.B(t.Accent, 0x1A)), ("ButtonBackgroundPressed", t.B(t.Accent, 0x30)),

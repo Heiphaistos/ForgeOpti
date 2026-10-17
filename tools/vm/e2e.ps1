@@ -3,7 +3,7 @@
 # ASCII uniquement dans les motifs (PowerShell 5.1 lit ce fichier en ANSI) : on cherche par jokers (*Optimiser en 1 clic*).
 $o = 'C:\ForgeOptiTest\e2e.log'
 function L($m) { "[$(Get-Date -f HH:mm:ss)] $m" | Out-File $o -Append -Encoding utf8 }
-Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes
+Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes, System.Windows.Forms
 $A = [Windows.Automation.AutomationElement]; $PC = [Windows.Automation.PropertyCondition]
 
 # ---- 1. installeur ----
@@ -26,6 +26,8 @@ for ($i = 0; $i -lt 60 -and -not $win; $i++) {
 L "fenetre UIA trouvee: $([bool]$win)"
 function Find($pattern) {
     $all = $win.FindAll('Descendants', [Windows.Automation.Condition]::TrueCondition)
+    # D'abord un vrai bouton (Invoke possible), sinon n'importe quel element portant ce nom (texte d'etat, etc.).
+    foreach ($e in $all) { $n = $e.Current.Name; if ($n -and $n -like $pattern -and $e.Current.ControlType.ProgrammaticName -match 'Button') { return $e } }
     foreach ($e in $all) { $n = $e.Current.Name; if ($n -and $n -like $pattern) { return $e } }
 }
 function Names { ($win.FindAll('Descendants', [Windows.Automation.Condition]::TrueCondition) | ForEach-Object { $_.Current.Name } | Where-Object { $_ } | Select-Object -First 40) -join ' | ' }
@@ -41,9 +43,14 @@ if (-not $b1) { L ("arbre UIA: " + (Names)) }
 
 # Optimiser en 1 clic
 if ($b1) { Click $b1; Start-Sleep 3 }
-$d = Find 'Optimiser'
+# Le bouton principal de la boite de dialogue s'appelle « Appliquer » comme les boutons des cartes : le dernier de l'arbre est celui de la popup.
+$d = $null
+foreach ($e in $win.FindAll('Descendants', [Windows.Automation.Condition]::TrueCondition)) { if ($e.Current.Name -eq 'Appliquer') { $d = $e } }
 L "dialogue de confirmation: $([bool]$d)"
-if ($d) { Click $d }
+# Le bouton principal de la boite de dialogue est celui par defaut : Entree le valide (fiable meme si l'arbre UIA melange les « Appliquer »).
+try { $win.SetFocus() } catch {}
+Start-Sleep 1
+[Windows.Forms.SendKeys]::SendWait('{ENTER}')
 $res = WaitText 'Termin* :*' 1500
 L "1 clic: $res"
 $sf = "$env:ProgramData\ForgeOpti\state.json"
@@ -58,7 +65,7 @@ $st2 = (Get-Content $sf -Raw | ConvertFrom-Json).Applied.PSObject.Properties.Nam
 L "tweaks restant appliques apres annulation: $st2"
 
 # Page Nettoyage
-$nav = Find '*Nettoyage'; if ($nav) { Click $nav }; Start-Sleep 4
+$nav = Find '*Nettoyage du disque*'; if ($nav) { Click $nav }; Start-Sleep 4
 $go = Find '*Nettoyer la s*'
 L "page nettoyage: bouton=$([bool]$go)"
 if ($go) { Click $go; L ("nettoyage: " + (WaitText 'Nettoyage termin*' 600)) }

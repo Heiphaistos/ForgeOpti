@@ -152,6 +152,7 @@ public sealed partial class MainWindow
         var t = _theme;
         bool compact = _view == "compact";
         var sw = Widgets.Toggle(t, _engine.IsApplied(x.Id)); sw.Tag = x; sw.Toggled += Toggled;
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(sw, x.Name);
 
         var badges = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 6 };
         badges.Children.Add(Widgets.Badge(x.Risk switch { Risk.Sur => "Sûr", Risk.Modere => "Modéré", _ => "Avancé" }, t.RiskColor(x.Risk), t));
@@ -190,6 +191,7 @@ public sealed partial class MainWindow
             body.Children.Add(Widgets.Text(it.Name, 14, t, bold: true));
             body.Children.Add(Widgets.Text(it.Description + (optIn.Contains(it.Id) ? "  (non coché par défaut)" : ""), 12, t, sub: true));
             var cb = Widgets.Check(t, body, !optIn.Contains(it.Id));
+            Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(cb, it.Name);
             var g = new Grid { ColumnSpacing = 12 };
             g.ColumnDefinitions.Add(new ColumnDefinition()); g.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             g.Children.Add(cb); Grid.SetColumn(size, 1); g.Children.Add(size);

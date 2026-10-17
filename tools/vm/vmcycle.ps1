@@ -15,7 +15,7 @@ $L = (Get-Partition -DiskNumber $d.Number | Get-Volume | Where-Object { $_.Drive
 Remove-Item "${L}:\ForgeOptiTest", "${L}:\ForgeOptiApp" -Recurse -Force -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force "${L}:\ForgeOptiTest" | Out-Null
 Copy-Item "$tmp\fo-vmtest\ForgeOpti.VmTest.exe" "${L}:\ForgeOptiTest\" -Force
-foreach ($f in 'launch.ps1', 'suite2.ps1', 'portable.ps1', 'winget.ps1', 'ui.ps1', 'e2e.ps1', 'shots.ps1') { if (Test-Path "$here\$f") { Copy-Item "$here\$f" "${L}:\ForgeOptiTest\" -Force } }
+foreach ($f in 'launch.ps1', 'suite2.ps1', 'portable.ps1', 'winget.ps1', 'ui.ps1', 'e2e.ps1', 'shots.ps1', 'dlg.ps1') { if (Test-Path "$here\$f") { Copy-Item "$here\$f" "${L}:\ForgeOptiTest\" -Force } }
 Copy-Item "$tmp\fo-app" "${L}:\ForgeOptiApp" -Recurse -Force
 Set-Content "${L}:\ForgeOptiTest\mode.txt" $Mode
 if ($Filter) { Set-Content "${L}:\ForgeOptiTest\filter.txt" $Filter }
@@ -38,4 +38,5 @@ reg unload HKLM\VMSYS | Out-Null
 Dismount-VHD -Path $p
 Start-VM $Vm
 "VM demarree ($Mode) : $((Get-VM $Vm).State), libre D: $([math]::Round((Get-PSDrive D).Free/1GB,1)) Go"
+
 

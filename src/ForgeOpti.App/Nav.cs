@@ -19,6 +19,7 @@ static class Nav
         ("Interface", ["Interface", "Explorateur", "Menu contextuel", "Windows 10"]),
         ("Applications", ["Debloat apps", "Edge et OneDrive"]),
         ("Système avancé", ["Services", "Tâches planifiées", "Fonctionnalités Windows"]),
+        ("Maintenance", ["Nettoyage"]),
     ];
 
     static readonly Dictionary<string, string> Glyphs = new()
@@ -43,11 +44,11 @@ static class Nav
             var entries = cats.Where(present.Contains).Select(c => new NavEntry(c, c, GlyphFor(c))).ToList();
             foreach (var c in entries) used.Add(c.Key);
             if (g == "Performance et jeux") entries.Insert(0, new NavEntry(GamingAll, "★ Tous les réglages gaming", ""));
+            if (g == "Maintenance") entries.Insert(0, new NavEntry(Clean, "Nettoyage du disque", ""));
             if (entries.Count > 0) res.Add(new NavGroup(g, entries));
         }
         var others = present.Except(used).Order().Select(c => new NavEntry(c, c, GlyphFor(c))).ToList();
-        if (others.Count > 0) res.Add(new NavGroup("Autres", others));
-        res.Add(new NavGroup("Maintenance", [new NavEntry(Clean, "Nettoyage du disque", "")]));
+        if (others.Count > 0) res.Insert(Math.Max(0, res.Count - 1), new NavGroup("Autres", others)); // avant « Maintenance »
         return res;
     }
 }
