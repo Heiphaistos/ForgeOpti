@@ -17,6 +17,14 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
         Title = "ForgeOpti";
+        try
+        {
+            // Taille confortable : 70 % x 80 % de la zone de travail (min 1000x700), centrée.
+            var wa = Microsoft.UI.Windowing.DisplayArea.GetFromWindowId(AppWindow.Id, Microsoft.UI.Windowing.DisplayAreaFallback.Primary).WorkArea;
+            int w = Math.Min(Math.Max(1000, wa.Width * 7 / 10), wa.Width), h = Math.Min(Math.Max(700, wa.Height * 8 / 10), wa.Height);
+            AppWindow.MoveAndResize(new Windows.Graphics.RectInt32(wa.X + (wa.Width - w) / 2, wa.Y + (wa.Height - h) / 2, w, h));
+        }
+        catch { /* taille par défaut */ }
         try { AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "forgeopti.ico")); } catch { /* icône facultative */ }
         foreach (var c in new[] { Gaming, CleanCat }.Concat(_all.Select(t => t.Category).Distinct().Order())) Cats.Items.Add(c);
         Cats.SelectedIndex = 0;

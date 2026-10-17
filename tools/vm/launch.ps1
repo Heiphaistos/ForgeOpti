@@ -1,4 +1,5 @@
 # Exécuté DANS la VM par un service SYSTEM injecté hors-ligne : lance le test dans la session de l'utilisateur connecté, élevé, sans invite UAC.
+# mode.txt = "phases" (test complet) ou le nom d'un script C:\ForgeOptiTest\<mode>.ps1 (suite2, portable, winget...), lancé une seule fois.
 $log = 'C:\ForgeOptiTest\launch.log'
 New-Item -ItemType Directory -Force C:\ForgeOptiTest | Out-Null
 "[$(Get-Date -f HH:mm:ss)] launch start" | Out-File $log -Append
@@ -14,16 +15,10 @@ function RunAs($name, $cmd) {
     schtasks /Run /TN $name 2>&1 | Out-File $log -Append
 }
 $mode = if (Test-Path C:\ForgeOptiTest\mode.txt) { (Get-Content C:\ForgeOptiTest\mode.txt -Raw).Trim() } else { 'phases' }
-if ($mode -eq 'suite2') {
-    if (-not (Test-Path C:\ForgeOptiTest\suite2.started)) {
-        New-Item C:\ForgeOptiTest\suite2.started -Force | Out-Null
-        RunAs FOSuite2 'powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\ForgeOptiTest\suite2.ps1'
-    }
-}
-elseif ($mode -eq 'portable') {
-    if (-not (Test-Path C:\ForgeOptiTest\portable.started)) {
-        New-Item C:\ForgeOptiTest\portable.started -Force | Out-Null
-        RunAs FOPortable 'powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\ForgeOptiTest\portable.ps1'
+if ($mode -ne 'phases' -and (Test-Path "C:\ForgeOptiTest\$mode.ps1")) {
+    if (-not (Test-Path "C:\ForgeOptiTest\$mode.started")) {
+        New-Item "C:\ForgeOptiTest\$mode.started" -Force | Out-Null
+        RunAs "FO$mode" "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\ForgeOptiTest\$mode.ps1"
     }
 }
 else {

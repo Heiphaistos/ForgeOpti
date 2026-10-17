@@ -396,7 +396,7 @@
       {
         "type": "cmd",
         "apply": "$s=Get-ChildItem \"${env:ProgramFiles(x86)}\\Microsoft\\Edge\\Application\\*\\Installer\\setup.exe\" -ErrorAction SilentlyContinue | Sort-Object FullName -Descending | Select-Object -First 1; if ($s) { Start-Process $s.FullName -ArgumentList '--uninstall --system-level --verbose-logging --force-uninstall' -Wait }",
-        "revert": "winget install --id Microsoft.Edge --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) { throw 'winget a echoue' }"
+        "revert": "winget install --id Microsoft.Edge --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189 -and $LASTEXITCODE -ne -1978335090) { throw 'winget a echoue' }"
       }
     ]
   },
@@ -453,7 +453,7 @@
       {
         "type": "cmd",
         "apply": "Stop-Process -Name OneDrive -Force -ErrorAction SilentlyContinue; $p=\"$env:SystemRoot\\SysWOW64\\OneDriveSetup.exe\"; if (-not (Test-Path $p)) { $p=\"$env:SystemRoot\\System32\\OneDriveSetup.exe\" }; if (Test-Path $p) { Start-Process $p -ArgumentList '/uninstall' -Wait }",
-        "revert": "winget install --id Microsoft.OneDrive --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) { throw 'winget a echoue' }"
+        "revert": "winget install --id Microsoft.OneDrive --accept-package-agreements --accept-source-agreements --silent; if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189 -and $LASTEXITCODE -ne -1978335090) { throw 'winget a echoue' }"
       }
     ]
   }

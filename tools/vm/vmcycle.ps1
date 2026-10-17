@@ -1,6 +1,6 @@
 # Prépare et démarre la VM Hyper-V de test. Usage : vmcycle.ps1 -Mode phases|suite2|portable [-Memory 3]
 # Checkpoint hors-ligne (VM éteinte) -> injection du binaire + d'un service SYSTEM à usage unique -> démarrage.
-param([ValidateSet('suite2', 'phases', 'portable')] $Mode = 'phases', [int]$MemoryGo = 3,
+param([string] $Mode = 'phases', [int]$MemoryGo = 3,
       [string]$Vm = 'W11 dev', [string]$Snapshot = 'avant-ForgeOpti-test3')
 $ErrorActionPreference = 'Stop'
 $here = $PSScriptRoot
@@ -15,7 +15,7 @@ $L = (Get-Partition -DiskNumber $d.Number | Get-Volume | Where-Object { $_.Drive
 Remove-Item "${L}:\ForgeOptiTest", "${L}:\ForgeOptiApp" -Recurse -Force -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force "${L}:\ForgeOptiTest" | Out-Null
 Copy-Item "$tmp\fo-vmtest\ForgeOpti.VmTest.exe" "${L}:\ForgeOptiTest\" -Force
-foreach ($f in 'launch.ps1', 'suite2.ps1', 'portable.ps1') { if (Test-Path "$here\$f") { Copy-Item "$here\$f" "${L}:\ForgeOptiTest\" -Force } }
+foreach ($f in 'launch.ps1', 'suite2.ps1', 'portable.ps1', 'winget.ps1', 'ui.ps1') { if (Test-Path "$here\$f") { Copy-Item "$here\$f" "${L}:\ForgeOptiTest\" -Force } }
 Copy-Item "$tmp\fo-app" "${L}:\ForgeOptiApp" -Recurse -Force
 Set-Content "${L}:\ForgeOptiTest\mode.txt" $Mode
 if (Test-Path "$tmp\rel\srv") { Copy-Item "$tmp\rel\srv" "${L}:\ForgeOptiTest\srv" -Recurse -Force }
