@@ -79,7 +79,7 @@ public sealed partial class MainWindow : Window
         foreach (var it in Cleaner.Items)
         {
             var size = new TextBlock { Text = "…", Opacity = 0.65, VerticalAlignment = VerticalAlignment.Center };
-            var cb = new CheckBox { Content = $"{it.Name}  —  {it.Description}", IsChecked = true };
+            var cb = new CheckBox { Content = $"{it.Name}  —  {it.Description}", IsChecked = it.Id != "composants" };
             var g = new Grid { Padding = new Thickness(12, 4, 12, 4) };
             g.ColumnDefinitions.Add(new ColumnDefinition()); g.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             g.Children.Add(cb); Grid.SetColumn(size, 1); g.Children.Add(size);
@@ -87,7 +87,7 @@ public sealed partial class MainWindow : Window
             _ = Task.Run(() => Cleaner.Measure(it)).ContinueWith(t => DispatcherQueue.TryEnqueue(() => size.Text = it.Special is not null && it.Dirs().All(d => false) ? "" : Human(t.Result)));
         }
         var go = new Button { Content = "🧹 Nettoyer la sélection", Style = (Style)Application.Current.Resources["AccentButtonStyle"], Margin = new Thickness(12, 12, 12, 0) };
-        go.Click += async (_, _) => await Run(async () =>
+        go.Click += async (_, _) => { if (!_busy) await Run(async () =>
         {
             long freed = 0;
             foreach (var (box, item, size) in boxes.Where(b => b.Box.IsChecked == true))
@@ -97,7 +97,7 @@ public sealed partial class MainWindow : Window
                 size.Text = Human(await Task.Run(() => Cleaner.Measure(item)));
             }
             Status.Text = $"Nettoyage terminé : {Human(freed)} libérés.";
-        }, () => { });
+        }, () => { }); };
         List.Children.Add(go);
     }
 
@@ -140,8 +140,14 @@ public sealed partial class MainWindow : Window
 
     async void UndoAll_Click(object s, RoutedEventArgs e) => await Run(async () =>
     {
-        foreach (var t in _all.Where(t => _engine.IsApplied(t.Id))) await Task.Run(() => _engine.Revert(t));
-        Status.Text = "Tout a été annulé.";
+        var todo = _all.Where(t => _engine.IsApplied(t.Id)).ToList();
+        int n = 0, fail = 0;
+        foreach (var t in todo)
+        {
+            Status.Text = $"Annulation ({++n}/{todo.Count}) : {t.Name}…";
+            try { await Task.Run(() => _engine.Revert(t)); } catch { fail++; }
+        }
+        Status.Text = fail == 0 ? "Tout a été annulé." : $"Annulation terminée : {todo.Count - fail} annulés, {fail} à réessayer (réinstallation impossible pour le moment).";
     }, Show);
 
     async Task EnsureRestorePoint()
