@@ -1,0 +1,158 @@
+[
+  {
+    "id": "fluent.historique-presse-papiers",
+    "category": "Confidentialité",
+    "name": "Désactiver l'historique du presse-papiers",
+    "description": "Windows ne conserve plus les éléments copiés (Win+V).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Clipboard",
+        "name": "EnableClipboardHistory",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "fluent.miniatures-cache-off",
+    "category": "Explorateur",
+    "name": "Ne pas créer de cache de miniatures",
+    "description": "Évite la constitution de thumbcache ; l'Explorateur régénère les aperçus à chaque ouverture (plus lent sur les gros dossiers).",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "DisableThumbnailCache",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "fluent.miniatures-reseau-off",
+    "category": "Explorateur",
+    "name": "Ne pas créer de Thumbs.db sur les dossiers réseau",
+    "description": "Empêche l'écriture de fichiers Thumbs.db sur les partages réseau.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "DisableThumbsDBOnNetworkFolders",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "fluent.stockage-auto",
+    "category": "Nettoyage",
+    "name": "Assistant de stockage : activer le nettoyage automatique",
+    "description": "Active l'Assistant de stockage de Windows pour supprimer les fichiers temporaires inutilisés.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy",
+        "name": "01",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "fluent.stockage-temp",
+    "category": "Nettoyage",
+    "name": "Assistant de stockage : purger les fichiers temporaires des applications",
+    "description": "Autorise la suppression des fichiers temporaires inutilisés par les applications.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy",
+        "name": "04",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "fluent.stockage-corbeille-30j",
+    "category": "Nettoyage",
+    "name": "Assistant de stockage : vider la corbeille après 30 jours",
+    "description": "Supprime définitivement les éléments restés plus de 30 jours dans la corbeille.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy",
+        "name": "256",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy",
+        "name": "08",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "fluent.stockage-telechargements",
+    "category": "Nettoyage",
+    "name": "Assistant de stockage : purger les Téléchargements après 60 jours",
+    "description": "Supprime les fichiers du dossier Téléchargements non modifiés depuis 60 jours. Attention : touche des données utilisateur.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy",
+        "name": "512",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy",
+        "name": "32",
+        "kind": "DWord",
+        "value": 60
+      }
+    ]
+  }
+]

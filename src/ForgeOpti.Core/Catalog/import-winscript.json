@@ -1,0 +1,2465 @@
+[
+  {
+    "id": "ws.edge-extras-inutiles",
+    "category": "Edge et OneDrive",
+    "name": "Edge : couper les extras inutiles",
+    "description": "Désactive par stratégie l'amélioration d'images, les Collections, le suivi de sites (Follow), le widget web, le service de contenu distant et les suggestions de pages liées.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "EdgeEnhanceImagesEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "EdgeCollectionsEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "EdgeFollowEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "WebWidgetAllowed",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "EdgeAssetDeliveryServiceEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "RelatedMatchesCloudServiceEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.edge-portefeuille-crypto",
+    "category": "Edge et OneDrive",
+    "name": "Edge : retirer le portefeuille crypto et les dons",
+    "description": "Désactive le portefeuille crypto intégré et l'invite de dons du portefeuille d'Edge.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "CryptoWalletEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "WalletDonationEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.edge-pages-erreur-alternatives",
+    "category": "Edge et OneDrive",
+    "name": "Edge : désactiver les pages d'erreur alternatives",
+    "description": "Edge n'interroge plus un service en ligne pour proposer des pages de remplacement quand un site est introuvable.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "AlternateErrorPagesEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.edge-donnees-diagnostic",
+    "category": "Edge et OneDrive",
+    "name": "Edge : couper les données de diagnostic",
+    "description": "Règle par stratégie le niveau de données de diagnostic d'Edge sur zéro.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "DiagnosticData",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.edge-bouton-copilot",
+    "category": "Edge et OneDrive",
+    "name": "Edge : masquer le bouton Copilot de la barre",
+    "description": "Retire l'action de page Copilot de la barre d'outils d'Edge.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "CopilotPageAction",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.brave-fonctions-superflues",
+    "category": "Confidentialité",
+    "name": "Brave : désactiver Rewards, portefeuille, Leo et ping de statistiques",
+    "description": "Par stratégie, coupe Brave Rewards, le portefeuille Brave, l'assistant IA Leo et l'envoi des statistiques d'usage. Sans effet si Brave n'est pas installé.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\BraveSoftware\\Brave",
+        "name": "BraveRewardsDisabled",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\BraveSoftware\\Brave",
+        "name": "BraveWalletDisabled",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\BraveSoftware\\Brave",
+        "name": "BraveAIChatEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\BraveSoftware\\Brave",
+        "name": "BraveStatsPingEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.copilot-ouverture-auto",
+    "category": "IA et Copilot",
+    "name": "Copilot : ne plus s'ouvrir seul sur grand écran",
+    "description": "Empêche le panneau Copilot de s'ouvrir automatiquement à la connexion sur les grands écrans.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings",
+        "name": "AutoOpenCopilotLargeScreens",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.copilot-runtime",
+    "category": "IA et Copilot",
+    "name": "Copilot : désactiver le moteur local",
+    "description": "Interdit l'exécution du runtime Copilot pour l'utilisateur courant.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WindowsCopilot",
+        "name": "AllowCopilotRuntime",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.copilot-eligibilite",
+    "category": "IA et Copilot",
+    "name": "Copilot : se déclarer indisponible et non éligible",
+    "description": "Marque Copilot comme indisponible pour la machine et le compte (région non éligible), ce qui masque ses points d'entrée.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\Shell\\Copilot",
+        "name": "IsCopilotAvailable",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\Shell\\Copilot",
+        "name": "CopilotDisabledReason",
+        "kind": "String",
+        "value": "IsEnabledForGeographicRegionFailed"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\Shell\\Copilot\\BingChat",
+        "name": "IsUserEligible",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.copilot-extension-shell-bloquee",
+    "category": "IA et Copilot",
+    "name": "Copilot : bloquer son extension d'interface",
+    "description": "Ajoute l'extension shell de Copilot à la liste des extensions bloquées de l'Explorateur.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+        "name": "{CB3B0003-8088-4EDE-8769-8B354AB2FF8C}",
+        "kind": "String",
+        "value": " "
+      }
+    ]
+  },
+  {
+    "id": "ws.bloc-notes-ia",
+    "category": "IA et Copilot",
+    "name": "Bloc-notes : désactiver les fonctions IA et Réécrire",
+    "description": "Coupe les fonctions d'IA du Bloc-notes par stratégie et masque le bouton Réécrire.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Policies\\WindowsNotepad",
+        "name": "DisableAIFeatures",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Notepad",
+        "name": "ShowRewriteButton",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.telemetrie-traitements-cloud",
+    "category": "Télémétrie",
+    "name": "Couper les traitements cloud des données de diagnostic",
+    "description": "Désactive par stratégie l'analyse de bureau, le nom de l'appareil dans la télémétrie, les traitements cloud Windows Update for Business, la conformité des mises à jour et le pipeline de données commerciales.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "AllowDesktopAnalyticsProcessing",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "AllowDeviceNameInTelemetry",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "MicrosoftEdgeDataOptIn",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "AllowWUfBCloudProcessing",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "AllowUpdateComplianceProcessing",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "AllowCommercialDataPipeline",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.telemetrie-niveau-zero-chemin-legacy",
+    "category": "Télémétrie",
+    "name": "Télémétrie au minimum (clé de stratégie héritée)",
+    "description": "Écrit aussi le niveau de télémétrie minimal dans l'ancien emplacement de stratégie, lu par certains composants.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection",
+        "name": "AllowTelemetry",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.rapport-erreurs-silencieux",
+    "category": "Télémétrie",
+    "name": "Rapport d'erreurs : ne rien envoyer en plus",
+    "description": "Règle le consentement par défaut sur « toujours demander », n'envoie aucune donnée supplémentaire et désactive la journalisation du rapport d'erreurs.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\Windows Error Reporting\\Consent",
+        "name": "DefaultConsent",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\Windows Error Reporting\\Consent",
+        "name": "DefaultOverrideBehavior",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\Windows Error Reporting",
+        "name": "DontSendAdditionalData",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\Windows Error Reporting",
+        "name": "LoggingDisabled",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.notifications-compte-microsoft",
+    "category": "Télémétrie",
+    "name": "Masquer les notifications de compte Microsoft",
+    "description": "Supprime les rappels de compte (sauvegarde, connexion) affichés dans les Paramètres et le menu Démarrer.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\SystemSettings\\AccountNotifications",
+        "name": "EnableAccountNotifications",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\SystemSettings\\AccountNotifications",
+        "name": "EnableAccountNotifications",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.suivi-applis-frequentes",
+    "category": "Télémétrie",
+    "name": "Ne plus suivre les applications les plus utilisées",
+    "description": "Désactive le suivi MFU (applications fréquentes) par stratégie utilisateur.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\EdgeUI",
+        "name": "DisableMFUTracking",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.notifications-retour-experience",
+    "category": "Télémétrie",
+    "name": "Désactiver les notifications de retour d'expérience (chemin machine)",
+    "description": "Masque les demandes de retour d'expérience de Windows via la stratégie machine héritée.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection",
+        "name": "DoNotShowFeedbackNotifications",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.tache-appraiser-exp",
+    "category": "Télémétrie",
+    "name": "Désactiver la tâche Compatibility Appraiser Exp",
+    "description": "Désactive la seconde tâche d'évaluation de compatibilité des applications (Application Experience).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "task",
+        "path": "\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser Exp"
+      }
+    ]
+  },
+  {
+    "id": "ws.wmdrm-en-ligne",
+    "category": "Télémétrie",
+    "name": "Bloquer l'accès en ligne de Windows Media DRM",
+    "description": "Empêche la gestion des droits Windows Media de contacter les serveurs de licences en ligne.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\WMDRM",
+        "name": "DisableOnline",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.manuscrit-collecte",
+    "category": "Confidentialité",
+    "name": "Ne pas collecter l'écriture manuscrite ni la saisie",
+    "description": "Restreint la collecte implicite d'encre et de texte, les rapports d'erreurs de reconnaissance manuscrite, le partage des données manuscrites et la personnalisation de saisie.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\InputPersonalization",
+        "name": "RestrictImplicitInkCollection",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\InputPersonalization",
+        "name": "RestrictImplicitTextCollection",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Policies\\Microsoft\\Windows\\HandwritingErrorReports",
+        "name": "PreventHandwritingErrorReports",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\TabletPC",
+        "name": "PreventHandwritingDataSharing",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\InputPersonalization",
+        "name": "AllowInputPersonalization",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.publicite-ciblee-politiques",
+    "category": "Confidentialité",
+    "name": "Publicités ciblées : verrouiller par stratégie",
+    "description": "Désactive les fonctionnalités Windows Spotlight et les expériences personnalisées liées aux données de diagnostic, et force la désactivation de l'identifiant publicitaire par stratégie.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "name": "DisableWindowsSpotlightFeatures",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "name": "DisableTailoredExperiencesWithDiagnosticData",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "name": "TailoredExperiencesWithDiagnosticDataEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\AdvertisingInfo",
+        "name": "DisabledByGroupPolicy",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.powershell-telemetrie",
+    "category": "Télémétrie",
+    "name": "PowerShell : se retirer de la télémétrie",
+    "description": "Définit la variable d'environnement utilisateur POWERSHELL_TELEMETRY_OPTOUT à 1 pour PowerShell 7+.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Environment",
+        "name": "POWERSHELL_TELEMETRY_OPTOUT",
+        "kind": "String",
+        "value": "1"
+      }
+    ]
+  },
+  {
+    "id": "ws.nvidia-telemetrie",
+    "category": "Télémétrie",
+    "name": "NVIDIA : couper la télémétrie du pilote",
+    "description": "Désactive l'envoi de télémétrie du pilote, les trois tâches planifiées NvTm* et le service NvTelemetryContainer. Sans effet si NVIDIA n'est pas installé.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\nvlddmkm\\Global\\Startup",
+        "name": "SendTelemetryData",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "task",
+        "path": "\\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
+      },
+      {
+        "type": "task",
+        "path": "\\NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
+      },
+      {
+        "type": "task",
+        "path": "\\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\NvTelemetryContainer",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "ws.visualstudio-telemetrie",
+    "category": "Télémétrie",
+    "name": "Visual Studio : couper télémétrie, retours et analyse IntelliCode",
+    "description": "Désactive les programmes d'amélioration (SQM), la télémétrie, les fenêtres de retour (e-mail, capture d'écran) et l'analyse distante d'IntelliCode pour Visual Studio 2015 à 2022.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Wow6432Node\\Microsoft\\VSCommon\\14.0\\SQM",
+        "name": "OptIn",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Wow6432Node\\Microsoft\\VSCommon\\15.0\\SQM",
+        "name": "OptIn",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Wow6432Node\\Microsoft\\VSCommon\\16.0\\SQM",
+        "name": "OptIn",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Wow6432Node\\Microsoft\\VSCommon\\17.0\\SQM",
+        "name": "OptIn",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Policies\\Microsoft\\VisualStudio\\SQM",
+        "name": "OptIn",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\VisualStudio\\Telemetry",
+        "name": "TurnOffSwitch",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback",
+        "name": "DisableFeedbackDialog",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback",
+        "name": "DisableEmailInput",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback",
+        "name": "DisableScreenshotCapture",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\VisualStudio\\IntelliCode",
+        "name": "DisableRemoteAnalysis",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\VSCommon\\16.0\\IntelliCode",
+        "name": "DisableRemoteAnalysis",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\VSCommon\\17.0\\IntelliCode",
+        "name": "DisableRemoteAnalysis",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.mediaplayer-suivi",
+    "category": "Télémétrie",
+    "name": "Lecteur Windows Media : couper le suivi et les métadonnées en ligne",
+    "description": "Désactive le suivi d'usage, la récupération en ligne des métadonnées de CD/DVD, de fichiers musicaux et des présélections radio.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\MediaPlayer\\Preferences",
+        "name": "UsageTracking",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\WindowsMediaPlayer",
+        "name": "PreventCDDVDMetadataRetrieval",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\WindowsMediaPlayer",
+        "name": "PreventMusicFileMetadataRetrieval",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\WindowsMediaPlayer",
+        "name": "PreventRadioPresetsRetrieval",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.ccleaner-telemetrie",
+    "category": "Télémétrie",
+    "name": "CCleaner : couper surveillance, télémétrie et offres",
+    "description": "Désactive la surveillance système, l'amélioration par envoi de données, les mises à jour automatiques, les offres d'essai et les notifications promotionnelles de CCleaner. Sans effet si CCleaner n'est pas installé.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "Monitoring",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "HelpImproveCCleaner",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "SystemMonitoring",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "UpdateAuto",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "UpdateCheck",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "CheckTrialOffer",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "(Cfg)HealthCheck",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "(Cfg)QuickClean",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "(Cfg)QuickCleanIpm",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "(Cfg)GetIpmForTrial",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "(Cfg)SoftwareUpdater",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Piriform\\CCleaner",
+        "name": "(Cfg)SoftwareUpdaterIpm",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.adobe-google-maj-auto",
+    "category": "Mises à jour",
+    "name": "Adobe Acrobat et Google : désactiver les mises à jour de fond",
+    "description": "Désactive la tâche de mise à jour d'Acrobat, les services de mise à jour Adobe (ARM) et Google (gupdate, gupdatem). Les logiciels se mettront à jour à la main.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "task",
+        "path": "\\Adobe Acrobat Update Task"
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\AdobeARMservice",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\adobeupdateservice",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\gupdate",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\gupdatem",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "ws.office-telemetrie-registre",
+    "category": "Télémétrie",
+    "name": "Office : couper journalisation, télémétrie et retours",
+    "description": "Désactive la journalisation Outlook/Word, l'envoi OSM, la télémétrie client, les programmes qualité et les retours pour Office 2013 à 365.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\15.0\\Outlook\\Options\\Mail",
+        "name": "EnableLogging",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\15.0\\Outlook\\Options\\Calendar",
+        "name": "EnableCalendarLogging",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\15.0\\Word\\Options",
+        "name": "EnableLogging",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Office\\15.0\\OSM",
+        "name": "EnableLogging",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Office\\15.0\\OSM",
+        "name": "EnableUpload",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\15.0\\Common",
+        "name": "QMEnable",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\15.0\\Common\\Feedback",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\16.0\\Outlook\\Options\\Mail",
+        "name": "EnableLogging",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\16.0\\Outlook\\Options\\Calendar",
+        "name": "EnableCalendarLogging",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\16.0\\Word\\Options",
+        "name": "EnableLogging",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\16.0\\Common",
+        "name": "QMEnable",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\16.0\\Common\\Feedback",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\Common\\ClientTelemetry",
+        "name": "DisableTelemetry",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\16.0\\Common\\ClientTelemetry",
+        "name": "DisableTelemetry",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\Common\\ClientTelemetry",
+        "name": "VerboseLogging",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Office\\16.0\\Common\\ClientTelemetry",
+        "name": "VerboseLogging",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.office-taches-telemetrie",
+    "category": "Tâches planifiées",
+    "name": "Office : désactiver les tâches d'agent de télémétrie",
+    "description": "Désactive les agents de télémétrie Office (2013/2016) et les tâches de « heartbeat » d'abonnement.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "task",
+        "path": "\\Microsoft\\Office\\OfficeTelemetryAgentFallBack"
+      },
+      {
+        "type": "task",
+        "path": "\\Microsoft\\Office\\OfficeTelemetryAgentLogOn"
+      },
+      {
+        "type": "task",
+        "path": "\\Microsoft\\Office\\OfficeTelemetryAgentFallBack2016"
+      },
+      {
+        "type": "task",
+        "path": "\\Microsoft\\Office\\OfficeTelemetryAgentLogOn2016"
+      },
+      {
+        "type": "task",
+        "path": "\\Microsoft\\Office\\Office 15 Subscription Heartbeat"
+      },
+      {
+        "type": "task",
+        "path": "\\Microsoft\\Office\\Office 16 Subscription Heartbeat"
+      }
+    ]
+  },
+  {
+    "id": "ws.recherche-confidentialite-renforcee",
+    "category": "Confidentialité",
+    "name": "Recherche : durcir la confidentialité",
+    "description": "Active la confidentialité maximale de la recherche connectée, bloque les requêtes distantes, le contenu dynamique de la zone de recherche, la détection automatique de langue et l'indexation d'éléments chiffrés.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "name": "ConnectedSearchPrivacy",
+        "kind": "DWord",
+        "value": 3
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "name": "PreventRemoteQueries",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "name": "EnableDynamicContentInWSB",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "name": "AlwaysUseAutoLangDetection",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "name": "AllowIndexingEncryptedStoresOrItems",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.recherche-historique-appareil",
+    "category": "Confidentialité",
+    "name": "Recherche : ne pas conserver l'historique",
+    "description": "Désactive l'historique de recherche de l'Explorateur (stratégie), l'historique d'activité de la recherche et l'affichage de l'historique.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "DisableSearchHistory",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search",
+        "name": "HistoryViewEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.recherche-cortana-voix",
+    "category": "Confidentialité",
+    "name": "Recherche : désactiver Cortana et le raccourci vocal",
+    "description": "Coupe le raccourci vocal de la recherche et l'état Cortana hérité.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search",
+        "name": "VoiceShortcut",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search",
+        "name": "CortanaEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.maj-connexion-limitee",
+    "category": "Mises à jour",
+    "name": "Windows Update : pas de téléchargement sur connexion limitée",
+    "description": "Empêche le téléchargement automatique des mises à jour sur un réseau défini comme limité.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings",
+        "name": "AllowAutoWindowsUpdateDownloadOverMeteredNetwork",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.maj-pause-etendue",
+    "category": "Mises à jour",
+    "name": "Windows Update : étendre la limite de pause à 20 ans",
+    "description": "Porte la durée maximale de mise en pause des mises à jour à 7300 jours. Ne désactive rien : la pause reste à lancer dans les Paramètres.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings",
+        "name": "FlightSettingsMaxPauseDays",
+        "kind": "DWord",
+        "value": 7300
+      }
+    ]
+  },
+  {
+    "id": "ws.maj-fonctionnalites-differees",
+    "category": "Mises à jour",
+    "name": "Windows Update : différer les mises à jour de fonctionnalités d'un an",
+    "description": "Repousse les mises à jour de fonctionnalités de 365 jours (canal semi-annuel) tout en laissant passer les correctifs de sécurité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings",
+        "name": "BranchReadinessLevel",
+        "kind": "DWord",
+        "value": 20
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings",
+        "name": "DeferFeatureUpdatesPeriodInDays",
+        "kind": "DWord",
+        "value": 365
+      }
+    ]
+  },
+  {
+    "id": "ws.wpbt-desactive",
+    "category": "Sécurité",
+    "name": "Désactiver le Windows Platform Binary Table (WPBT)",
+    "description": "Empêche le micrologiciel d'injecter et d'exécuter des programmes au démarrage de Windows (techniques de réinstallation OEM).",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager",
+        "name": "DisableWpbtExecution",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.bitlocker-pas-auto",
+    "category": "Sécurité",
+    "name": "Empêcher le chiffrement automatique de l'appareil",
+    "description": "Désactive le chiffrement automatique de l'appareil (BitLocker simplifié) à la première configuration. N'efface ni ne déchiffre un disque déjà chiffré, mais réduit la protection des données en cas de vol.",
+    "risk": "Avance",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\BitLocker",
+        "name": "PreventDeviceEncryption",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.sync-parametres-cloud",
+    "category": "Confidentialité",
+    "name": "Désactiver la synchronisation des paramètres avec le cloud",
+    "description": "Bloque la synchronisation des paramètres entre appareils (applications, identifiants, thème, personnalisation, disposition du Démarrer, navigateur, langue, Windows) et sur réseau payant.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableSyncOnPaidNetwork",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\SettingSync",
+        "name": "SyncPolicy",
+        "kind": "DWord",
+        "value": 5
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableApplicationSettingSync",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableApplicationSettingSyncUserOverride",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableAppSyncSettingSync",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableAppSyncSettingSyncUserOverride",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableCredentialsSettingSync",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableCredentialsSettingSyncUserOverride",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableDesktopThemeSettingSync",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableDesktopThemeSettingSyncUserOverride",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisablePersonalizationSettingSync",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisablePersonalizationSettingSyncUserOverride",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableStartLayoutSettingSync",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableStartLayoutSettingSyncUserOverride",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableWebBrowserSettingSync",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableWebBrowserSettingSyncUserOverride",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableWindowsSettingSync",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync",
+        "name": "DisableWindowsSettingSyncUserOverride",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\SettingSync\\Groups\\Credentials",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\SettingSync\\Groups\\Language",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.cartes-telechargement-auto",
+    "category": "Confidentialité",
+    "name": "Cartes : bloquer les téléchargements automatiques",
+    "description": "Empêche le trafic réseau non sollicité de la page Cartes et la mise à jour automatique des cartes hors ligne.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Maps",
+        "name": "AllowUntriggeredNetworkTrafficOnSettingsPage",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Maps",
+        "name": "AutoDownloadAndUpdateMapData",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.biometrie-desactivee",
+    "category": "Sécurité",
+    "name": "Désactiver la biométrie (Windows Hello empreinte/visage)",
+    "description": "Interdit l'usage de la biométrie pour se connecter. Désactive les lecteurs d'empreintes et la reconnaissance faciale ; le code PIN et le mot de passe restent disponibles.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Biometrics",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.centre-notifications-masque",
+    "category": "Interface",
+    "name": "Masquer le centre de notifications",
+    "description": "Désactive le panneau de notifications et le calendrier associé par stratégie utilisateur.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "DisableNotificationCenter",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.barre-fin-de-tache",
+    "category": "Interface",
+    "name": "Ajouter « Fin de tâche » au clic droit de la barre des tâches",
+    "description": "Affiche la commande Fin de tâche dans le menu contextuel des applications de la barre des tâches (Windows 11).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings",
+        "name": "TaskbarEndTask",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.demarrer-masquer-recents",
+    "category": "Interface",
+    "name": "Démarrer : masquer la liste des applications récentes",
+    "description": "Retire la liste des applications récemment ajoutées du menu Démarrer.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Start",
+        "name": "ShowRecentList",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.heure-utc-materiel",
+    "category": "Performance",
+    "name": "Horloge matérielle en UTC (double démarrage Linux)",
+    "description": "Indique à Windows que l'horloge matérielle est en UTC, pour éviter le décalage d'heure avec Linux en double démarrage. Peut décaler l'heure de Windows si l'horloge est en heure locale.",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation",
+        "name": "RealTimeIsUniversal",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.widgets-politique-actualites",
+    "category": "Interface",
+    "name": "Widgets : désactiver Actualités et centres d'intérêt (stratégie)",
+    "description": "Coupe le flux Actualités et centres d'intérêt via la stratégie PolicyManager.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\PolicyManager\\default\\NewsAndInterests\\AllowNewsAndInterests",
+        "name": "value",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.snap-assist-volet",
+    "category": "Interface",
+    "name": "Désactiver le volet de disposition Snap au survol du bouton agrandir",
+    "description": "Supprime la fenêtre de choix de disposition Snap qui s'affiche au survol du bouton Agrandir (Windows 11).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "EnableSnapAssistFlyout",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "ws.bsod-details",
+    "category": "Performance",
+    "name": "Écran bleu : afficher les paramètres détaillés",
+    "description": "Affiche le code d'arrêt et les paramètres complets sur l'écran bleu, utile au diagnostic.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "System\\CurrentControlSet\\Control\\CrashControl",
+        "name": "DisplayParameters",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "ws.survol-souris-instantane",
+    "category": "Interface",
+    "name": "Survol de la souris : délai nul",
+    "description": "Règle le délai d'apparition des info-bulles et aperçus au survol sur 0 ms.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Mouse",
+        "name": "MouseHoverTime",
+        "kind": "String",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-camera",
+    "category": "Confidentialité",
+    "name": "Applications : refuser la caméra",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à la caméra. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\webcam",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-micro",
+    "category": "Confidentialité",
+    "name": "Applications : refuser le microphone",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à le microphone. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\microphone",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-infos-compte",
+    "category": "Confidentialité",
+    "name": "Applications : refuser les informations de compte (nom, image)",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à les informations de compte (nom, image). Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\userAccountInformation",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-contacts",
+    "category": "Confidentialité",
+    "name": "Applications : refuser les contacts",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à les contacts. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\contacts",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-historique-appels",
+    "category": "Confidentialité",
+    "name": "Applications : refuser l'historique des appels",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à l'historique des appels. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\phoneCallHistory",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-messagerie",
+    "category": "Confidentialité",
+    "name": "Applications : refuser les messages (SMS/MMS)",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à les messages (SMS/MMS). Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\chat",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-ecoute-notifications",
+    "category": "Confidentialité",
+    "name": "Applications : refuser la lecture des notifications",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à la lecture des notifications. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\userNotificationListener",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-courriel",
+    "category": "Confidentialité",
+    "name": "Applications : refuser les e-mails",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à les e-mails. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\email",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-taches-utilisateur",
+    "category": "Confidentialité",
+    "name": "Applications : refuser les tâches utilisateur",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à les tâches utilisateur. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\userDataTasks",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-diagnostic-applis",
+    "category": "Confidentialité",
+    "name": "Applications : refuser les diagnostics des autres applications",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à les diagnostics des autres applications. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\appDiagnostics",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-calendrier",
+    "category": "Confidentialité",
+    "name": "Applications : refuser le calendrier",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à le calendrier. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\appointments",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-mouvement",
+    "category": "Confidentialité",
+    "name": "Applications : refuser le suivi d'activité et de mouvement",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à le suivi d'activité et de mouvement. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\activity",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-radios",
+    "category": "Confidentialité",
+    "name": "Applications : refuser le contrôle des radios (Bluetooth, Wi-Fi)",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à le contrôle des radios (Bluetooth, Wi-Fi). Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\radios",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-capture-sans-bordure",
+    "category": "Confidentialité",
+    "name": "Applications : refuser la capture d'écran sans bordure jaune",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à la capture d'écran sans bordure jaune. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\graphicsCaptureWithoutBorder",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-capture-programmatique",
+    "category": "Confidentialité",
+    "name": "Applications : refuser la capture d'écran programmatique",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à la capture d'écran programmatique. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\graphicsCaptureProgrammatic",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-modeles-ia-systeme",
+    "category": "Confidentialité",
+    "name": "Applications : refuser les modèles d'IA du système",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à les modèles d'IA du système. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\systemAIModels",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-documents",
+    "category": "Confidentialité",
+    "name": "Applications : refuser la bibliothèque Documents",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à la bibliothèque Documents. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\documentsLibrary",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-images",
+    "category": "Confidentialité",
+    "name": "Applications : refuser la bibliothèque Images",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à la bibliothèque Images. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\picturesLibrary",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-videos",
+    "category": "Confidentialité",
+    "name": "Applications : refuser la bibliothèque Vidéos",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à la bibliothèque Vidéos. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\videosLibrary",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-systeme-fichiers",
+    "category": "Confidentialité",
+    "name": "Applications : refuser l'accès large au système de fichiers",
+    "description": "Règle par défaut, pour toute la machine, le refus de l'accès de l'application à l'accès large au système de fichiers. Les applications qui en ont besoin cesseront de fonctionner correctement pour cette fonction ; à réautoriser dans Paramètres, Confidentialité.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\broadFileSystemAccess",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "ws.applis-refuser-telephone",
+    "category": "Confidentialité",
+    "name": "Applications : refuser l'accès au téléphone",
+    "description": "Règle par stratégie le refus de l'accès au téléphone pour toutes les applications.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "name": "LetAppsAccessPhone",
+        "kind": "DWord",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "ws.app-widgets",
+    "category": "Debloat apps",
+    "name": "Supprimer les Widgets",
+    "description": "Retire le composant Windows Web Experience Pack qui fournit le panneau Widgets.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-widgets.was\"; $pk=@('*WebExperience*'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-widgets.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('*WebExperience*'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Windows%20Web%20Experience%20Pack' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-jeux-promotionnels",
+    "category": "Debloat apps",
+    "name": "Supprimer les jeux promotionnels préinstallés",
+    "description": "Retire Candy Crush, Bubble Witch 3 Saga, Hidden City, Royal Revolt et les jeux Random Salad Games préinstallés par certains constructeurs.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-jeux-promotionnels.was\"; $pk=@('*CandyCrush*','*BubbleWitch3Saga*','*HiddenCity*','*Royal Revolt*','*RandomSaladGamesLLC*'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-jeux-promotionnels.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('*CandyCrush*','*BubbleWitch3Saga*','*HiddenCity*','*Royal Revolt*','*RandomSaladGamesLLC*'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Candy%20Crush' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-minecraft",
+    "category": "Debloat apps",
+    "name": "Supprimer les versions de Minecraft préinstallées",
+    "description": "Retire les lanceurs et éditions Minecraft préinstallés. Ne touche pas aux mondes enregistrés hors du dossier de l'application.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-minecraft.was\"; $pk=@('*Minecraft*'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-minecraft.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('*Minecraft*'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Minecraft' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-reseaux-sociaux",
+    "category": "Debloat apps",
+    "name": "Supprimer Facebook, Twitter, LinkedIn et Viber",
+    "description": "Retire les applications de réseaux sociaux et de messagerie préinstallées.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-reseaux-sociaux.was\"; $pk=@('*Facebook*','*Twitter*','*LinkedInForWindows*','*Viber*'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-reseaux-sociaux.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('*Facebook*','*Twitter*','*LinkedInForWindows*','*Viber*'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Facebook' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-streaming-musique",
+    "category": "Debloat apps",
+    "name": "Supprimer Netflix, Hulu, Spotify, iHeartRadio, Pandora et Shazam",
+    "description": "Retire les applications de streaming vidéo et audio préinstallées.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-streaming-musique.was\"; $pk=@('*Netflix*','*Hulu*','SpotifyAB.SpotifyMusic','ClearChannelRadioDigital.iHeartRadio','*PandoraMediaInc*','ShazamEntertainmentLtd.Shazam','*ACGMediaPlayer*'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-streaming-musique.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('*Netflix*','*Hulu*','SpotifyAB.SpotifyMusic','ClearChannelRadioDigital.iHeartRadio','*PandoraMediaInc*','ShazamEntertainmentLtd.Shazam','*ACGMediaPlayer*'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Spotify' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-divers-tiers",
+    "category": "Debloat apps",
+    "name": "Supprimer les autres applications tierces préinstallées",
+    "description": "Retire Duolingo, Flipboard, Wunderlist, OneCalendar, Sway, Speed Test, Photoshop Express, Dropbox OEM, McAfee et quelques utilitaires d'éditeurs tiers.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-divers-tiers.was\"; $pk=@('*Duolingo-LearnLanguagesforFree*','*Flipboard*','*Wunderlist*','*OneCalendar*','*Sway*','*Speed Test*','*AdobePhotoshopExpress*','*DropboxOEM*','*McAfee*','*EclipseManager*','*ActiproSoftwareLLC*'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-divers-tiers.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('*Duolingo-LearnLanguagesforFree*','*Flipboard*','*Wunderlist*','*OneCalendar*','*Sway*','*Speed Test*','*AdobePhotoshopExpress*','*DropboxOEM*','*McAfee*','*EclipseManager*','*ActiproSoftwareLLC*'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Duolingo' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-bing-divers",
+    "category": "Debloat apps",
+    "name": "Supprimer les applications Bing secondaires",
+    "description": "Retire Recherche Bing, Voyages, Santé, Cuisine, Traducteur, Sports, Finance et l'ancienne application Actualités.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-bing-divers.was\"; $pk=@('*BingSearch*','Microsoft.BingTravel','Microsoft.BingHealthAndFitness','Microsoft.BingFoodAndDrink','Microsoft.BingTranslator','Microsoft.BingSports','Microsoft.BingFinance','Microsoft.News'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-bing-divers.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('*BingSearch*','Microsoft.BingTravel','Microsoft.BingHealthAndFitness','Microsoft.BingFoodAndDrink','Microsoft.BingTranslator','Microsoft.BingSports','Microsoft.BingFinance','Microsoft.News'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Bing' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-office-lens",
+    "category": "Debloat apps",
+    "name": "Supprimer Office Lens",
+    "description": "Retire l'application de numérisation Office Lens.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-office-lens.was\"; $pk=@('Microsoft.Office.Lens'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-office-lens.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('Microsoft.Office.Lens'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Office%20Lens' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-microsoft-family",
+    "category": "Debloat apps",
+    "name": "Supprimer Microsoft Family",
+    "description": "Retire l'application de contrôle parental Microsoft Family.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-microsoft-family.was\"; $pk=@('MicrosoftCorporationII.MicrosoftFamily'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-microsoft-family.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('MicrosoftCorporationII.MicrosoftFamily'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Microsoft%20Family' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-assistance-rapide",
+    "category": "Debloat apps",
+    "name": "Supprimer l'Assistance rapide",
+    "description": "Retire Quick Assist, l'outil de prise en main à distance. Utile si vous ne dépannez ni n'êtes dépanné à distance.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-assistance-rapide.was\"; $pk=@('*QuickAssist*'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-assistance-rapide.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('*QuickAssist*'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Quick%20Assist' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-pense-bete",
+    "category": "Debloat apps",
+    "name": "Supprimer Sticky Notes (Pense-bêtes)",
+    "description": "Retire l'application Pense-bêtes. Les notes locales non synchronisées sont perdues : sauvegardez-les d'abord.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-pense-bete.was\"; $pk=@('Microsoft.MicrosoftStickyNotes'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-pense-bete.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('Microsoft.MicrosoftStickyNotes'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Sticky%20Notes' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-impression-3d",
+    "category": "Debloat apps",
+    "name": "Supprimer 3D Builder et Imprimer en 3D",
+    "description": "Retire les applications d'impression 3D héritées.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-impression-3d.was\"; $pk=@('Microsoft.3DBuilder','Microsoft.Print3D'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-impression-3d.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('Microsoft.3DBuilder','Microsoft.Print3D'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=3D%20Builder' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-apps-heritees-telephone",
+    "category": "Debloat apps",
+    "name": "Supprimer les applications héritées Windows Phone",
+    "description": "Retire les restes de Windows Phone : Phone, Messagerie, Wallet, OneConnect, App Connector et GroupMe.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-apps-heritees-telephone.was\"; $pk=@('Microsoft.WindowsPhone','Microsoft.CommsPhone','Microsoft.Messaging','Microsoft.Wallet','Microsoft.OneConnect','Microsoft.AppConnector','Microsoft.GroupMe10'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-apps-heritees-telephone.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('Microsoft.WindowsPhone','Microsoft.CommsPhone','Microsoft.Messaging','Microsoft.Wallet','Microsoft.OneConnect','Microsoft.AppConnector','Microsoft.GroupMe10'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Microsoft%20Messaging' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-programme-amelioration-experience",
+    "category": "Debloat apps",
+    "name": "Supprimer le paquet UserExperienceImprovementProgram",
+    "description": "Retire le paquet résiduel du programme d'amélioration de l'expérience utilisateur.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-programme-amelioration-experience.was\"; $pk=@('*UserExperienceImprovementProgram*'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-programme-amelioration-experience.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('*UserExperienceImprovementProgram*'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Microsoft' }; Remove-Item $mk -Force"
+      }
+    ]
+  },
+  {
+    "id": "ws.app-office-sway",
+    "category": "Debloat apps",
+    "name": "Supprimer Microsoft Sway",
+    "description": "Retire l'application de présentation Sway.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "cmd",
+        "apply": "$ErrorActionPreference='SilentlyContinue'; $mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-office-sway.was\"; $pk=@('Microsoft.Office.Sway'); $found=$false; foreach ($p in $pk) { if (Get-AppxPackage -AllUsers -Name $p) { $found=$true } }; if (-not $found) { exit 0 }; New-Item (Split-Path $mk) -ItemType Directory -Force | Out-Null; New-Item $mk -Force | Out-Null; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | Remove-AppxPackage -AllUsers; Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $p } | Remove-AppxProvisionedPackage -Online | Out-Null }; exit 0",
+        "revert": "$mk=\"$env:ProgramData\\ForgeOpti\\appx\\ws-office-sway.was\"; if (-not (Test-Path $mk)) { exit 0 }; $pk=@('Microsoft.Office.Sway'); $ok=$false; foreach ($p in $pk) { Get-AppxPackage -AllUsers -Name $p | ForEach-Object { $m=Join-Path $_.InstallLocation 'AppxManifest.xml'; if (Test-Path $m) { Add-AppxPackage -DisableDevelopmentMode -Register $m; $ok=$true } } }; if (-not $ok) { Start-Process 'ms-windows-store://search/?query=Sway' }; Remove-Item $mk -Force"
+      }
+    ]
+  }
+]

@@ -2,25 +2,49 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid x:Name="Root">
-        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-        <Grid Padding="24,16" ColumnSpacing="12">
-            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-            <StackPanel>
-                <TextBlock Text="ForgeOpti" Style="{StaticResource TitleTextBlockStyle}"/>
-                <TextBlock Text="Optimisation de Windows 10 / 11 : tout est réversible" Opacity="0.7"/>
-            </StackPanel>
-            <Button x:Name="BtnOneClick" Grid.Column="1" Style="{StaticResource AccentButtonStyle}" Content="⚡ Optimiser en 1 clic" Click="OneClick_Click"/>
-            <Button x:Name="BtnUndoAll" Grid.Column="2" Content="↩ Tout annuler" Click="UndoAll_Click"/>
-            <StackPanel Grid.Column="3" Spacing="4">
-                <Button Content="Rechercher une mise à jour" Click="Update_Click"/>
-                <CheckBox x:Name="ChkAuto" Content="Mises à jour automatiques" Click="Auto_Click"/>
-            </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="Header" Padding="20,12" ColumnSpacing="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="Brand" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center"/>
+            <TextBox x:Name="SearchBox" Grid.Column="1" MaxWidth="480" MinWidth="200" VerticalAlignment="Center"
+                     PlaceholderText="Rechercher un réglage (ex. widgets, télémétrie, souris)…" TextChanged="Search_Changed"/>
+            <StackPanel x:Name="Actions" Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center"/>
         </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions><ColumnDefinition Width="260"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-            <ListView x:Name="Cats" SelectionChanged="Cats_SelectionChanged" Padding="8,0"/>
-            <ScrollViewer Grid.Column="1"><StackPanel x:Name="List" Padding="16,0,24,16" Spacing="6"/></ScrollViewer>
+
+        <ScrollViewer x:Name="TopNavScroll" Grid.Row="1" Visibility="Collapsed" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <StackPanel x:Name="TopNav" Orientation="Horizontal" Spacing="4" Padding="16,4,16,8"/>
+        </ScrollViewer>
+
+        <Grid x:Name="Body" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="SideColumn" Width="290"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer x:Name="SideScroll" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="SideNav" Padding="10,10,10,16" Spacing="2"/>
+            </ScrollViewer>
+            <ScrollViewer x:Name="MainScroll" Grid.Column="1" SizeChanged="Main_SizeChanged" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="Main" Padding="28,16,32,28" Spacing="10"/>
+            </ScrollViewer>
         </Grid>
-        <TextBlock x:Name="Status" Grid.Row="2" Padding="24,8" Text="Prêt." Opacity="0.8"/>
+
+        <Grid x:Name="StatusBar" Grid.Row="3" Padding="20,8" ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ProgressRing x:Name="Busy" Width="16" Height="16" IsActive="False"/>
+            <TextBlock x:Name="Status" Grid.Column="1" Text="Prêt." VerticalAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>

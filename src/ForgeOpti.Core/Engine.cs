@@ -102,11 +102,24 @@ public sealed class Engine(string stateFile)
         }
     }
 
+    /// <summary>
+    /// Filet de sécurité : refuse de changer le démarrage d'un pilote/service de DÉMARRAGE (0) ou SYSTÈME (1).
+    /// Les désactiver peut empêcher Windows de démarrer (écran bleu INACCESSIBLE_BOOT_DEVICE, constaté avec rdyboost).
+    /// </summary>
+    static void GuardBootDriver(RegOp r)
+    {
+        const string prefix = @"system\currentcontrolset\services\";
+        if (r.Hive != "HKLM" || !r.Name.Equals("Start", StringComparison.OrdinalIgnoreCase) || !r.Key.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) return;
+        if (Capture(r) is { Exists: true, Value: { ValueKind: JsonValueKind.Number } v } && v.GetInt64() is 0 or 1 && v.GetInt64() != r.Value.GetInt64())
+            throw new InvalidOperationException($"Refus : « {r.Key[prefix.Length..]} » est un pilote de démarrage ou système, le désactiver peut empêcher Windows de démarrer.");
+    }
+
     static void Do(Op op)
     {
         switch (op)
         {
             case RegOp r:
+                GuardBootDriver(r);
                 using (var k = Root(r.Hive).CreateSubKey(r.Key))
                     k.SetValue(r.Name, ToObj(r.Kind, r.Value), Enum.Parse<RegistryValueKind>(r.Kind));
                 break;

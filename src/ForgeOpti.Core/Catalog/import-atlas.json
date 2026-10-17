@@ -1,0 +1,1386 @@
+[
+  {
+    "id": "atlas.compat-assistant",
+    "category": "Confidentialité",
+    "name": "Désactiver l'assistant de compatibilité des programmes",
+    "description": "Coupe la télémétrie de l'assistant de compatibilité des programmes (PCA) et désactive la collecte AIT par stratégie AppCompat.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat",
+        "name": "AllowTelemetry",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat",
+        "name": "DisableEngine",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.kms-telemetrie",
+    "category": "Télémétrie",
+    "name": "Désactiver la télémétrie d'activation (KMS)",
+    "description": "Empêche le client d'activation d'envoyer des tickets de validation en ligne.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform",
+        "name": "NoGenTicket",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.msrt-telemetrie",
+    "category": "Télémétrie",
+    "name": "Désactiver la télémétrie de l'outil de suppression de logiciels malveillants",
+    "description": "Empêche MSRT de remonter les infections détectées et son suivi de présence.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\MRT",
+        "name": "DontReportInfectionInformation",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\RemovalTools\\MpGears",
+        "name": "HeartbeatTrackingIndex",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.telemetrie-office",
+    "category": "Télémétrie",
+    "name": "Désactiver la télémétrie Microsoft Office",
+    "description": "Désactive l'envoi des données client et de la télémétrie d'Office 16 via stratégie utilisateur.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\office\\16.0\\common",
+        "name": "sendcustomerdata",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\office\\common\\clienttelemetry",
+        "name": "sendtelemetry",
+        "kind": "DWord",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "atlas.sync-parametres",
+    "category": "Confidentialité",
+    "name": "Désactiver la synchronisation des paramètres Windows",
+    "description": "Coupe la synchronisation des paramètres Windows entre appareils pour les groupes Personnalisation, Navigateur, Accessibilité et Windows.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\SettingSync\\Groups\\Personalization",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\SettingSync\\Groups\\BrowserSettings",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\SettingSync\\Groups\\Accessibility",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\SettingSync\\Groups\\Windows",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.attestation-sante",
+    "category": "Confidentialité",
+    "name": "Désactiver l'attestation de santé de l'appareil",
+    "description": "Désactive le service d'attestation de santé de l'appareil au démarrage.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\DeviceHealthAttestationService",
+        "name": "EnableDeviceHealthAttestationService",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.experimentation",
+    "category": "Confidentialité",
+    "name": "Interdire les expérimentations Microsoft",
+    "description": "Empêche Microsoft d'utiliser le PC pour tester des fonctions en avant-première.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\PolicyManager\\default\\System\\AllowExperimentation",
+        "name": "Value",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.suivi-reactivite",
+    "category": "Confidentialité",
+    "name": "Désactiver le suivi des événements de réactivité",
+    "description": "Désactive l'exécution des scénarios de diagnostic de performance (WDI) qui mesurent la réactivité.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WDI\\{9c5a40da-b965-4fc3-8781-88dd50a6299d}",
+        "name": "ScenarioExecutionEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.oobe-confidentialite",
+    "category": "Confidentialité",
+    "name": "Ne plus relancer l'écran de confidentialité après mises à jour",
+    "description": "Évite que l'assistant de confidentialité des mises à jour ne remette vos choix à zéro.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\OOBE",
+        "name": "DisablePrivacyExperience",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.voix-mises-a-jour",
+    "category": "Confidentialité",
+    "name": "Désactiver les mises à jour automatiques des données vocales",
+    "description": "Empêche le téléchargement automatique des modèles de reconnaissance vocale.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Speech",
+        "name": "AllowSpeechModelUpdate",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.compte-local-seulement",
+    "category": "Confidentialité",
+    "name": "Interdire l'ajout de comptes Microsoft",
+    "description": "Empêche d'ajouter des comptes Microsoft comme comptes utilisateurs Windows : seuls les comptes locaux restent possibles. Ne gêne pas les comptes déjà présents.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "name": "NoConnectedUser",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.localisation-services",
+    "category": "Confidentialité",
+    "name": "Désactiver la localisation et Localiser mon appareil",
+    "description": "Coupe les services de géolocalisation (lfsvc) et de cartes (MapsBroker), la fonction Localiser mon appareil et les invites globales de localisation. Les applications de cartes et météo perdent la position automatique.",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\FindMyDevice",
+        "name": "AllowFindMyDevice",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\FindMyDevice",
+        "name": "LocationSyncEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
+        "name": "ShowGlobalPrompts",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.insider-restreint",
+    "category": "Mises à jour",
+    "name": "Bloquer le programme Windows Insider",
+    "description": "Empêche l'inscription au programme Insider et masque sa page dans Paramètres, ce qui évite builds instables et collecte supplémentaire.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+        "name": "ManagePreviewBuilds",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+        "name": "ManagePreviewBuildsPolicyValue",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\WindowsSelfHost\\UI\\Visibility",
+        "name": "HideInsiderPage",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.anonyme-sam",
+    "category": "Sécurité",
+    "name": "Bloquer l'énumération anonyme des comptes (SAM)",
+    "description": "Interdit aux connexions anonymes de lister les comptes locaux, ce qui réduit la surface d'attaque réseau.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\Lsa",
+        "name": "RestrictAnonymousSAM",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.anonyme-partages",
+    "category": "Sécurité",
+    "name": "Restreindre l'accès et l'énumération anonymes des partages",
+    "description": "Limite les sessions nulles aux tubes nommés et partages, et interdit l'énumération anonyme des partages. Peut gêner de très vieux appareils réseau.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\LanManServer\\Parameters",
+        "name": "RestrictNullSessAccess",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\Lsa",
+        "name": "RestrictAnonymous",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.assistance-distance",
+    "category": "Sécurité",
+    "name": "Interdire le contrôle total par Assistance à distance",
+    "description": "Retire la possibilité de laisser un assistant prendre le contrôle complet via Assistance à distance.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\Remote Assistance",
+        "name": "fAllowFullControl",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.uac-sans-bureau-securise",
+    "category": "Sécurité",
+    "name": "UAC : ne plus basculer sur le bureau sécurisé",
+    "description": "Les invites d'élévation s'affichent sur le bureau normal au lieu du bureau sécurisé : plus fluide mais moins protégé contre les logiciels qui simulent l'invite.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "name": "PromptOnSecureDesktop",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.smb-pas-de-limitation",
+    "category": "Réseau",
+    "name": "Désactiver la limitation de bande passante SMB",
+    "description": "Supprime la limitation de débit du client SMB pour de meilleurs transferts sur partages réseau.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+        "name": "DisableBandwidthThrottling",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.maintenance-sans-reveil",
+    "category": "Performance",
+    "name": "Empêcher la maintenance automatique de réveiller le PC",
+    "description": "Ne réveille plus l'ordinateur pour exécuter la maintenance automatique.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Task Scheduler\\Maintenance",
+        "name": "WakeUp",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.fth",
+    "category": "Performance",
+    "name": "Désactiver le tas tolérant aux pannes (FTH)",
+    "description": "Retire les mitigations automatiques appliquées aux programmes qui plantent souvent, pour éviter des ralentissements inexpliqués.",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\FTH",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.fusion-pages-memoire",
+    "category": "Performance",
+    "name": "Désactiver la fusion des pages mémoire",
+    "description": "Arrête la déduplication de pages en RAM, ce qui économise du processeur au prix d'un peu plus de mémoire utilisée.",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "name": "DisablePageCombining",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.survol-instantane",
+    "category": "Performance",
+    "name": "Réduire le délai d'infobulle des fichiers",
+    "description": "Ramène le délai de survol des éléments de l'Explorateur de 400 ms à 20 ms.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Desktop",
+        "name": "MouseHoverTime",
+        "kind": "String",
+        "value": "20"
+      }
+    ]
+  },
+  {
+    "id": "atlas.cache-icones-4mo",
+    "category": "Explorateur",
+    "name": "Étendre le cache d'icônes à 4 Mo",
+    "description": "Porte le cache d'icônes de l'Explorateur à 4096 entrées pour des dossiers plus réactifs.",
+    "risk": "Sur",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        "name": "Max Cached Icons",
+        "kind": "String",
+        "value": "4096"
+      }
+    ]
+  },
+  {
+    "id": "atlas.effets-visuels-reactifs",
+    "category": "Interface",
+    "name": "Effets visuels : réglage réactif",
+    "description": "Conserve le lissage des polices et le glissement de fenêtre plein contenu tout en passant en profil « performances » et en libérant les miniatures en veille.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Desktop",
+        "name": "FontSmoothing",
+        "kind": "String",
+        "value": "2"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Desktop",
+        "name": "DragFullWindows",
+        "kind": "String",
+        "value": "1"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects",
+        "name": "VisualFXSetting",
+        "kind": "DWord",
+        "value": 3
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\DWM",
+        "name": "AlwaysHibernateThumbnails",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.svc-onesync",
+    "category": "Services",
+    "name": "Désactiver la synchronisation de données (OneSyncSvc)",
+    "description": "Arrête le service de synchronisation courrier, contacts et calendrier de l'application Courrier native.",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\OneSyncSvc",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "atlas.svc-decouverte-reseau",
+    "category": "Services",
+    "name": "Désactiver les services de découverte réseau",
+    "description": "Arrête la découverte de périphériques (fdPHost, FDResPub, SSDPSRV). Les imprimantes et médias réseau n'apparaissent plus automatiquement.",
+    "risk": "Avance",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\fdPHost",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\FDResPub",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "atlas.recents-masques",
+    "category": "Explorateur",
+    "name": "Masquer les éléments récents partout",
+    "description": "Vide les documents récents à la fermeture de session, retire l'historique et les destinations distantes des listes de raccourcis.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "ClearRecentDocsOnExit",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoRecentDocsHistory",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "NoRemoteDestinations",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.demarrer-sans-recommandations",
+    "category": "Interface",
+    "name": "Menu Démarrer sans recommandations ni apps fréquentes",
+    "description": "Masque les applications les plus utilisées, les ajouts récents et les sites recommandés dans le menu Démarrer.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoStartMenuMFUprogramsList",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "ShowOrHideMostUsedApps",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "HideRecommendedPersonalizedSites",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.win-x-invite-commandes",
+    "category": "Interface",
+    "name": "Win+X : Invite de commandes au lieu de PowerShell",
+    "description": "Le menu Win+X ouvre l'Invite de commandes classique.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "DontUsePowerShellOnWinX",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.apercu-bureau",
+    "category": "Interface",
+    "name": "Désactiver l'aperçu du bureau (Peek)",
+    "description": "Évite l'aperçu déclenché par erreur en survolant le coin de la barre des tâches.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "DisablePreviewDesktop",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.alt-tab-fenetres",
+    "category": "Interface",
+    "name": "Alt+Tab : fenêtres ouvertes seulement",
+    "description": "N'affiche plus les onglets Edge dans Alt+Tab.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "MultiTaskingAltTabFilter",
+        "kind": "DWord",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "atlas.sons-accessibilite",
+    "category": "Interface",
+    "name": "Désactiver les sons d'accessibilité",
+    "description": "Coupe le bip des touches rémanentes et les sons d'activation ou d'avertissement.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Accessibility",
+        "name": "Warning Sounds",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Accessibility",
+        "name": "Sound on Activation",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Accessibility\\SoundSentry",
+        "name": "WindowsEffect",
+        "kind": "String",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "id": "atlas.raccourcis-accessibilite",
+    "category": "Interface",
+    "name": "Désactiver les raccourcis d'accessibilité gênants",
+    "description": "Retire le lancement du Narrateur par Win+Entrée, l'outil d'accessibilité Win+Volume et la lecture automatique de section.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Narrator\\NoRoam",
+        "name": "WinEnterLaunchEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Accessibility\\SlateLaunch",
+        "name": "LaunchAT",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Ease of Access",
+        "name": "selfscan",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Ease of Access",
+        "name": "selfvoice",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.clavier-tactile",
+    "category": "Interface",
+    "name": "Clavier tactile : retirer correction et prédiction",
+    "description": "Désactive correction, prédiction, double espace, majuscule auto et son de touche du clavier tactile.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnableAutoShiftEngage",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnableKeyAudioFeedback",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.retour-tactile",
+    "category": "Interface",
+    "name": "Désactiver le retour visuel tactile",
+    "description": "Supprime les cercles et traces affichés sous le doigt ou le stylet.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Cursors",
+        "name": "GestureVisualization",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Cursors",
+        "name": "ContactVisualization",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.notifications-usb",
+    "category": "Interface",
+    "name": "Désactiver les alertes de problèmes USB",
+    "description": "Supprime les notifications souvent fausses sur les erreurs USB et chargeurs faibles.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Shell\\USB",
+        "name": "NotifyOnUsbErrors",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Shell\\USB",
+        "name": "NotifyOnWeakCharger",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.sons-peripheriques-masques",
+    "category": "Interface",
+    "name": "Panneau Son : masquer les périphériques débranchés",
+    "description": "Cache les périphériques audio désactivés ou déconnectés.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+        "name": "ShowDisconnectedDevices",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+        "name": "ShowHiddenDevices",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.themes-sans-curseurs",
+    "category": "Interface",
+    "name": "Les thèmes ne changent plus curseurs et icônes",
+    "description": "Un thème appliqué ne remplace plus vos pointeurs de souris ni vos icônes de bureau.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
+        "name": "ThemeChangesMousePointers",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
+        "name": "ThemeChangesDesktopIcons",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.encre-windows",
+    "category": "Interface",
+    "name": "Espace de travail Windows Ink : sans suggestions",
+    "description": "Retire les suggestions d'applications de l'espace stylet.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PenWorkspace",
+        "name": "PenWorkspaceAppSuggestionsEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.eclairage-dynamique",
+    "category": "Interface",
+    "name": "Désactiver l'éclairage dynamique",
+    "description": "Désactive Dynamic Lighting (contrôle RGB par Windows) pour éviter les conflits avec les logiciels de périphériques.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Lighting",
+        "name": "AmbientLightingEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.verrouillage-superpositions",
+    "category": "Interface",
+    "name": "Écran de verrouillage sans conseils ni widgets",
+    "description": "Désactive les superpositions d'informations de l'écran de verrouillage.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization",
+        "name": "LockScreenOverlaysDisabled",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.ancien-volet-batterie",
+    "category": "Interface",
+    "name": "Ancien indicateur de batterie",
+    "description": "Rétablit le survol de batterie classique de la barre des tâches.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ImmersiveShell",
+        "name": "UseWin32BatteryFlyout",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.ancienne-horloge",
+    "category": "Interface",
+    "name": "Ancien volet date et heure",
+    "description": "Rétablit le calendrier et l'horloge classiques de la barre des tâches.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ImmersiveShell",
+        "name": "UseWin32TrayClockExperience",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.ancien-volume",
+    "category": "Interface",
+    "name": "Ancien indicateur de volume",
+    "description": "Rétablit le contrôle de volume classique de Windows.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\MTCUVC",
+        "name": "EnableMtcUvc",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.miniatures-sans-badge",
+    "category": "Explorateur",
+    "name": "Miniatures sans icône d'application",
+    "description": "Retire le badge de l'application affiché sur les miniatures de fichiers.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "ShowTypeOverlay",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.volet-reseau-masque",
+    "category": "Explorateur",
+    "name": "Masquer Réseau dans le volet de navigation",
+    "description": "Retire l'entrée Réseau du volet gauche de l'Explorateur.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Classes\\CLSID\\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}",
+        "name": "System.IsPinnedToNameSpaceTree",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.pages-securite-masquees",
+    "category": "Interface",
+    "name": "Masquer les pages inutiles de Sécurité Windows",
+    "description": "Cache les pages Options famille, Performances et intégrité de l'appareil et Protection du compte. La protection reste active.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Family options",
+        "name": "UILockdown",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Device performance and health",
+        "name": "UILockdown",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Account protection",
+        "name": "UILockdown",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.sans-vidage-memoire",
+    "category": "Performance",
+    "name": "Ne plus créer de fichiers de vidage mémoire",
+    "description": "Aucun vidage après un plantage, ni événement journalisé : économise l'espace disque mais complique le diagnostic d'un écran bleu.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+        "name": "CrashDumpEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+        "name": "LogEvent",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\CrashControl\\StorageTelemetry",
+        "name": "DeviceDumpEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.chemins-longs",
+    "category": "Explorateur",
+    "name": "Autoriser les chemins de plus de 260 caractères",
+    "description": "Active la prise en charge des chemins longs pour les applications compatibles.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "name": "LongPathsEnabled",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.archivage-apps-store",
+    "category": "Performance",
+    "name": "Désactiver l'archivage automatique des applications Store",
+    "description": "Empêche Windows de désinstaller les applications peu utilisées pour libérer de l'espace.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Policies\\Microsoft\\Windows\\Appx",
+        "name": "AllowAutomaticAppArchiving",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.maj-notifications",
+    "category": "Mises à jour",
+    "name": "Réduire les notifications de Windows Update",
+    "description": "Masque la notification de redémarrage, le lien des contrôles de mise à jour et l'option par défaut Mettre à jour et arrêter.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+        "name": "SetAutoRestartNotificationDisable",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings",
+        "name": "RestartNotificationsAllowed2",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+        "name": "SetUpdateNotificationLevel",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+        "name": "NoAUAsDefaultShutdownOption",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings",
+        "name": "HideMCTLink",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.maj-reveil-pc",
+    "category": "Mises à jour",
+    "name": "Ne pas réveiller le PC pour les mises à jour",
+    "description": "Windows Update n'utilise plus la gestion d'alimentation pour sortir le PC de veille.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+        "name": "AUPowerManagement",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "atlas.maj-outlook-devhome",
+    "category": "Mises à jour",
+    "name": "Bloquer l'installation automatique d'Outlook et Dev Home",
+    "description": "Marque comme terminés les travaux d'installation forcée d'Outlook (nouveau) et de Dev Home par Windows Update.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WindowsUpdate\\Orchestrator\\UScheduler\\DevHomeUpdate",
+        "name": "workCompleted",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WindowsUpdate\\Orchestrator\\UScheduler\\OutlookUpdate",
+        "name": "workCompleted",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "atlas.bord-ecran-tactile",
+    "category": "Interface",
+    "name": "Désactiver le balayage depuis les bords de l'écran",
+    "description": "Supprime les gestes tactiles de bord (widgets, centre d'action) par stratégie.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Policies\\Microsoft\\Windows\\EdgeUI",
+        "name": "AllowEdgeSwipe",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  }
+]

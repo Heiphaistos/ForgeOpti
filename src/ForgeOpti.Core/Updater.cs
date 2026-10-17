@@ -14,12 +14,10 @@ public static class Updater
     const string AssetZip = "ForgeOpti-win-x64.zip";
     static readonly HttpClient Http = new() { DefaultRequestHeaders = { { "User-Agent", "ForgeOpti-Updater" } }, Timeout = TimeSpan.FromMinutes(5) };
 
-    static string SettingsFile => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "ForgeOpti", "settings.json");
-
     public static bool Enabled
     {
-        get { try { return JsonDocument.Parse(File.ReadAllText(SettingsFile)).RootElement.GetProperty("autoUpdate").GetBoolean(); } catch { return true; } }
-        set { Directory.CreateDirectory(Path.GetDirectoryName(SettingsFile)!); File.WriteAllText(SettingsFile, JsonSerializer.Serialize(new { autoUpdate = value })); }
+        get => Settings.Get("autoUpdate", true);
+        set => Settings.Set("autoUpdate", value);
     }
 
     public static Version Current => typeof(Updater).Assembly.GetName().Version ?? new Version(0, 0);

@@ -11,8 +11,14 @@ var phaseFile = Path.Combine(dir, "phase.txt");
 var phase = File.Exists(phaseFile) ? File.ReadAllText(phaseFile).Trim() : "0";
 var all = Catalog.LoadAll().Where(t => t.MinBuild <= Environment.OSVersion.Version.Build
     && (t.MaxBuild == 0 || Environment.OSVersion.Version.Build <= t.MaxBuild)).ToList();
+// filter.txt = "services" : ne teste que les tweaks qui changent le démarrage d'un service (test rapide du démarrage de Windows).
+if (File.Exists(Path.Combine(dir, "filter.txt")) && File.ReadAllText(Path.Combine(dir, "filter.txt")).Trim() == "services")
+    all = all.Where(t => t.Ops.OfType<RegOp>().Any(o => o.Name.Equals("Start", StringComparison.OrdinalIgnoreCase) && o.Key.Contains(@"\Services\", StringComparison.OrdinalIgnoreCase))).ToList();
+// filter.txt = "reg" : uniquement les tweaks 100 % registre/tâches (sans DISM ni winget, donc rapide) : valide les retours à l'état d'origine.
+if (File.Exists(Path.Combine(dir, "filter.txt")) && File.ReadAllText(Path.Combine(dir, "filter.txt")).Trim() == "reg")
+    all = all.Where(t => t.Ops.All(o => o is not CmdOp)).ToList();
 var engine = new Engine(Path.Combine(dir, "state.json"));
-var J = new JsonSerializerOptions { WriteIndented = true };
+var J =new JsonSerializerOptions { WriteIndented = true };
 
 void Log(string s) { Console.WriteLine(s); File.AppendAllText(Path.Combine(dir, "run.log"), $"[{DateTime.Now:HH:mm:ss}] [phase {phase}] {s}\n"); }
 void Next(string p) => File.WriteAllText(phaseFile, p);

@@ -52,6 +52,19 @@ public class EngineTests
         }
     }
 
+    [Fact]
+    public void Aucun_tweak_ne_touche_un_pilote_de_demarrage_connu()
+    {
+        // Pilotes de stockage/volume/système : les désactiver = écran bleu INACCESSIBLE_BOOT_DEVICE au redémarrage.
+        string[] interdits = ["rdyboost", "dam", "netbt", "ucpd", "tcpipreg", "storvsc", "vmbus", "stornvme", "storahci", "storport", "disk", "partmgr", "volmgr",
+            "volsnap", "volume", "fvevol", "mountmgr", "ntfs", "refs", "fltmgr", "acpi", "pci", "wdf01000", "cng", "ksecdd", "ksecpkg", "msfs", "npfs", "tcpip", "afd", "ndis"];
+        const string prefix = @"SYSTEM\CurrentControlSet\Services\";
+        foreach (var t in Catalog.LoadAll())
+            foreach (var o in t.Ops.OfType<RegOp>())
+                if (o.Hive == "HKLM" && o.Key.StartsWith(prefix, StringComparison.OrdinalIgnoreCase) && o.Name.Equals("Start", StringComparison.OrdinalIgnoreCase))
+                    Assert.DoesNotContain(o.Key[prefix.Length..].Split('\\')[0].ToLowerInvariant(), interdits);
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]

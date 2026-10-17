@@ -1,0 +1,1716 @@
+[
+  {
+    "id": "revi.jpeg-fond-qualite-max",
+    "category": "Interface",
+    "name": "Fond d'écran JPEG sans compression",
+    "description": "Importe les fonds d'écran JPEG à 100 % de qualité au lieu de les recompresser.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Desktop",
+        "name": "JPEGImportQuality",
+        "kind": "DWord",
+        "value": 100
+      }
+    ]
+  },
+  {
+    "id": "revi.bips-systeme-off",
+    "category": "Interface",
+    "name": "Couper les bips système",
+    "description": "Désactive le bip du haut-parleur interne de Windows.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Sound",
+        "name": "Beep",
+        "kind": "String",
+        "value": "no"
+      }
+    ]
+  },
+  {
+    "id": "revi.arret-rapide-applis",
+    "category": "Performance",
+    "name": "Fermeture rapide des applications à l'arrêt",
+    "description": "Ferme automatiquement les applications bloquées et réduit les délais d'attente à 2 s (au lieu de 5 s). Des données non enregistrées peuvent être perdues.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Control Panel\\Desktop",
+        "name": "LowLevelHooksTimeout",
+        "kind": "String",
+        "value": "1000"
+      }
+    ]
+  },
+  {
+    "id": "revi.aide-en-ligne-off",
+    "category": "Confidentialité",
+    "name": "Désactiver les astuces en ligne",
+    "description": "Empêche Windows d'afficher des conseils et astuces récupérés en ligne.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "AllowOnlineTips",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.explorer-type-dossier-auto-off",
+    "category": "Explorateur",
+    "name": "Désactiver la détection automatique du type de dossier",
+    "description": "Évite à l'Explorateur d'analyser le contenu des dossiers pour choisir leur affichage : ouverture plus rapide.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\Bags\\AllFolders\\Shell",
+        "name": "FolderType",
+        "kind": "String",
+        "value": "NotSpecified"
+      }
+    ]
+  },
+  {
+    "id": "revi.explorer-gpu-performant",
+    "category": "Performance",
+    "name": "Explorateur sur le GPU performant",
+    "description": "Force l'Explorateur à utiliser la carte graphique haute performance (consommation accrue sur portable).",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\DirectX\\UserGpuPreferences",
+        "name": "C:\\Windows\\explorer.exe",
+        "kind": "String",
+        "value": "GpuPreference=2;"
+      }
+    ]
+  },
+  {
+    "id": "revi.explorer-recents-cloud-off",
+    "category": "Confidentialité",
+    "name": "Masquer les éléments récents du compte dans l'Explorateur",
+    "description": "Retire les suggestions et fichiers récents issus du compte cloud dans l'accueil de l'Explorateur.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "DisableGraphRecentItems",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.explorer-seuil-ouverture-multiple",
+    "category": "Explorateur",
+    "name": "Relever le seuil de confirmation d'ouverture multiple",
+    "description": "Ouvre jusqu'à 100 éléments sélectionnés sans demander de confirmation.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        "name": "MultipleInvokePromptMinimum",
+        "kind": "DWord",
+        "value": 100
+      }
+    ]
+  },
+  {
+    "id": "revi.copie-details-par-defaut",
+    "category": "Explorateur",
+    "name": "Détails de copie toujours affichés",
+    "description": "Affiche d'emblée la fenêtre détaillée (graphique de débit) lors des copies de fichiers.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\OperationStatusManager",
+        "name": "EnthusiastMode",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.autorun-lecteurs-off",
+    "category": "Sécurité",
+    "name": "Désactiver l'exécution automatique des lecteurs",
+    "description": "Bloque AutoRun/AutoPlay sur tous les types de lecteurs (clés USB, disques optiques).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoDriveTypeAutoRun",
+        "kind": "DWord",
+        "value": 255
+      }
+    ]
+  },
+  {
+    "id": "revi.espace-disque-alerte-off",
+    "category": "Explorateur",
+    "name": "Désactiver l'alerte d'espace disque faible",
+    "description": "Supprime la notification de manque d'espace disque.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoLowDiskSpaceChecks",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.raccourcis-sans-recherche",
+    "category": "Explorateur",
+    "name": "Résolution rapide des raccourcis",
+    "description": "Ne cherche pas la cible d'un raccourci cassé et ignore le suivi réseau des liens : ouverture plus rapide.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "LinkResolveIgnoreLinkInfo",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoResolveSearch",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.infobulles-explorer-off",
+    "category": "Explorateur",
+    "name": "Masquer les info-bulles descriptives",
+    "description": "Supprime les fenêtres d'info-bulle au survol des fichiers et dossiers.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "ShowInfoTip",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.notif-astuces-fonctions-off",
+    "category": "Confidentialité",
+    "name": "Couper les bulles de publicité des fonctionnalités",
+    "description": "Désactive les bulles de promotion de fonctionnalités et le nettoyage de la zone de notification.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "NoBalloonFeatureAdvertisements",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "NoAutoTrayNotify",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.notif-reseau-cloud-off",
+    "category": "Confidentialité",
+    "name": "Désactiver les notifications cloud des applications",
+    "description": "Interdit les notifications poussées depuis le réseau pour les applications.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+        "name": "NoCloudApplicationNotification",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.parole-ecran-verrouillage-off",
+    "category": "Confidentialité",
+    "name": "Activation vocale désactivée sur l'écran verrouillé",
+    "description": "Empêche l'assistant vocal d'écouter lorsque la session est verrouillée.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Speech_OneCore\\Preferences",
+        "name": "VoiceActivationEnableAboveLockscreen",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.barre-personnes-meetnow-off",
+    "category": "Interface",
+    "name": "Masquer Contacts et Se réunir maintenant",
+    "description": "Retire la barre Contacts et l'icône Se réunir maintenant.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "HidePeopleBar",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "HideSCAMeetNow",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "HideSCAMeetNow",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.mode-bureau-permanent",
+    "category": "Interface",
+    "name": "Toujours en mode bureau (pas de mode tablette)",
+    "description": "Désactive le basculement automatique en mode tablette sur les appareils convertibles.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ImmersiveShell",
+        "name": "SignInMode",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ImmersiveShell",
+        "name": "TabletMode",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ImmersiveShell",
+        "name": "ConvertibleSlateModePromptPreference",
+        "kind": "DWord",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "revi.saisie-correction-auto-off",
+    "category": "Confidentialité",
+    "name": "Désactiver correction auto et suggestions de saisie",
+    "description": "Coupe correction automatique, surlignage des fautes et prédiction de texte (clavier tactile et physique).",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnableAutocorrection",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnableAutocorrection",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnableSpellchecking",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnableSpellchecking",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnableTextPrediction",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnableTextPrediction",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnablePredictionSpaceInsertion",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnablePredictionSpaceInsertion",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnableDoubleTapSpace",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\TabletTip\\1.7",
+        "name": "EnableDoubleTapSpace",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Input\\Settings",
+        "name": "EnableHwkbTextPrediction",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Input\\Settings",
+        "name": "EnableHwkbTextPrediction",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Input\\Settings",
+        "name": "EnableHwkbAutocorrection",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Input\\Settings",
+        "name": "EnableHwkbAutocorrection",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Input\\Settings",
+        "name": "MultilingualEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Input\\Settings",
+        "name": "MultilingualEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Input\\Settings",
+        "name": "InsightsEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.saisie-personnalisation-off",
+    "category": "Confidentialité",
+    "name": "Désactiver l'amélioration de la saisie et de l'écriture",
+    "description": "Arrête la collecte de données de frappe et d'écriture manuscrite pour personnaliser la reconnaissance.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\TextInput",
+        "name": "AllowLinguisticDataCollection",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Input\\TIPC",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.cartes-hors-ligne-off",
+    "category": "Confidentialité",
+    "name": "Cartes hors ligne : pas de mise à jour automatique",
+    "description": "Désactive la mise à jour automatique des cartes hors ligne et la limite au Wi-Fi.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\Maps",
+        "name": "UpdateOnlyOnWifi",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.reprise-multi-appareils-off",
+    "category": "Confidentialité",
+    "name": "Désactiver la reprise entre appareils",
+    "description": "Désactive la reprise d'activité (Cross-Device Resume) depuis un téléphone.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+        "name": "IsResumeAllowed",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "MinBuild": 26100
+  },
+  {
+    "id": "revi.pub-id-off",
+    "category": "Confidentialité",
+    "name": "Désactiver l'identifiant publicitaire",
+    "description": "Supprime l'identifiant publicitaire de l'utilisateur et de l'appareil.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.experiences-personnalisees-off",
+    "category": "Confidentialité",
+    "name": "Désactiver les expériences personnalisées",
+    "description": "Interdit l'usage des données de diagnostic pour des conseils et publicités sur mesure.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CPSS\\DevicePolicy\\TailoredExperiencesWithDiagnosticDataEnabled",
+        "name": "DefaultValue",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.journal-diagnostic-off",
+    "category": "Télémétrie",
+    "name": "Désactiver la visionneuse de données de diagnostic",
+    "description": "Désactive le transcript d'événements de diagnostic et les sollicitations d'avis.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Diagnostics\\DiagTrack\\EventTranscriptKey",
+        "name": "EnableEventTranscript",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.permissions-capteurs-refuses",
+    "category": "Confidentialité",
+    "name": "Refuser par défaut position, activité et compte aux applications",
+    "description": "Interdit l'accès à la position, aux données d'activité, aux informations de compte, au calendrier, aux tâches et à la messagerie.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\activity",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\userAccountInformation",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\appointments",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\userDataTasks",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\chat",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "revi.permissions-peripheriques-refuses",
+    "category": "Confidentialité",
+    "name": "Refuser par défaut radios, Bluetooth et diagnostic d'applis",
+    "description": "Interdit aux applications de contrôler les radios, de synchroniser des appareils Bluetooth non appairés et de lire les diagnostics d'applications.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\radios",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\bluetoothSync",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\bluetoothSync",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\appDiagnostics",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "revi.permissions-fichiers-refuses",
+    "category": "Confidentialité",
+    "name": "Refuser par défaut l'accès aux documents, images, vidéos et système de fichiers",
+    "description": "Les applications du Store ne peuvent plus lire vos bibliothèques ni le système de fichiers sans demande. Peut perturber certaines applications.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\documentsLibrary",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\picturesLibrary",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\videosLibrary",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\broadFileSystemAccess",
+        "name": "Value",
+        "kind": "String",
+        "value": "Deny"
+      }
+    ]
+  },
+  {
+    "id": "revi.wifi-sense-off",
+    "category": "Réseau",
+    "name": "Désactiver Wi-Fi Sense",
+    "description": "Empêche la connexion automatique aux points d'accès ouverts suggérés et le partage de réseaux.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\WcmSvc\\wifinetworkmanager\\config",
+        "name": "AutoConnectAllowedOEM",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\WcmSvc\\wifinetworkmanager\\features",
+        "name": "PaidWifi",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\WcmSvc\\wifinetworkmanager\\features",
+        "name": "WiFiSenseOpen",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.sudo-integre",
+    "category": "Interface",
+    "name": "Activer sudo intégré à Windows",
+    "description": "Active la commande sudo en ligne dans le terminal. Ajoute une capacité d'élévation : à réserver aux développeurs.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Sudo",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 3
+      }
+    ],
+    "MinBuild": 26100
+  },
+  {
+    "id": "revi.journaux-office-gpo-off",
+    "category": "Confidentialité",
+    "name": "Réduire la journalisation d'Office et de la stratégie de groupe",
+    "description": "Désactive la gestion des journaux Click-to-Run d'Office et la journalisation RSoP.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\ClickToRun\\OverRide",
+        "name": "DisableLogManagement",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+        "name": "RSoPLogging",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.audio-communications-rien",
+    "category": "Interface",
+    "name": "Ne pas baisser le volume lors des appels",
+    "description": "Règle « Quand Windows détecte une activité de communication » sur « Ne rien faire ».",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Multimedia\\Audio",
+        "name": "UserDuckingPreference",
+        "kind": "DWord",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "revi.contenu-suggere-off",
+    "category": "Confidentialité",
+    "name": "Couper la diffusion de contenu et les applis suggérées",
+    "description": "Désactive Content Delivery Manager : applis suggérées ou préinstallées, astuces, contenu sponsorisé.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "name": "SubscribedContentEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "name": "FeatureManagementEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "name": "RemediationRequired",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "name": "SubscribedContent-314559Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "name": "SubscribedContent-280815Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "name": "SubscribedContent-314563Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "name": "SubscribedContent-202914Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "name": "SubscribedContent-280810Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "name": "SubscribedContent-280811Enabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.spotlight-cloud-politiques",
+    "category": "Confidentialité",
+    "name": "Stratégies Spotlight et contenu cloud désactivées",
+    "description": "Désactive les fonctions Spotlight, les suggestions tierces, l'expérience de bienvenue, les astuces et le contenu optimisé cloud.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "name": "ConfigureWindowsSpotlight",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "name": "IncludeEnterpriseSpotlight",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "name": "DisableWindowsSpotlightWindowsWelcomeExperience",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "name": "DisableWindowsSpotlightOnActionCenter",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "name": "DisableWindowsSpotlightOnSettings",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.compte-microsoft-optionnel",
+    "category": "Confidentialité",
+    "name": "Compte Microsoft facultatif dans les applications",
+    "description": "Autorise les applications à s'utiliser sans compte Microsoft obligatoire.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "name": "MSAOptional",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.messagerie-sync-off",
+    "category": "Confidentialité",
+    "name": "Désactiver la synchronisation cloud des messages",
+    "description": "Bloque la synchronisation des messages vers le cloud.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Messaging",
+        "name": "AllowMessageSync",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.aide-sticker-mfu-off",
+    "category": "Confidentialité",
+    "name": "Désactiver astuces d'aide et suivi d'usage des applis",
+    "description": "Supprime les info-bulles d'aide Edge UI et le suivi des applications les plus utilisées.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\EdgeUI",
+        "name": "DisableHelpSticker",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.services-internet-windows-off",
+    "category": "Confidentialité",
+    "name": "Restreindre les assistants Windows connectés à Internet",
+    "description": "Désactive les assistants en ligne (publication web, impression photo, Ouvrir avec en ligne, impression HTTP, pilotes d'impression web).",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoPublishingWizard",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoWebServices",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoOnlinePrintsWizard",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoInternetOpenWith",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows NT\\Printers",
+        "name": "DisableHTTPPrinting",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Policies\\Microsoft\\Windows NT\\Printers",
+        "name": "DisableWebPnPDownload",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoPublishingWizard",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoWebServices",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoOnlinePrintsWizard",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "name": "NoInternetOpenWith",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows NT\\Printers",
+        "name": "DisableHTTPPrinting",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows NT\\Printers",
+        "name": "DisableWebPnPDownload",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.aide-pchealth-off",
+    "category": "Confidentialité",
+    "name": "Couper aide en ligne PCHealth et assistants d'inscription",
+    "description": "Désactive les actualités d'aide, la recherche KB, l'assistant d'inscription et les liens en ligne de l'Observateur d'événements.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\PCHealth\\HelpSvc",
+        "name": "Headlines",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\PCHealth\\HelpSvc",
+        "name": "MicrosoftKBSearch",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Registration Wizard Control",
+        "name": "NoRegistration",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\EventViewer",
+        "name": "MicrosoftEventVwrDisableLinks",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\SearchCompanion",
+        "name": "DisableContentFileUpdates",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.ecriture-manuscrite-rapports-off",
+    "category": "Confidentialité",
+    "name": "Désactiver les rapports d'écriture manuscrite",
+    "description": "Empêche l'envoi de rapports d'erreurs et de données d'écriture manuscrite.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\HandwritingErrorReports",
+        "name": "PreventHandwritingErrorReports",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\TabletPC",
+        "name": "PreventHandwritingDataSharing",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.nvidia-telemetrie-off",
+    "category": "Télémétrie",
+    "name": "Désactiver la télémétrie du panneau NVIDIA",
+    "description": "Refuse la collecte de statistiques d'usage par le panneau de configuration NVIDIA.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\NVIDIA Corporation\\NVControlPanel2\\Client",
+        "name": "OptInOrOutPreference",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.diagnostic-options-off",
+    "category": "Télémétrie",
+    "name": "Verrouiller les options de diagnostic Windows",
+    "description": "Désactive pipeline commercial, nom d'appareil, collecte navigateur, notifications d'option, journaux et vidages de diagnostic.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "DisableEnterpriseAuthProxy",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "DisableTelemetryOptInChangeNotification",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "DisableTelemetryOptInSettingsUx",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "LimitEnhancedDiagnosticDataWindowsAnalytics",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "LimitDumpCollection",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.insider-expe-off",
+    "category": "Télémétrie",
+    "name": "Bloquer builds Insider et expérimentations",
+    "description": "Désactive les fonctions préliminaires, la gestion des builds Insider et l'expérimentation.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "AllowBuildPreview",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\System",
+        "name": "AllowExperimentation",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.autologgers-telemetrie-off",
+    "category": "Télémétrie",
+    "name": "Désactiver les journaux de démarrage de télémétrie",
+    "description": "Coupe les enregistreurs de trace au démarrage liés à DiagTrack, SQM et à l'installation.",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\Diagtrack-Listener",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\SQMLogger",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\SetupPlatformTel",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.wer-politiques-off",
+    "category": "Télémétrie",
+    "name": "Rapport d'erreurs Windows : stratégies complètes",
+    "description": "Désactive le rapport d'erreurs, la journalisation, l'envoi de données et de vidages, et masque l'interface de rapport.",
+    "risk": "Modere",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting",
+        "name": "LoggingDisabled",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting",
+        "name": "AutoApproveOSDumps",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting",
+        "name": "DontSendAdditionalData",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting",
+        "name": "DontShowUI",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.ceip-politiques-off",
+    "category": "Télémétrie",
+    "name": "Programme d'amélioration (CEIP) : toutes stratégies",
+    "description": "Désactive le CEIP Windows, App-V, Internet Explorer et Messenger.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\AppV\\CEIP",
+        "name": "CEIPEnable",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Internet Explorer\\SQM",
+        "name": "DisableCustomerImprovementProgram",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Messenger\\Client",
+        "name": "CEIP",
+        "kind": "DWord",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "revi.compte-protection-masquer",
+    "category": "Sécurité",
+    "name": "Masquer l'alerte « Protection du compte »",
+    "description": "Retire l'avertissement de connexion à un compte Microsoft dans Sécurité Windows (n'altère pas la protection).",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows Security Health\\State",
+        "name": "AccountProtection_MicrosoftAccount_Disconnected",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.plantage-pas-de-redemarrage",
+    "category": "Interface",
+    "name": "Ne pas redémarrer automatiquement après un plantage",
+    "description": "Laisse l'écran bleu affiché pour lire le code d'erreur et active les vidages mémoire automatiques.",
+    "risk": "Sur",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+        "name": "AutoReboot",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+        "name": "CrashDumpEnabled",
+        "kind": "DWord",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "revi.maintenance-auto-off",
+    "category": "Performance",
+    "name": "Désactiver la maintenance automatique",
+    "description": "Supprime la maintenance planifiée de Windows (défragmentation, diagnostics). Pensez à lancer ces tâches à la main de temps en temps.",
+    "risk": "Avance",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance",
+        "name": "MaintenanceDisabled",
+        "kind": "DWord",
+        "value": 1
+      },
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\ScheduledDiagnostics",
+        "name": "EnabledExecution",
+        "kind": "DWord",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "revi.menu-alim-veille",
+    "category": "Alimentation",
+    "name": "Afficher Veille dans le menu d'arrêt",
+    "description": "Ajoute l'option Veille au menu Marche/Arrêt.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FlyoutMenuSettings",
+        "name": "ShowSleepOption",
+        "kind": "DWord",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "revi.telemetrie-outils-dev-off",
+    "category": "Télémétrie",
+    "name": "Désactiver la télémétrie .NET CLI et PowerShell",
+    "description": "Définit les variables utilisateur DOTNET_CLI_TELEMETRY_OPTOUT et POWERSHELL_TELEMETRY_OPTOUT à 1.",
+    "risk": "Sur",
+    "reboot": false,
+    "gaming": false,
+    "oneClick": true,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKCU",
+        "key": "Environment",
+        "name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+        "kind": "String",
+        "value": "1"
+      }
+    ]
+  },
+  {
+    "id": "revi.svc-gpuenergydrv",
+    "category": "Services",
+    "name": "Désactiver le pilote GPU Energy (GpuEnergyDrv)",
+    "description": "Arrête le pilote de mesure d'énergie du GPU.",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\GpuEnergyDrv",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "revi.svc-intel-telemetry",
+    "category": "Services",
+    "name": "Désactiver le service de télémétrie Intel",
+    "description": "Arrête le service Intel(R) Telemetry s'il est installé.",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\Telemetry",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "revi.svc-diagnosticshub",
+    "category": "Services",
+    "name": "Désactiver le collecteur Diagnostics Hub",
+    "description": "Arrête le service collecteur standard du Diagnostics Hub.",
+    "risk": "Modere",
+    "reboot": true,
+    "gaming": false,
+    "oneClick": false,
+    "ops": [
+      {
+        "type": "reg",
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service",
+        "name": "Start",
+        "kind": "DWord",
+        "value": 4
+      }
+    ]
+  }
+]
