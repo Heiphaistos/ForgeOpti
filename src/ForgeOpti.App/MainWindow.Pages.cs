@@ -9,12 +9,12 @@ public sealed partial class MainWindow
 {
     void BuildPage()
     {
-        Main.Children.Clear();
-        _actionButtons.RemoveAll(b => !_headerButtons.Contains(b)); // boutons de la page précédente
+        Main.Children.Clear(); _switches.Clear();
         switch (_page)
         {
             case Nav.Home: HomePage(); break;
             case Nav.Clean: CleanerPage(); break;
+            case Nav.Health: HealthPage(); break;
             case Nav.Search: SearchPage(); break;
             default: TweakPage(_page); break;
         }
@@ -29,7 +29,8 @@ public sealed partial class MainWindow
         ((TextBlock)((Border)row.Children[0]).Child).HorizontalAlignment = HorizontalAlignment.Center;
         var txt = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
         txt.Children.Add(Widgets.Text(title, 24, t, bold: true));
-        txt.Children.Add(Widgets.Text(subtitle, 13, t, sub: true));
+        _subtitle = Widgets.Text(subtitle, 13, t, sub: true);
+        txt.Children.Add(_subtitle);
         row.Children.Add(txt);
         Main.Children.Add(row);
     }
@@ -51,12 +52,16 @@ public sealed partial class MainWindow
         PageTitle("Bienvenue dans ForgeOpti", $"{_all.Count} réglages disponibles sur ce PC · {applied} actifs · tout est réversible", "");
 
         var wrap = new VariableSizedWrapGrid { Orientation = Orientation.Horizontal, ItemWidth = 400, ItemHeight = 170, MaximumRowsOrColumns = -1 };
-        wrap.Children.Add(HomeCard("", "Optimisation en 1 clic", $"{OneClickSet.Count} réglages sûrs, appliqués après un point de restauration automatique.", "Optimiser", true,
-            async () => await ApplyMany("Optimiser en 1 clic", OneClickSet)));
-        wrap.Children.Add(HomeCard("", "Profil Gaming", "Moins de latence et plus d'images par seconde : jeux, GPU, alimentation, réseau.", "Appliquer", false,
-            async () => await ApplyMany("Profil Gaming", _all.Where(x => x.Gaming && x.Risk != Risk.Avance && !_engine.IsApplied(x.Id)).ToList())));
-        wrap.Children.Add(HomeCard("", "Profil Confidentialité", "Télémétrie, publicités, suggestions et Copilot réduits, sans toucher à la sécurité.", "Appliquer", false,
-            async () => await ApplyMany("Profil Confidentialité", _all.Where(x => x.Category is "Confidentialité" or "Télémétrie" or "IA et Copilot" && x.Risk == Risk.Sur && !_engine.IsApplied(x.Id)).ToList())));
+        wrap.Children.Add(HomeCard("", "Optimisation en 1 clic", $"{Profiles.OneClick(_all).Count(t => !_engine.IsApplied(t.Id))} réglages sûrs, après aperçu et point de restauration automatique. Impression, Bluetooth, réseau local et mises à jour restent intacts.", "Optimiser", true,
+            () => { OneClick_Click(this, null!); return Task.CompletedTask; }));
+        wrap.Children.Add(HomeCard("", "Profil Gaming", "Moins de latence et plus d'images par seconde : jeux, GPU, alimentation, réseau.", "Présélectionner", false,
+            () => { Preselect("Profil Gaming", Profiles.Select(Profiles.Gaming, _all)); return Task.CompletedTask; }));
+        wrap.Children.Add(HomeCard("", "Profil Bureautique", "PC de travail sobre : télémétrie et publicités réduites, aucun réglage de jeu. Imprimantes et périphériques intacts.", "Présélectionner", false,
+            () => { Preselect("Profil Bureautique", Profiles.Select(Profiles.Bureautique, _all)); return Task.CompletedTask; }));
+        wrap.Children.Add(HomeCard("", "Profil Hybride", "Bureau propre et gains de jeu à la fois : le mélange Bureautique + Gaming.", "Présélectionner", false,
+            () => { Preselect("Profil Hybride", Profiles.Select(Profiles.Hybride, _all)); return Task.CompletedTask; }));
+        wrap.Children.Add(HomeCard("", "Profil Confidentialité", "Télémétrie, publicités, suggestions et Copilot réduits, sans toucher à la sécurité.", "Présélectionner", false,
+            () => { Preselect("Profil Confidentialité", Profiles.Select(Profiles.Confidentialite, _all)); return Task.CompletedTask; }));
         wrap.Children.Add(HomeCard("", "Nettoyage du disque", "Caches, temporaires, journaux et caches de jeux : libère de la place en un clic.", "Ouvrir", false,
             () => { Go(Nav.Clean); return Task.CompletedTask; }));
         Main.Children.Add(wrap);
@@ -64,7 +69,10 @@ public sealed partial class MainWindow
         Heading("Comment ça marche", t.Accent);
         foreach (var line in new[]
         {
-            "Chaque interrupteur applique UN réglage et mémorise la valeur d'origine : l'éteindre remet exactement l'état précédent.",
+            "Les interrupteurs ne changent rien tout de suite : ils préparent une sélection. Une barre en bas t'indique combien de changements attendent, puis « Voir et appliquer » affiche la liste exacte avant de valider.",
+            "La valeur d'origine de chaque réglage est mémorisée : le désactiver remet exactement l'état précédent.",
+            "Les profils présélectionnent seulement : tu peux tout ajuster avant d'appliquer, et enregistrer ta propre sélection (bouton Profils).",
+            "Jamais touchés par les profils ni par le 1 clic : impression, Bluetooth, découverte réseau et partages, mises à jour et protection de Windows.",
             "Un point de restauration Windows est créé avant le premier changement de la session.",
             "Les pastilles indiquent le risque : Sûr (vert), Modéré (orange), Avancé (rouge, jamais inclus dans le 1 clic).",
             "Astuce : la recherche en haut trouve un réglage par son nom ou sa description, dans toutes les catégories.",
@@ -100,18 +108,16 @@ public sealed partial class MainWindow
         PageTitle(entry?.Label ?? key, $"{total} réglages · {applied} actifs", entry?.Glyph ?? "");
 
         var bar = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, Margin = new Thickness(0, 0, 0, 4) };
-        var safeTodo = list.Where(x => x.Risk == Risk.Sur && !_engine.IsApplied(x.Id)).ToList();
-        var on = Widgets.Btn($"Activer les réglages sûrs ({safeTodo.Count})", t, true, "");
-        on.Click += async (_, _) => await ApplyMany($"Activer les réglages sûrs : {entry?.Label ?? key}", safeTodo);
-        var off = Widgets.Btn("Tout désactiver ici", t, false, "");
-        off.Click += async (_, _) => await RevertMany(list, "Annulé.");
+        var safeTodo = list.Where(x => x.Risk == Risk.Sur && !Profiles.Protected(x) && Want(x) == false).ToList();
+        var on = Widgets.Btn($"Sélectionner les réglages sûrs ({safeTodo.Count})", t, true);
+        on.Click += (_, _) => Preselect($"{entry?.Label ?? key}", safeTodo);
+        var off = Widgets.Btn("Tout désactiver ici", t, false);
+        off.Click += (_, _) => Preselect($"{entry?.Label ?? key}", list.Where(x => Want(x)), on: false);
         // Suppression d'applications, d'Edge/OneDrive et de fonctionnalités Windows : jamais en masse, choix un par un.
         bool bulk = key is not ("Debloat apps" or "Edge et OneDrive" or "Fonctionnalités Windows");
-        if (bulk) bar.Children.Add(on); else on.IsEnabled = false;
+        if (bulk) bar.Children.Add(on);
         bar.Children.Add(off);
         Main.Children.Add(bar);
-        if (bulk) _actionButtons.Add(on);
-        _actionButtons.Add(off);
 
         Items(list);
     }
@@ -151,12 +157,13 @@ public sealed partial class MainWindow
     {
         var t = _theme;
         bool compact = _view == "compact";
-        var sw = Widgets.Toggle(t, _engine.IsApplied(x.Id)); sw.Tag = x; sw.Toggled += Toggled;
+        var sw = Widgets.Toggle(t, Want(x)); sw.Tag = x; sw.Checked += Toggled; sw.Unchecked += Toggled; _switches.Add(sw);
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(sw, x.Name);
 
         var badges = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 6 };
         badges.Children.Add(Widgets.Badge(x.Risk switch { Risk.Sur => "Sûr", Risk.Modere => "Modéré", _ => "Avancé" }, t.RiskColor(x.Risk), t));
         if (x.OneClick) badges.Children.Add(Widgets.Badge("1 clic", t.Accent, t));
+        if (Profiles.Protected(x)) badges.Children.Add(Widgets.Badge("Protégé des profils", t.Sub, t));
         if (x.Reboot) badges.Children.Add(Widgets.Badge("Redémarrage", t.Sub, t));
         if (x.Gaming) badges.Children.Add(Widgets.Badge("Gaming", t.Accent, t));
         if (x.MinBuild >= 22000) badges.Children.Add(Widgets.Badge("Windows 11", t.Sub, t));
@@ -175,6 +182,45 @@ public sealed partial class MainWindow
         var card = Widgets.Card(t, grid);
         if (compact) { card.Padding = new Thickness(14, 6, 14, 6); ToolTipService.SetToolTip(card, x.Description); }
         return card;
+    }
+
+    // ---------- santé et persistance ----------
+    void HealthPage()
+    {
+        var t = _theme;
+        PageTitle("Santé et persistance", "Vérifie que tes réglages sont toujours en place après les mises à jour de Windows.", "");
+        int applied = _all.Count(x => _engine.IsApplied(x.Id));
+        Main.Children.Add(Widgets.Text($"{applied} réglage(s) actif(s). Les valeurs sont écrites dans le registre ; si une mise à jour de Windows en défait certaines, ForgeOpti les remet en place.", 13, t, sub: true));
+        Main.Children.Add(Widgets.Text("Dernière vérification : " + Settings.Get("lastCheck", "jamais"), 13, t));
+
+        var auto = Widgets.Check(t, "Vérifier automatiquement à l'ouverture de session Windows et au lancement de ForgeOpti", Maintenance.AutoRepair);
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(auto, "Vérification automatique");
+        auto.Click += async (_, _) =>
+        {
+            Maintenance.AutoRepair = auto.IsChecked == true;
+            await Task.Run(() => Maintenance.SyncTask(Maintenance.AutoRepair && _all.Any(x => _engine.IsApplied(x.Id))));
+            Status.Text = Maintenance.AutoRepair ? "Vérification automatique activée." : "Vérification automatique désactivée.";
+        };
+        Main.Children.Add(Widgets.Card(t, auto));
+
+        var now = Widgets.Btn("Vérifier et réparer maintenant", t, true); now.HorizontalAlignment = HorizontalAlignment.Left;
+        now.Click += async (_, _) =>
+        {
+            if (_busy) return;
+            await Run(async () =>
+            {
+                Status.Text = "Vérification des réglages appliqués…";
+                var res = await Task.Run(() => Maintenance.Repair(_engine, _all));
+                int ok = res.Count(r => r.Error is null);
+                Status.Text = res.Count == 0 ? "Tout est en place : aucun réglage n'a été défait." : $"{ok} réglage(s) remis en place" + (ok < res.Count ? $", {res.Count - ok} en échec (voir le journal)." : ".");
+            }, () => BuildPage());
+        };
+        Main.Children.Add(now);
+
+        Heading("Journal récent", t.Accent);
+        var lines = Log.Tail(30);
+        if (lines.Count == 0) Main.Children.Add(Widgets.Text("Aucune entrée pour le moment.", 12.5, t, sub: true));
+        foreach (var l in lines) Main.Children.Add(Widgets.Text(l, 11.5, t, sub: true));
     }
 
     // ---------- nettoyage ----------
@@ -214,7 +260,6 @@ public sealed partial class MainWindow
                 Status.Text = $"Nettoyage terminé : {Human(freed)} libérés.";
             }, () => { });
         };
-        _actionButtons.Add(go);
         Main.Children.Add(go);
     }
 

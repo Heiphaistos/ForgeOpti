@@ -34,7 +34,7 @@ public static class SelfTest
                 var applied = t.Ops.Select(Engine.Probe).ToList();
                 var problems = new List<string>();
                 for (var i = 0; i < t.Ops.Count; i++)
-                    if (t.Ops[i] is RegOp r && applied[i] != Expected(r)) problems.Add($"op{i} apres Apply={applied[i]} attendu={Expected(r)}");
+                    if (t.Ops[i] is RegOp r && applied[i] != Engine.Expected(r)) problems.Add($"op{i} apres Apply={applied[i]} attendu={Engine.Expected(r)}");
                 engine.Revert(t);
                 var after = t.Ops.Select(Engine.Probe).ToList();
                 for (var i = 0; i < t.Ops.Count; i++)
@@ -49,14 +49,6 @@ public static class SelfTest
         }
         File.Delete(state);
         return results;
-    }
-
-    static string Expected(RegOp r)
-    {
-        // Même lecture que Probe : Kind:valeur, DWord stocké signé.
-        var v = r.Kind == "DWord" ? (object)unchecked((int)r.Value.GetInt64())
-              : r.Kind == "QWord" ? r.Value.GetInt64() : r.Value.GetString()!;
-        return $"{r.Kind}:{v}";
     }
 
     /// <summary>Remonte un message à l'hôte Hyper-V via le canal KVP (clé parente à créer d'abord).</summary>

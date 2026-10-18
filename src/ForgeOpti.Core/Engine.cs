@@ -8,6 +8,9 @@ namespace ForgeOpti.Core;
 /// <summary>Snapshot d'un Op avant application. Exists=false : valeur/tâche absente à l'origine.</summary>
 public sealed record Snap(bool Exists, string? Kind, JsonElement? Value);
 
+/// <summary>Un tweak dont des valeurs ont été remises en place par <see cref="Engine.Repair"/> (Error = échec).</summary>
+public sealed record RepairItem(string Id, string Name, int Ops, string? Error);
+
 /// <summary>État persisté : tweaks appliqués, valeur d'origine de chaque emplacement (1re prise gagne), et qui la "réclame".</summary>
 public sealed class State
 {
@@ -24,8 +27,9 @@ public sealed class Engine(string stateFile)
 {
     static readonly JsonSerializerOptions J = new() { WriteIndented = true, PropertyNameCaseInsensitive = true };
     readonly State _s = Load(stateFile);
+    readonly object _lock = new(); // l'UI interroge IsApplied pendant qu'un thread applique
 
-    public bool IsApplied(string id) => _s.Applied.ContainsKey(id);
+    public bool IsApplied(string id) { lock (_lock) return _s.Applied.ContainsKey(id); }
 
     static string? Loc(Op op) => op switch
     {
@@ -34,9 +38,11 @@ public sealed class Engine(string stateFile)
         _ => null,
     };
 
-    public void Apply(Tweak t)
+    public void Apply(Tweak t) { lock (_lock) ApplyLocked(t); }
+
+    void ApplyLocked(Tweak t)
     {
-        if (IsApplied(t.Id)) return;
+        if (_s.Applied.ContainsKey(t.Id)) return;
         foreach (var o in t.Ops.OfType<CmdOp>())
             if (string.IsNullOrWhiteSpace(o.Revert)) throw new InvalidOperationException($"{t.Id}: CmdOp sans Revert");
         foreach (var o in t.Ops)
@@ -58,9 +64,11 @@ public sealed class Engine(string stateFile)
     }
 
     /// <summary>Annule : registre/tâches d'abord (sûr), puis commandes. Si une commande échoue, le tweak reste "appliqué" pour pouvoir réessayer.</summary>
-    public void Revert(Tweak t)
+    public void Revert(Tweak t) { lock (_lock) RevertLocked(t); }
+
+    void RevertLocked(Tweak t)
     {
-        if (!IsApplied(t.Id)) return;
+        if (!_s.Applied.ContainsKey(t.Id)) return;
         foreach (var o in t.Ops.Where(o => o is not CmdOp).Reverse()) Undo(o, t.Id);
         List<string> errs = [];
         foreach (var o in t.Ops.Where(o => o is CmdOp).Reverse())
@@ -68,6 +76,36 @@ public sealed class Engine(string stateFile)
         Save();
         if (errs.Count > 0) throw new InvalidOperationException(string.Join(" | ", errs));
         _s.Applied.Remove(t.Id); Save();
+    }
+
+    /// <summary>Valeur attendue d'un RegOp, au format de <see cref="Probe"/> (DWord stocké signé).</summary>
+    public static string Expected(RegOp r) => $"{r.Kind}:{(r.Kind == "DWord" ? unchecked((int)r.Value.GetInt64()) : r.Kind == "QWord" ? r.Value.GetInt64() : (object)r.Value.GetString()!)}";
+
+    static bool Drifted(Op o) => o switch
+    {
+        RegOp r => Probe(r) != Expected(r),
+        TaskOp t => TaskState(t.Path) is { } s && s != "Disabled", // tâche disparue = rien à désactiver
+        _ => false, // CmdOp : non sondable
+    };
+
+    /// <summary>Opérations d'un tweak appliqué dont l'état réel ne correspond plus (mise à jour Windows, autre outil…).</summary>
+    public List<Op> Drift(Tweak t) => t.Ops.Where(Drifted).ToList();
+
+    /// <summary>Réécrit les valeurs qu'une mise à jour a défaites pour chaque tweak appliqué. N'altère ni les origines ni les réclamants.</summary>
+    public List<RepairItem> Repair(IEnumerable<Tweak> catalog)
+    {
+        lock (_lock)
+        {
+            List<RepairItem> res = [];
+            foreach (var t in catalog.Where(t => _s.Applied.ContainsKey(t.Id)))
+            {
+                var bad = Drift(t);
+                if (bad.Count == 0) continue;
+                try { foreach (var o in bad) Do(o); res.Add(new(t.Id, t.Name, bad.Count, null)); }
+                catch (Exception e) { res.Add(new(t.Id, t.Name, bad.Count, e.Message)); }
+            }
+            return res;
+        }
     }
 
     void Release(Op o, string id) { if (Loc(o) is { } l && _s.Claims.TryGetValue(l, out var c)) c.Remove(id); }
@@ -191,12 +229,28 @@ public sealed class Engine(string stateFile)
         return o;
     }
 
-    static State Load(string f) =>
-        File.Exists(f) ? JsonSerializer.Deserialize<State>(File.ReadAllText(f), J) ?? new() : new();
+    /// <summary>État illisible : on tente la copie .bak, sinon on met le fichier de côté (jamais écrasé) et on repart à vide.</summary>
+    static State Load(string f)
+    {
+        foreach (var p in new[] { f, f + ".bak" })
+        {
+            if (!File.Exists(p)) continue;
+            try { return JsonSerializer.Deserialize<State>(File.ReadAllText(p), J) ?? new(); }
+            catch (Exception e)
+            {
+                Log.Error($"État illisible ({p}) : {e.Message}");
+                try { File.Move(p, $"{p}.corrompu-{DateTime.Now:yyyyMMddHHmmss}", true); } catch { /* meilleur effort */ }
+            }
+        }
+        return new();
+    }
 
+    /// <summary>Écriture atomique : un crash en plein enregistrement ne corrompt jamais l'état (qui contient les valeurs d'origine).</summary>
     void Save()
     {
         Directory.CreateDirectory(Path.GetDirectoryName(stateFile)!);
-        File.WriteAllText(stateFile, JsonSerializer.Serialize(_s, J));
+        var tmp = stateFile + ".tmp";
+        File.WriteAllText(tmp, JsonSerializer.Serialize(_s, J));
+        if (File.Exists(stateFile)) File.Replace(tmp, stateFile, stateFile + ".bak"); else File.Move(tmp, stateFile);
     }
 }

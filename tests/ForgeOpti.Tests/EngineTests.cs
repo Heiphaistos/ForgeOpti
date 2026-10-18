@@ -110,4 +110,67 @@ public class EngineTests
         Assert.False(Directory.Exists(Path.Combine(d, "sub")));
         Directory.Delete(d, true);
     }
+
+    [Fact]
+    public void Repair_reecrit_une_valeur_defaite_par_Windows()
+    {
+        var state = Path.Combine(Path.GetTempPath(), $"fo-{Guid.NewGuid()}.json");
+        Registry.CurrentUser.CreateSubKey(Key).Dispose();
+        try
+        {
+            var e = new Engine(state); var t = T(R("E", 0));
+            e.Apply(t);
+            Assert.Empty(e.Drift(t));
+            using (var k = Registry.CurrentUser.OpenSubKey(Key, true)!) k.SetValue("E", 1, RegistryValueKind.DWord); // « mise à jour Windows »
+            Assert.Single(e.Drift(t));
+            var rep = e.Repair([t]);
+            Assert.Single(rep); Assert.Null(rep[0].Error);
+            Assert.Empty(e.Drift(t));
+            Assert.Empty(e.Repair([t])); // idempotent
+        }
+        finally { Registry.CurrentUser.DeleteSubKeyTree(Key, false); File.Delete(state); }
+    }
+
+    [Fact]
+    public void Etat_corrompu_ne_fait_pas_planter_et_est_mis_de_cote()
+    {
+        var state = Path.Combine(Path.GetTempPath(), $"fo-{Guid.NewGuid()}.json");
+        File.WriteAllText(state, "{ pas du json");
+        var e = new Engine(state);
+        Assert.False(e.IsApplied("x"));
+        Assert.False(File.Exists(state));
+        Assert.NotEmpty(Directory.GetFiles(Path.GetTempPath(), Path.GetFileName(state) + ".corrompu-*"));
+    }
+
+    [Fact]
+    public void Etat_survit_a_une_ecriture_et_garde_une_copie_bak()
+    {
+        var state = Path.Combine(Path.GetTempPath(), $"fo-{Guid.NewGuid()}.json");
+        var e = new Engine(state);
+        e.Apply(T(new CmdOp("exit 0", "exit 0")) with { Id = "t.1" });
+        e.Apply(T(new CmdOp("exit 0", "exit 0")) with { Id = "t.2" });
+        Assert.True(File.Exists(state + ".bak"));
+        Assert.True(new Engine(state).IsApplied("t.2"));
+        Assert.False(File.Exists(state + ".tmp"));
+    }
+
+    [Fact]
+    public void Reglages_vitaux_sont_proteges_et_absents_des_profils_et_du_1_clic()
+    {
+        var all = Catalog.LoadAll();
+        string[] vitaux = ["svc.spooler", "svc.bluetooth", "svc.ssdp-upnp", "svc.lltd", "atlas.svc-decouverte-reseau", "feat.cap-faxscan"];
+        foreach (var id in vitaux) Assert.True(Profiles.Protected(all.Single(t => t.Id == id)), id);
+        var prot = all.Where(Profiles.Protected).Select(t => t.Id).ToHashSet();
+        Assert.DoesNotContain(Profiles.OneClick(all), t => prot.Contains(t.Id));
+        foreach (var p in Profiles.Builtin)
+        {
+            var sel = Profiles.Select(p, all);
+            Assert.NotEmpty(sel);
+            Assert.DoesNotContain(sel, t => prot.Contains(t.Id));
+            Assert.DoesNotContain(sel, t => t.Risk == Risk.Avance && p != Profiles.Confidentialite && p != Profiles.Gaming);
+        }
+        // un réglage qui coupe un service vital est protégé même s'il n'est pas dans la liste explicite
+        var svc = new Tweak("t.x", "Services", "x", "x", Risk.Sur, false, false, true, [new RegOp("HKLM", @"SYSTEM\CurrentControlSet\Services\Spooler", "Start", "DWord", JsonSerializer.SerializeToElement(4))]);
+        Assert.True(Profiles.Protected(svc));
+    }
 }

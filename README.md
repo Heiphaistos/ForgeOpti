@@ -23,19 +23,24 @@ Chaque fichier a son empreinte SHA-256 (`.sha256`). Aucune dépendance à instal
 * Chaque interrupteur mémorise la **valeur d'origine** (registre, tâche planifiée) : l'éteindre remet exactement l'état précédent,
   même si plusieurs réglages touchent la même clé.
 * Les réglages sont classés **Sûr / Modéré / Avancé**. Les « Avancé » ne sont jamais dans l'optimisation en 1 clic.
+* Les interrupteurs **ne changent rien tout de suite** : ils préparent une sélection. Une barre en bas indique les modifications en attente ;
+  « Voir et appliquer » affiche la liste exacte, puis chaque changement est relu dans le registre et un compte rendu est affiché.
+* Les réglages **restent en place après les mises à jour de Windows** : au lancement et à chaque ouverture de session (tâche planifiée
+  `ForgeOpti-Verification`), ForgeOpti remet en place les valeurs qu'une mise à jour aurait défaites. Page **Santé et persistance** pour le faire à la main.
+* **Jamais touchés par les profils ni par le 1 clic** : impression, Bluetooth, découverte réseau et partages, mises à jour et protection de Windows.
 * Un garde-fou **refuse de modifier un pilote de démarrage ou système** (cela empêcherait Windows de démarrer).
 * La suppression d'applications, d'Edge/OneDrive et de fonctionnalités Windows se fait un élément à la fois, jamais en masse.
 
 ## Interface
 
 Plusieurs thèmes (Forge, Océan, Minuit, Néon, Papier, Contraste élevé), navigation latérale ou en haut, affichage en cartes,
-grille ou liste compacte, recherche globale, profils Gaming / Confidentialité / 1 clic. Menu **Apparence** en haut à droite.
+grille ou liste compacte, recherche globale, profils Gaming / Bureautique / Hybride / Confidentialité / 1 clic (présélection ajustable) et profils personnels enregistrables. Menu **Apparence** en haut à droite.
 
 ## Développement
 
 ```
 dotnet test                                   # moteur + catalogue
-scripts/build-release.ps1 -Version 0.4.1      # installeur, portable, zip (Inno Setup requis)
+scripts/build-release.ps1 -Version 0.5.0      # installeur, portable, zip (Inno Setup requis)
 python tools/validate-catalog.py <fichier>    # valider des réglages ajoutés
 ```
 

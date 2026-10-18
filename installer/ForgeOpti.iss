@@ -58,6 +58,9 @@ Name: "desktopicon"; Description: "Créer un raccourci sur le Bureau"; Flags: un
 
 [Run]
 Filename: "{app}\ForgeOpti.exe"; Description: "Lancer ForgeOpti"; Flags: nowait postinstall skipifsilent
+
+[UninstallRun]
+Filename: "{sys}\schtasks.exe"; Parameters: "/Delete /TN ForgeOpti-Verification /F"; Flags: runhidden; RunOnceId: "SupprTacheVerification"
 #else
 [Run]
 Filename: "{app}\ForgeOpti.exe"; Flags: nowait

@@ -1,6 +1,7 @@
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media;
 
 namespace ForgeOpti.App;
@@ -39,15 +40,34 @@ static class Widgets
         return b;
     }
 
-    public static ToggleSwitch Toggle(Theme t, bool on)
+    /// <summary>
+    /// Interrupteur dessiné à la main sur un ToggleButton (UIA : motif Toggle, clavier, nom). Le ToggleSwitch de WinUI levait par moments
+    /// « Invalid attribute value Unknown for property Stroke » à la reconstruction des pages, ce qui figeait l'interface.
+    /// </summary>
+    public static ToggleButton Toggle(Theme t, bool on)
     {
-        var s = new ToggleSwitch { IsOn = on, OnContent = "", OffContent = "", MinWidth = 0, HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Center };
-        foreach (var k in new[] { "ToggleSwitchFillOn", "ToggleSwitchFillOnPointerOver", "ToggleSwitchFillOnPressed", "ToggleSwitchStrokeOn", "ToggleSwitchStrokeOnPointerOver", "ToggleSwitchStrokeOnPressed" })
-            s.Resources[k] = t.AccentB;
-        foreach (var k in new[] { "ToggleSwitchKnobFillOn", "ToggleSwitchKnobFillOnPointerOver", "ToggleSwitchKnobFillOnPressed" }) s.Resources[k] = t.OnAccentB;
-        foreach (var k in new[] { "ToggleSwitchStrokeOff", "ToggleSwitchStrokeOffPointerOver", "ToggleSwitchStrokeOffPressed", "ToggleSwitchKnobFillOff", "ToggleSwitchKnobFillOffPointerOver", "ToggleSwitchKnobFillOffPressed" })
-            s.Resources[k] = t.SubB;
-        return s;
+        var knob = new Microsoft.UI.Xaml.Shapes.Ellipse { Width = 14, Height = 14, VerticalAlignment = VerticalAlignment.Center };
+        var pill = new Border { Width = 44, Height = 22, CornerRadius = new CornerRadius(11), BorderThickness = new Thickness(1), Padding = new Thickness(3, 0, 3, 0), Child = knob };
+        var none = new SolidColorBrush(Microsoft.UI.Colors.Transparent);
+        var b = new ToggleButton
+        {
+            Content = pill, IsChecked = on, Padding = new Thickness(2), MinWidth = 0, MinHeight = 0, Background = none, BorderThickness = new Thickness(0),
+            HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Center,
+            UseSystemFocusVisuals = false, FocusVisualPrimaryThickness = new Thickness(0), FocusVisualSecondaryThickness = new Thickness(0),
+        };
+        foreach (var s in new[] { "", "PointerOver", "Pressed", "Checked", "CheckedPointerOver", "CheckedPressed", "Disabled", "CheckedDisabled" })
+        {
+            b.Resources["ToggleButtonBackground" + s] = none; b.Resources["ToggleButtonBorderBrush" + s] = none;
+        }
+        void Paint()
+        {
+            bool c = b.IsChecked == true;
+            pill.Background = c ? t.AccentB : t.B(t.Border); pill.BorderBrush = c ? t.AccentB : t.SubB;
+            knob.Fill = c ? t.OnAccentB : t.SubB; knob.HorizontalAlignment = c ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+        }
+        b.Checked += (_, _) => Paint(); b.Unchecked += (_, _) => Paint();
+        Paint();
+        return b;
     }
 
     public static CheckBox Check(Theme t, object content, bool on)

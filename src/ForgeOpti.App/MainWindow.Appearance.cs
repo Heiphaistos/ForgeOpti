@@ -18,6 +18,7 @@ public sealed partial class MainWindow
         var t = _theme;
         Root.RequestedTheme = t.Dark ? ElementTheme.Dark : ElementTheme.Light;
         Root.Background = t.BackB;
+        PendingBar.Background = t.AccentSoftB; PendingBar.BorderBrush = t.B(t.Accent, 0x66); PendingBar.BorderThickness = new Thickness(0, 1, 0, 0); PendingText.Foreground = t.TextB;
         Header.Background = t.SurfaceB; SideScroll.Background = t.SurfaceB; TopNavScroll.Background = t.SurfaceB; StatusBar.Background = t.SurfaceB;
         Status.Foreground = t.SubB; Busy.Foreground = t.AccentB;
         SearchBox.Background = t.CardB; SearchBox.Foreground = t.TextB; SearchBox.BorderBrush = t.BorderB;
@@ -45,13 +46,19 @@ public sealed partial class MainWindow
         names.Children.Add(new TextBlock { Text = $"Windows {(Build >= 22000 ? "11" : "10")} · build {Build}", FontSize = 11, Foreground = t.SubB });
         Brand.Children.Add(logo); Brand.Children.Add(names);
 
-        Actions.Children.Clear(); _actionButtons.Clear();
+        Actions.Children.Clear();
         var one = Widgets.Btn("Optimiser en 1 clic", t, true, ""); one.Click += OneClick_Click;
+        var profiles = Widgets.Btn("Profils", t, false, "");
+        var menu = new MenuFlyout(); menu.Opening += (_, _) => ProfileMenu(menu); profiles.Flyout = menu;
         var undo = Widgets.Btn("Tout annuler", t, false, ""); undo.Click += UndoAll_Click;
         var look = Widgets.Btn("Apparence", t, false, ""); look.Flyout = BuildAppearanceFlyout();
-        foreach (var b in new[] { one, undo }) { Actions.Children.Add(b); _actionButtons.Add(b); }
-        Actions.Children.Add(look);
-        _headerButtons = _actionButtons.ToList();
+        foreach (var b in new[] { one, profiles, undo, look }) Actions.Children.Add(b);
+
+        PendingButtons.Children.Clear();
+        var apply = Widgets.Btn("Voir et appliquer", t, true); apply.Click += async (_, _) => { try { await ApplyPending("Appliquer la sélection"); } catch (Exception ex) { Log.Error(ex.ToString()); } };
+        var cancel = Widgets.Btn("Annuler la sélection", t, false); cancel.Click += (_, _) => { ClearWant(); BuildPage(); };
+        PendingButtons.Children.Add(apply); PendingButtons.Children.Add(cancel);
+        UpdatePending();
     }
 
     Flyout BuildAppearanceFlyout()
@@ -90,7 +97,7 @@ public sealed partial class MainWindow
     // ---------- recherche / disposition ----------
     void Search_Changed(object s, TextChangedEventArgs e)
     {
-        if (_refreshing) return;
+        if (_refreshing || _busy) return;
         var q = SearchBox.Text.Trim();
         if (q.Length >= 2) { _page = Nav.Search; BuildNav(); BuildPage(); }
         else if (_page == Nav.Search) Go(Nav.Home);
@@ -99,7 +106,7 @@ public sealed partial class MainWindow
     int _lastColumns;
     void Main_SizeChanged(object s, SizeChangedEventArgs e)
     {
-        if (_view != "grid" || _page is Nav.Home or Nav.Clean) return;
+        if (_view != "grid" || _page is Nav.Home or Nav.Clean or Nav.Health) return;
         if (GridColumns() != _lastColumns) BuildPage();
     }
 
@@ -108,6 +115,7 @@ public sealed partial class MainWindow
     // ---------- navigation ----------
     void Go(string key)
     {
+        if (_busy && key != _page) return; // pas de changement de page pendant une application
         _page = key;
         if (key != Nav.Search) Settings.Set("page", key);
         if (key != Nav.Search && SearchBox.Text.Length > 0) { _refreshing = true; SearchBox.Text = ""; _refreshing = false; }
@@ -149,7 +157,7 @@ public sealed partial class MainWindow
         row.Children.Add(Widgets.Glyph(e.Glyph, 16, sel ? t.AccentB : t.SubB));
         var label = new TextBlock { Text = e.Label, Foreground = sel ? t.TextB : t.SubB, FontWeight = sel ? FontWeights.SemiBold : FontWeights.Normal, VerticalAlignment = VerticalAlignment.Center, TextTrimming = TextTrimming.CharacterEllipsis };
         Grid.SetColumn(label, 1); row.Children.Add(label);
-        if (e.Key is not (Nav.Home or Nav.Clean))
+        if (e.Key is not (Nav.Home or Nav.Clean or Nav.Health))
         {
             var (a, n) = Counts(e.Key);
             var count = new TextBlock { Text = a > 0 ? $"{a}/{n}" : $"{n}", FontSize = 11, Foreground = a > 0 ? t.AccentB : t.SubB, VerticalAlignment = VerticalAlignment.Center };
