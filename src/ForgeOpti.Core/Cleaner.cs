@@ -30,10 +30,22 @@ public static class Cleaner
         new("composants", "Composants Windows obsolètes (WinSxS)", "DISM /StartComponentCleanup : long, sans risque.", () => [], null, () => Engine.Ps("Dism.exe /Online /Cleanup-Image /StartComponentCleanup | Out-Null")),
     ];
 
+    // Jonctions/liens symboliques ignorés : un processus non élevé ne doit pas pouvoir faire supprimer
+    // par l'admin des fichiers hors du dossier nettoyé (jonction placée dans %TEMP%).
+    static EnumerationOptions Opts(bool recurse) => new()
+    {
+        RecurseSubdirectories = recurse,
+        AttributesToSkip = FileAttributes.ReparsePoint | FileAttributes.System,
+        IgnoreInaccessible = true,
+    };
+
+    static IEnumerable<string> Roots(CleanItem it) =>
+        it.Dirs().Where(Directory.Exists).Where(d => !File.GetAttributes(d).HasFlag(FileAttributes.ReparsePoint));
+
     static IEnumerable<string> Files(CleanItem it) =>
-        it.Dirs().Where(Directory.Exists).SelectMany(d =>
+        Roots(it).SelectMany(d =>
         {
-            try { return Directory.EnumerateFiles(d, it.Pattern ?? "*", it.Pattern is null ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly); }
+            try { return Directory.EnumerateFiles(d, it.Pattern ?? "*", Opts(it.Pattern is null)); }
             catch { return []; }
         });
 
@@ -53,7 +65,7 @@ public static class Cleaner
             try { var len = new FileInfo(f).Length; File.Delete(f); freed += len; } catch { /* verrouillé : ignoré */ }
         }
         if (it.Pattern is null)
-            foreach (var d in it.Dirs().Where(Directory.Exists))
+            foreach (var d in Roots(it))
                 foreach (var sub in SafeDirs(d)) { try { Directory.Delete(sub, false); } catch { /* non vide ou verrouillé */ } }
         it.Special?.Invoke();
         return freed;
@@ -61,7 +73,7 @@ public static class Cleaner
 
     static IEnumerable<string> SafeDirs(string d)
     {
-        try { return Directory.EnumerateDirectories(d, "*", SearchOption.AllDirectories).OrderByDescending(x => x.Length).ToList(); }
+        try { return Directory.EnumerateDirectories(d, "*", Opts(true)).OrderByDescending(x => x.Length).ToList(); }
         catch { return []; }
     }
 }
