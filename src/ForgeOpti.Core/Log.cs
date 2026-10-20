@@ -4,7 +4,14 @@ namespace ForgeOpti.Core;
 public static class Log
 {
     static readonly object L = new();
-    public static string Dir => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "ForgeOpti");
+    static readonly Lazy<string> _dir = new(() =>
+    {
+        var d = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "ForgeOpti");
+        try { PrivateDir.Ensure(d); } catch (Exception e) when (e is IOException or UnauthorizedAccessException) { /* sans droits : le journal reste best-effort */ }
+        return d;
+    });
+    /// <summary>ProgramData\ForgeOpti, ACL admin/SYSTEM imposée au premier accès (state.json contient les valeurs de restauration du registre).</summary>
+    public static string Dir => _dir.Value;
     public static string FilePath => Path.Combine(Dir, "forgeopti.log");
 
     public static void Info(string m) => Write("INFO", m);

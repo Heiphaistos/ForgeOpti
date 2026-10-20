@@ -27,21 +27,35 @@ public static class Maintenance
         return res;
     }
 
-    /// <summary>Crée (ou met à jour le chemin de) la tâche d'ouverture de session, ou la supprime.</summary>
-    public static void SyncTask(bool enable)
+    public const string PortableMessage = "Installe ForgeOpti avec l'installeur (Program Files) pour activer la vérification automatique : la version portable n'est pas dans un dossier protégé.";
+
+    /// <summary>La tâche s'exécute en HIGHEST sans UAC : l'exe visé doit être dans un dossier que seul un admin peut modifier.</summary>
+    public static bool IsProtectedPath(string exe)
+    {
+        var full = Path.GetFullPath(exe);
+        return new[] { Environment.SpecialFolder.ProgramFiles, Environment.SpecialFolder.ProgramFilesX86 }
+            .Select(Environment.GetFolderPath).Where(r => r.Length > 0)
+            .Any(r => full.StartsWith(Path.TrimEndingDirectorySeparator(Path.GetFullPath(r)) + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase));
+    }
+
+    /// <summary>Crée (ou met à jour le chemin de) la tâche d'ouverture de session, ou la supprime. Retourne un message à afficher si elle est refusée.</summary>
+    public static string? SyncTask(bool enable)
     {
         try
         {
             var exe = Environment.ProcessPath ?? throw new InvalidOperationException("chemin de l'exécutable inconnu");
-            var args = enable
+            var refused = enable && !IsProtectedPath(exe);
+            if (refused) Log.Warn("Tâche de vérification non créée : exécutable hors Program Files (" + exe + ")");
+            var args = enable && !refused
                 ? $"/Create /TN {TaskName} /TR \"\\\"{exe}\\\" --repair\" /SC ONLOGON /RL HIGHEST /F"
-                : $"/Delete /TN {TaskName} /F";
+                : $"/Delete /TN {TaskName} /F"; // refus : on retire aussi une ancienne tâche pointant vers un chemin modifiable
             var psi = new ProcessStartInfo("schtasks.exe", args) { CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };
             using var p = Process.Start(psi)!;
             var err = p.StandardError.ReadToEndAsync();
             p.StandardOutput.ReadToEnd(); p.WaitForExit();
-            if (p.ExitCode != 0 && enable) throw new InvalidOperationException(err.Result.Trim());
+            if (p.ExitCode != 0 && enable && !refused) throw new InvalidOperationException(err.Result.Trim());
+            return refused ? PortableMessage : null;
         }
-        catch (Exception e) { Log.Error("Tâche de vérification : " + e.Message); }
+        catch (Exception e) { Log.Error("Tâche de vérification : " + e.Message); return null; }
     }
 }

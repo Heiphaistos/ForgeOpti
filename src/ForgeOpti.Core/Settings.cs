@@ -6,7 +6,7 @@ namespace ForgeOpti.Core;
 /// <summary>Réglages de l'application (apparence, mises à jour auto) : un seul fichier JSON dans ProgramData\ForgeOpti.</summary>
 public static class Settings
 {
-    static string FilePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "ForgeOpti", "settings.json");
+    static string FilePath => Path.Combine(Log.Dir, "settings.json");
 
     static JsonObject Load()
     {

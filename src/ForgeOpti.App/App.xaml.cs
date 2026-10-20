@@ -40,8 +40,7 @@ public partial class App : Application
     /// <summary>Mise à jour sans interface (tâche planifiée / test) : journal dans ProgramData\ForgeOpti\update.log.</summary>
     static async Task SilentUpdate()
     {
-        var log = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "ForgeOpti", "update.log");
-        Directory.CreateDirectory(Path.GetDirectoryName(log)!);
+        var log = Path.Combine(Log.Dir, "update.log");
         void L(string m) => File.AppendAllText(log, $"[{DateTime.Now:s}] {m}{Environment.NewLine}");
         try
         {

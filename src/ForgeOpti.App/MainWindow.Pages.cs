@@ -198,8 +198,8 @@ public sealed partial class MainWindow
         auto.Click += async (_, _) =>
         {
             Maintenance.AutoRepair = auto.IsChecked == true;
-            await Task.Run(() => Maintenance.SyncTask(Maintenance.AutoRepair && _all.Any(x => _engine.IsApplied(x.Id))));
-            Status.Text = Maintenance.AutoRepair ? "Vérification automatique activée." : "Vérification automatique désactivée.";
+            var refus = await Task.Run(() => Maintenance.SyncTask(Maintenance.AutoRepair && _all.Any(x => _engine.IsApplied(x.Id))));
+            Status.Text = refus ?? (Maintenance.AutoRepair ? "Vérification automatique activée." : "Vérification automatique désactivée.");
         };
         Main.Children.Add(Widgets.Card(t, auto));
 
