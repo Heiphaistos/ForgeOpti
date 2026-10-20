@@ -38,9 +38,16 @@ public class UpdateVerifierTests
     [Fact]
     public void Cle_non_configuree_refuse_toute_mise_a_jour()
     {
-        Assert.Equal("", UpdateVerifier.PublicKey);
         var (_, k) = NewKey(); var m = Man(Good);
-        Assert.Throws<InvalidOperationException>(() => UpdateVerifier.Parse(m, Sign(k, m)));
+        Assert.Throws<InvalidOperationException>(() => UpdateVerifier.Parse(m, Sign(k, m), ""));
+    }
+
+    [Fact]
+    public void Cle_publiee_refuse_un_manifeste_signe_par_une_autre_cle()
+    {
+        Assert.NotEqual("", UpdateVerifier.PublicKey);
+        var (_, k) = NewKey(); var m = Man(Good);
+        Assert.ThrowsAny<Exception>(() => UpdateVerifier.Parse(m, Sign(k, m)));
     }
 
     [Theory]

@@ -13,7 +13,7 @@ public static class UpdateVerifier
     /// A REMPLIR PAR MOMO : clé PUBLIQUE ECDSA P-256 (X||Y, 64 octets, base64), générée avec scripts/new-update-key.ps1.
     /// La clé privée va dans le secret CI FORGEOPTI_UPDATE_KEY, jamais dans le dépôt. Vide = toute mise à jour est refusée.
     /// </summary>
-    public const string PublicKey = "";
+    public const string PublicKey = "kTfdqupMw+1HEZsvvenSz8XzWX9jdxk2HUGFTHPr8Z/rieRho+17Pwtt1oOSanNpGOTQEFqkN3QbeTAz5bt/Ug==";
 
     public const string ManifestUrl = "https://github.com/Heiphaistos/ForgeOpti/releases/latest/download/latest.json";
     public const string ChannelPrefix = "https://github.com/Heiphaistos/ForgeOpti/releases/download/";
