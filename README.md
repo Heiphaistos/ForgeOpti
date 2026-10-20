@@ -40,7 +40,7 @@ grille ou liste compacte, recherche globale, profils Gaming / Bureautique / Hybr
 
 ```
 dotnet test                                   # moteur + catalogue
-scripts/build-release.ps1 -Version 0.5.0      # installeur, portable, zip (Inno Setup requis)
+scripts/build-release.ps1 -Version 0.6.0      # installeur, portable, zip (Inno Setup requis)
 python tools/validate-catalog.py <fichier>    # valider des réglages ajoutés
 ```
 
@@ -50,3 +50,10 @@ dans une VM, redémarre, vérifie la santé de Windows puis annule tout et compa
 ## Licence
 
 Les réglages sont réécrits à partir de faits publics (clés de registre, services, tâches) ; aucun code de projets tiers n'est copié.
+
+## Signature des mises à jour
+
+Le manifeste `latest.json` (+ `.sig`, ECDSA P-256) est vérifié avec la clé publique épinglée `UpdateVerifier.PublicKey`
+(vide tant que non renseignée : toute mise à jour est alors refusée). Générer le couple avec
+`scripts/new-update-key.ps1 -PrivateOut <fichier hors dépôt>`, coller la clé publique dans `UpdateVerifier.cs`,
+et mettre la clé privée dans le secret CI `FORGEOPTI_UPDATE_KEY`.

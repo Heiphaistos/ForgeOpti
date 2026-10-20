@@ -21,6 +21,11 @@ jobs:
       - name: Installeur, portable et zip (scripts/build-release.ps1)
         shell: pwsh
         run: ./scripts/build-release.ps1 -Version ('${{ github.ref_name }}'.TrimStart('v'))
+      - name: Manifeste de mise à jour signé (latest.json + .sig)
+        shell: pwsh
+        env:
+          FORGEOPTI_UPDATE_KEY: ${{ secrets.FORGEOPTI_UPDATE_KEY }}
+        run: ./scripts/sign-manifest.ps1 -Version ('${{ github.ref_name }}'.TrimStart('v')) -Repo '${{ github.repository }}'
       - name: Release
         shell: pwsh
         env:
